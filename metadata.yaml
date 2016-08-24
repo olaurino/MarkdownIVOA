@@ -1,0 +1,18 @@
+---
+title: Markdown and IVOA
+name: Markdown
+version: '1.0'
+docType: NOTE
+url: http://some.url
+author:
+    - name: Omar Laurino
+      url: http://www.ivoa.net/cgi-bin/twiki/bin/view/IVOA/OmarLaurino
+    - name: Markus Demleitner
+      url: http://www.ivoa.net/cgi-bin/twiki/bin/view/IVOA/MarkusDemleitner
+editor:
+    - name: Omar Laurino
+ivoaGroup: Standards and Processes
+previousVersion:
+    - ver: '1.0'
+      url: http://www.ivoa.net/documents/ivoatexDoc/20150129
+---

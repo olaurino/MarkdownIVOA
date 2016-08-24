@@ -15,4 +15,11 @@ ivoaGroup: Standards and Processes
 previousVersion:
     - ver: '1.0'
       url: http://www.ivoa.net/documents/ivoatexDoc/20150129
+
+abstract: |
+    This note describes a Markdown document preparation system for IVOA standards and notes.
+    This system makes use of classes and templates defined in the \ivoatex
+    project and will support the production of PDF and HTML renderings of the
+    documents with sources in plain text suitable for version control, as is
+    desirable for normative texts.
 ---

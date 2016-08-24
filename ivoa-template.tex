@@ -39,8 +39,6 @@
 \title{$title$}
 
 \ivoagroup{$ivoaGroup$}
-%\currentDocURL{$url$}
-
 
 $for(author)$
 \author$if(author.url)$[$author.url$]$endif${$author.name$}
@@ -55,7 +53,12 @@ $for(previousVersion)$\previousversion$if(previousVersion.url)$[$previousVersion
 $endfor$
        
 \begin{document}
-\maketitle
+
+$if(abstract)$
+\begin{abstract}
+$abstract$
+\end{abstract}
+$endif$
 
 $body$
 

@@ -18,8 +18,22 @@ previousVersion:
 
 abstract: |
     This note describes a Markdown document preparation system for IVOA standards and notes.
-    This system makes use of classes and templates defined in the \ivoatex
-    project and will support the production of PDF and HTML renderings of the
+    This system makes use of classes and templates defined in the \ivoatex\ 
+    project [@ivoatex] and will support the production of PDF and HTML renderings of the
     documents with sources in plain text suitable for version control, as is
     desirable for normative texts.
+
+references:
+    - id: ivoatex
+      type: article 
+      author:
+        - family: Demleitner
+          given: Markus
+      title: The IVOATEX Document Preparation System
+      issued:
+          year: 2016
+          month: 4
+          day: 30 
+      UTL: 'http://www.ivoa.net/documents/Notes/IVOATex/20160430/NOTE-ivoatexDoc-1.1-20160430.html' 
+link-citations: true
 ---

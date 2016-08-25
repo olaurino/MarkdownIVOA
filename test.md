@@ -32,13 +32,8 @@ in other specifications. Such a language must be expressive and formal enough
 to enable the serialization of data types of growing complexity and the
 development of reusable, extensible software components and libraries that can
 make the technological uptake of the VO standards seamless and scalable.
-
------------------------ ------------------------------------
-TODO                    Rewrite this section, needs more on needs of data
-                        models per se, and formal spec so that one can point
-                        into it in standardised fashion.
-
-------------------------------------------------------------
+\todo{Rewrite this section, needs more on needs of data models per se,
+and formal spec so that one can point into it in standardised fashion}
 
 For serializations to non-standard representations one needs to map the
 abstract Data Model to a particular format meta-model. For instance, the
@@ -56,6 +51,9 @@ different interpretations of `UTYPE`s have been proposed and used.
 ^[See [@usages]] This
 specification aims to resolve this ambiguity.
 
+TODO
+====
+\listoftodos
 
 Bibliography
 ============

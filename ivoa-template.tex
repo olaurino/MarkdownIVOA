@@ -1,5 +1,4 @@
 \documentclass[11pt,a4paper]{style/ivoa}
-\input style/tthdefs
 
 \usepackage{listings}
 \lstloadlanguages{sh,make,[latex]tex}
@@ -17,17 +16,6 @@
 \definecolor{texcolor}{rgb}{0.4,0.1,0.1}
 \newcommand{\texword}[1]{\texttt{\color{texcolor} #1}}
 
-\iftth
-  \newcommand{\BibTeX}{BibTeX}
-\fi
-
-\iftth
- \newcommand{\comicstuff}[1]{
-    \begin{html}<span class="comic">#1</span>\end{html}}
-\else
-  \newcommand{\comicstuff}[1]{(HTML exclusive material)}
-\fi
-\customcss{custom.css}
 
 \newcommand{\ivoaDocversion}{$version$}
 \newcommand{\ivoaDoctype}{$docType$}

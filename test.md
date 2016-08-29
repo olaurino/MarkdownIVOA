@@ -1,3 +1,5 @@
+\todo{Add document History}
+
 Introduction
 ============
 
@@ -51,8 +53,88 @@ different interpretations of `UTYPE`s have been proposed and used.
 ^[See [@usages]] This
 specification aims to resolve this ambiguity.
 
-TODO
-====
+Any standard trying to reconcile these very different usages must take them
+into account and make the transition from the current usages to the new
+standard as seamless as possible. For this reason, this document also shows how
+the current `UTYPE`s usages can be seamlessly integrated with the new scheme, so
+to minimize the transition effort.
+
+As a matter of fact, existing files and services can be made compliant
+according to this specification by simply adding annotations and keeping the
+old ones. So they do not need to change them in such a way that would
+necessarily make them incompatible with existing software. 
+
+Several sections of this document are utterly informative: in particular, the
+appendices provide more information about the impact of this specification to
+the current and future IVOA practices.
+
+This specification describes how to represent Data Model instances using the
+VOTable schema. This representation uses the `<VODML>` element introduced for
+this purpose in VOTable v1.4 [@votable1.4] and the structure of the VOTable meta-model
+elements to indicate how instances of data models are stored in VOTable
+documents. We show many examples and give a complete listing of allowed mapping
+patterns.
+
+In sections [@sec:motivation] to [@sec:examples] we give an introduction to why
+and how the VODML elements can
+be used to hold pointers into the data models and several examples that
+illustrate the mapping.
+
+[@Sec:normative] is a rigorous listing of all valid annotations, and the normative
+part of the specification. [@Sec:absences] describes what patterns and usages this
+specification does not cover; moreover, it describes how legacy and custom
+`@utypes` can be treated in this specification's framework: as such, this section
+actually describes the transition from the current usages and this
+specification. [@Sec:others] describes ideas on how this specification might be used
+for annotating other tabular formats, and how to generalize it to other, more
+structured data serialization formats.
+
+The appendices contain additional material: [@sec:annotations] describes the VODML
+annotation element that was added to the VOTable schema to support this mapping
+specification. [@Sec:clients] describes different types of client software and how
+they could deal with VOTables annotated according to the current specification.
+[@Sec:regexp] defines a set-based "language" for expressing mapping patterns in a
+more formal manner. [@Sec:faq] tries to answer some frequently asked
+questions.
+
+Use Cases {#usecases}
+=========
+
+The need for a mapping language {#sec:motivation}
+===============================
+
+Mapping with the `<VODML>` element {#sec:mapping}
+==================================
+
+General information about this spec {#sec:general}
+===================================
+
+Examples: Mapping VO-DML => VOTable {#sec:examples}
+===================================
+
+Patterns for annotating VOTable [NORMATIVE] {#sec:normative}
+===========================================
+
+Notable Absences {#sec:absences}
+================
+
+Serializing to other file formats {#sec:others}
+=================================
+
+\appendix
+
+The VODML annotation elements in the VOTable schema {#sec:annotations}
+===================================================
+
+Growing complexity: naive, advanced, and guru clients {#sec:clients}
+=====================================================
+
+Regular expressions for mapping {#sec:regexp}
+===============================
+
+Frequently Asked Questions {#sec:faq}
+==========================
+
 \listoftodos
 
 Bibliography

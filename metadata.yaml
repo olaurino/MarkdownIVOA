@@ -55,11 +55,22 @@ references:
       author:
         - family: Graham
           given: Matthew
-      title: 
+      title: 'UTypes: current usages and practices in the IVOA'
       issued:
           year: 2013
           month: 2
           day: 13
       URL: 'http://www.ivoa.net/documents/Notes/UTypesUsage/index.html' 
+    - id: votable1.4 
+      type: article 
+      author:
+        - family: Ochsenbein
+          given: Francois
+      title: 'VOTable Format Definition'
+      issued:
+          year: xxxx
+          month: xxxx
+          day: xxxx
+      URL: 'http://www.ivoa.net/documents/xxxx' 
 link-citations: true
 ---

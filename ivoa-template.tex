@@ -1,9 +1,47 @@
 \documentclass[11pt,a4paper]{style/ivoa}
 
+%\usepackage{geometry}
+% \geometry{
+% a4paper,
+% total={170mm,257mm},
+% left=20mm,
+% top=20mm,
+% }
+
+\usepackage{fontspec}
 \usepackage{listings}
-\lstloadlanguages{sh,make,[latex]tex}
-\lstset{flexiblecolumns=true,numberstyle=\small,showstringspaces=False,
-  identifierstyle=\texttt,defaultdialect=[latex]tex,language=tex}
+\usepackage{color}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\lstset{
+  basicstyle=\linespread{0.5}\small\ttfamily,
+  columns=fullflexible,
+  showstringspaces=false,
+  commentstyle=\color{gray}\upshape
+  breaklines=true,
+  postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},
+  numberstyle=\small,
+  numbers=left,
+  stepnumber=1,
+  firstnumber=1,
+  numberfirstline=true
+}
+
+\lstdefinelanguage{XML}
+{
+  morestring=[b]",
+  morestring=[s]{>}{<},
+  morecomment=[s]{<?}{?>},
+  stringstyle=\color{black},
+  identifierstyle=\color{darkblue},
+  keywordstyle=\color{olive},
+  morekeywords={xmlns,version,type,VODML,ROLE,TYPE}% list your attributes here
+}
+%\lstloadlanguages{sh,make,[latex]tex}
+%\lstset{flexiblecolumns=true,numberstyle=\small,showstringspaces=False,
+%  identifierstyle=\texttt,defaultdialect=[latex]tex,language=tex}
 
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -27,7 +65,6 @@
 \newcommand{\ivoaDocdatecode}{\today}
 \newcommand{\ivoaDocname}{$name$}
 
-
 \title{$title$}
 
 \ivoagroup{$ivoaGroup$}
@@ -43,7 +80,7 @@ $endfor$
 $for(previousVersion)$\previousversion$if(previousVersion.url)$[$previousVersion.url$]$endif$
 {Version $previousVersion.ver$}
 $endfor$
-       
+
 \begin{document}
 
 $if(abstract)$

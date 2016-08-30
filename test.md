@@ -62,7 +62,7 @@ to minimize the transition effort.
 As a matter of fact, existing files and services can be made compliant
 according to this specification by simply adding annotations and keeping the
 old ones. So they do not need to change them in such a way that would
-necessarily make them incompatible with existing software. 
+necessarily make them incompatible with existing software.
 
 Several sections of this document are utterly informative: in particular, the
 appendices provide more information about the impact of this specification to
@@ -97,6 +97,17 @@ they could deal with VOTables annotated according to the current specification.
 more formal manner. [@Sec:faq] tries to answer some frequently asked
 questions.
 
+**
+Throughout the document we will refer to some real or example Data Models.
+Please remember that such models have been designed to be fairly simple,
+yet complex enough to illustrate all the possible constructs that this
+specification covers. They are not to be intended as actual DMs, nor,
+by any means, this specification suggests their adoption by the IVOA or by
+users and or Data Providers. In some cases we refer to actual DMs in order
+to provide an idea of how this specification relates to real life cases
+involving actual DMs.
+**
+
 Use Cases {#usecases}
 =========
 
@@ -114,6 +125,126 @@ Examples: Mapping VO-DML => VOTable {#sec:examples}
 
 Patterns for annotating VOTable [NORMATIVE] {#sec:normative}
 ===========================================
+In this section we list all legal mapping patterns that can be used to express
+how instances of VO-DML-defined types are represented in a VOTable and the
+possible roles they play. It defines which VOTable elements can be annotated
+with `<VODML>` elements described in [@sec:mapping], what restrictions
+there are and how to interpret the annotation.
+
+The organization of the following sections is based on the different VO-DML
+concepts that can be represented. Each of these subsections contains
+sub-subsections which represent the different possible ways the concept may be
+encountered in a VOTable and discuss rules and constraints on those annotations.
+We start with `Model`, and then we discuss value types (`PrimitiveType`,
+`Enumeration`, and `DataType`) and `Attribute`s. Then `ObjectType` and the
+relationships, `Composition` (collection), `Reference`, and `Inheritance`
+(extends). `Package` is not mapped: none of the use cases required this element
+to be actually mapped to a VOTable instance.
+
+Each subsection contains a concise, formal description of a mapping pattern,
+according to a simple *grammar* described in [@sec:regexp] ... \todo{TBC}
+
+For example the pattern expression:
+
+--------------------------------------------------------------------------------
+{GROUP G| G $\in$ TABLE & G/VODML/TYPE $\Rightarrow$ **ObjectType**
+  & G/VODML/ROLE = NULL}
+
+--------------------------------------------------------------------------------
+
+Defines the pattern: `GROUP` directly under a `TABLE`, with `VODML/TYPE` element
+identifying an `ObjectType` and without `VODML/ROLE` element. For example
+
+----------------------------------------------------------
+{GROUP|VODML/TYPE='vo-dml:Model' $\Rightarrow$ **Model**}
+
+----------------------------------------------------------
+
+implies the `GROUP` with `VODML/TYPE` set to `vo-dml:Model` is mapped to a
+`Model`. \todo{See  whether we should define a list of
+all the legal mapping patterns in  an Appendix.}
+
+Some comments on how we refer to VOTable and VO-DML elements \todo{redundant
+with text above in section ...}
+
+  * When referring to VOTable elements we will use the notation by which these
+elements will occur in VOTable documents, i.e. in general *all caps*, e.g.
+`GROUP`, `FIELD`, (though `FIELDref`).
+  * When referring to rows in a `TABLE` element in a
+VOTable, we will use `TR`, when referring to individual cells, `TD`. Even though
+such elements only appear in the `TABLEDATA` serialization of a `TABLE`. When
+referring to a column in the `TABLE` we will use `FIELD`, also if we do
+not intend the actual `FIELD` element annotating the column.
+  * When referring to an `XML` attribute on a VOTable element we will prefix it
+  with a `@`, e.g. `@id`, `@ref`.
+  * References to VO-DML elements will be capitalized and **bold face**, using
+their `VO-DML/XSD` type definitions. E.g. `ObjectType`, `Attribute`.
+Some mapping solutions require a reference to a `GROUP` defined elsewhere in the
+same VOTable.
+We refer to such a construct as a `GROUPref`, which is not an element of the
+current VOTable standard (v1.3). It refers to a `GROUP` with a `@ref` attribute,
+which must always identify another `GROUP` in the same document. The target
+`GROUP` must have an `@id` attribute. In cases where this is important we will
+indicate that this combination is to be interpreted as a `GROUPref`.
+
+## Model ##
+
+### Model declaration: `GROUP` in `VOTABLE` ###
+
+Pattern expression:
+
+--------------------------------------------------------------------------------
+{GROUP G| G $\in$ VOTABLE & G/VODML/TYPE="vo-dml:Model"}
+
+--------------------------------------------------------------------------------
+
+A GROUP element with VODML element identifying a Model and placed directly under
+the root VOTABLE element indicates that the corresponding VO-DML model is used
+in VODML associations.
+
+Restrictions:
+
+  * `GROUP` element representing a VO-DML Model must exist directly under
+  `VOTABLE` Each such `GROUP` **MUST** have a VODML element with
+  `VODML/TYPE="vo-dml:Model"`, no `VODML/ROLE`
+  * **MUST** have child `PARAM`
+  element with `VODML/ROLE="vo-dml:Model.identifier"` and `@value` the URI of
+  the VO-DML document representing the model. `@name` is irrelevant,
+  `@datatype="char"` and `arraysize="*"`. This annotation allows clients to
+  discover whether a particular model is used in the document, the prefix of
+  the `vodmlrefs` in the document, and to resolve the Model to its VO-DML
+  description. The URI **MUST** be a `IVORN` for models registered in a VO
+  registry.
+  * **SHOULD** have child `PARAM` element with `VODML/ROLE="vo-dml:Model.url"`
+  and `@value` the URL of the VO-DML document representing the model.
+  `@name` is irrelevant, `@datatype="char"` and `arraysize="*"`. This is a
+  convenient shortcut for the resolution of the URI. Data providers should make
+  sure the URL is not broken. Clients should make sure that they fall back to
+  resolving the URI if the URL is broken.
+  * **MUST** have child PARAM element with `VODML/ROLE="vo-dml:Model.name"`
+  and `@value` the name of the Model, which also works as the `vodmlref` prefix
+  (see [@sec:mapping]). `@name` is irrelevant, `@datatype="char"` and
+  `arraysize="*"`. The `@value` attribute **MUST** have the same value as the
+  name of the Model in the VO-DML/XML document defining it.
+
+```{include="code/model.xml" caption="Model example" .xml}
+Model.xml example
+```
+
+## ObjectType ##
+See also [@sec:composition] for more patterns regarding serialisation of
+**`ObjectType`** instances.
+
+### Standalone root **`ObjectType`**: direct `GROUP` ###
+
+Pattern expression:
+
+--------------------------------------------------------------------------------
+{GROUP G| G $\subset$ RESOURCE & G $\not\subset$ TABLE & G $\not\subset$
+  GROUP[VODML] & G/VODML/TYPE $\Rightarrow$ **`ObjectType`** &
+  G/VODML/ROLE = NULL}
+
+--------------------------------------------------------------------------------
 
 Notable Absences {#sec:absences}
 ================

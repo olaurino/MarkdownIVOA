@@ -2,7 +2,12 @@
 title: Mapping Data Models to VOTable
 name: MappingDMtoVOTable
 version: '1.0-201506xx'
-docType: WD
+# supported types: WD, PR, NOTE, REC, DERR
+# custom types may be provided by creating files
+# in `style/messages`, following the examples.
+type: WD
+date: '2016-08-30'
+dateCode: '20160830'
 author:
     - name: Gerard Lemson
       url: http://www.ivoa.net/cgi-bin/twiki/bin/view/IVOA/GerardLemson
@@ -15,7 +20,7 @@ author:
 editor:
     - name: Omar Laurino
     - name: Gerard Lemson
-ivoaGroup: Standards and Processes
+ivoaGroup: Data Models
 previousVersion:
     - ver: xx
       url: http://www.ivoa.net/documents/xx

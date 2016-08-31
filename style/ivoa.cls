@@ -198,18 +198,11 @@
 	\list{}{\rightmargin 0mm\leftmargin 5mm}\item[]}
 	{\endlist}
 
-\newcommand\expandedDoctype[1] % "Proposed Recommendation" for PR and such
-	{\ifthenelse{\equal{#1}{NOTE}}
-		{IVOA Note}
-		{\ifthenelse{\equal{#1}{WD}}
-			{IVOA Working Draft}
-		{\ifthenelse{\equal{#1}{PR}}
-			{IVOA Proposed Recommendation}
-		{\ifthenelse{\equal{#1}{REC}}
-			{IVOA Recommendation}
-		{\ifthenelse{\equal{#1}{DERR}}
-			{Draft Erratum}
-		{UNKNOWN DOCUMENT (fix DOCTYPE)}}}}}}
+% Extensible document types
+% A file of the kind <Doctype>.txt is searched in
+% `style/messages`
+\newcommand\expandedDoctype[1]
+	{\input{style/messages/#1.txt}}
 
 \newcommand\docstatusDeclaration[1]
 	{\ifthenelse{\equal{#1}{NOTE}}

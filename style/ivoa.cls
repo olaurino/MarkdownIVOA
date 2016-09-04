@@ -125,14 +125,14 @@
     \Large\color{ivoacolor}\quad\textsl{\textsf{\textbf{V}irtual}} \\
     \Large\color{ivoacolor}\quad\textsl{\textsf{\textbf{O}bservatory}} \\
     \Large\color{ivoacolor}\textsl{\textsf{\textbf{A}lliance}}}}\hfil}
- 
+
  	\vskip 1.4cm
  	\begin{sloppypar}\raggedright
   \LARGE\color{ivoacolor}\sffamily\bfseries \@title\par
   \end{sloppypar}
 
 	\bigskip
-  \noindent{\LARGE\color{ivoacolor}\sffamily\bfseries 
+  \noindent{\LARGE\color{ivoacolor}\sffamily\bfseries
   	Version \ivoaDocversion}
 	\medskip
   \titlehe@d{\expandedDoctype{\ivoaDoctype} \ivoaDocdate}%
@@ -170,7 +170,7 @@
     				\vcsD@te}
    				\ifthenelse{\equal{\vcs@RL}{unknown}}{\relax}
    					{\\\strut\tiny\url{\vcs@RL}}}
-    			
+
     \end{bigdescription}
   \@thanks
   \vfill\null
@@ -205,52 +205,15 @@
 	{\input{style/messages/#1.txt}}
 
 \newcommand\docstatusDeclaration[1]
-	{\ifthenelse{\equal{#1}{NOTE}}
-		{This is an IVOA Note expressing suggestions from and
-     opinions of the authors. It is intended to share best
-     practices, possible approaches, or other perspectives on
-     interoperability with the Virtual Observatory. It should
-     not be referenced or otherwise interpreted as a standard
-     specification.}
-	{\ifthenelse{\equal{#1}{WD}}
-		{This is an IVOA Working Draft for review by IVOA members
-     and other interested parties.  It is a draft document and
-     may be updated, replaced, or obsoleted by other documents
-     at any time. It is inappropriate to use IVOA Working Drafts
-     as reference materials or to cite them as other than ``work
-     in progress''.}
- 	{\ifthenelse{\equal{#1}{PR}}
- 		{This is an IVOA Proposed Recommendation made available for
-      public review. It is appropriate to reference this document
-      only as a recommended standard that is under review and
-      which may be changed before it is accepted as a full
-      Recommendation.}
- 	{\ifthenelse{\equal{#1}{DERR}}
- 		{This is a draft for an erratum to an IVOA recommendation made 
- 			available for public review.  Interested parties are invited
- 			to evaluate the erratum's validity and impact, but at this stage
- 			the erratum does not yet change the normative content of the
- 			recommendation.}
-	{\ifthenelse{\equal{#1}{REC}}
-		{This document has been reviewed by IVOA Members and other
-     interested parties, and has been endorsed by the IVOA
-     Executive Committee as an IVOA Recommendation. It is a
-     stable document and may be used as reference material or
-     cited as a normative reference from another document.
-     IVOA's role in making the Recommendation is to draw
-     attention to the specification and to promote its
-     widespread deployment. This enhances the functionality and
-     interoperability inside the Astronomical Community.}
-		{UNKNOWN DOCUMENT (fix DOCTYPE)}}}}}\par
-	A list of current IVOA Recommendations and other technical documents
-	can be found at \href{http://www.ivoa.net/Documents/
-	}{http://www.ivoa.net/Documents/}.}
+  {\input{style/messages/#1_description.txt}
+	\par
+	\input{style/messages/doc_list.txt}}
 
 
 \newcommand\currentDocURL % URL of this document's landing page
 	{\href{http://www.ivoa.net/documents/\ivoaDocname/\ivoaDocdatecode}
 		{http://www.ivoa.net/documents/\ivoaDocname/\ivoaDocdatecode}}
-\newcommand\latestDocURL 
+\newcommand\latestDocURL
 	% URL of a potential successor to the document's landing page
 	{\href{http://www.ivoa.net/documents/\ivoaDocname}
 		{http://www.ivoa.net/documents/\ivoaDocname}}
@@ -328,4 +291,3 @@
 	{\hspace{\labelsep}\itshape #1}
 
 \makeatother
-

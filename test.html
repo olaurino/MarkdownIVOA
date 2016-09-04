@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2016-08-30" />
+  <title>Mapping Data Models to VOTable</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="style/ivoa-plus.css" type="text/css" />
+  <link rel="stylesheet" href="style/ivoa_doc.css" type="text/css" />
+</head>
+<body>
+
+<!-- IVOA Header -->
+<table xmlns="http://www.w3.org/1999/xhtml" cellspacing="0"
+cellpadding="0" width="450"><tr><td><a href="http://www.ivoa.net/"><img
+height="169" alt="IVOA" src="http://www.ivoa.net/icons/IVOA_wb_300.jpg"
+width="300" border="0"/></a></td><td><div style="padding: 3.6pt
+7.2pt;"><p><b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);"><span>
+</span>I</span></i></b><i><span style="font-size: 14pt; color: rgb(0, 90,
+156);">nternational</span></i></p><p><b><i><span style="font-size: 14pt;
+color: rgb(0, 90, 156);"><span>   </span>V</span></i></b><i><span
+style="font-size: 14pt; color: rgb(0, 90,
+156);">irtual</span></i></p><p><b><i><span style="font-size: 14pt; color:
+rgb(0, 90, 156);"><span> </span><span>  </span>O</span></i></b><i><span
+style="font-size: 14pt; color: rgb(0, 90,
+156);">bservatory</span></i></p><p><b><i><span style="font-size: 14pt; color:
+rgb(0, 90, 156);">A</span></i></b><i><span style="font-size: 14pt; color:
+rgb(0, 90, 156);">lliance</span></i><i/></p></div><i/></td></tr></table>
+<!-- End IVOA Header -->
+
+<div id="header">
+<h1 class="title">Mapping Data Models to VOTable</h1>
+
+<div xmlns="http://www.w3.org/1999/xhtml" id="versionstatement">
+  Version 1.0-201506xx</div>
+
+<div xmlns="http://www.w3.org/1999/xhtml" id="dateline">
+%{type}
+<span xmlns="" id="docdate">2016-04-30</span></div>
+
+\author[http://www.ivoa.net/cgi-bin/twiki/bin/view/IVOA/GerardLemson]{Gerard Lemson}
+\author[http://www.ivoa.net/cgi-bin/twiki/bin/view/IVOA/OmarLaurino]{Omar Laurino}
+\author{Patrick Dowler}
+\author{Markus Demleitner}
+\author{Matthew Graham}
+\author{Jesus Salgado}
+
+\editor{Omar Laurino}
+\editor{Gerard Lemson}
+<h3 class="date">2016-08-30</h3>
+</div>
+
+<p></p>
+<h1 id="introduction"><span class="header-section-number">1</span> Introduction</h1>
+<p>Data providers put a lot of effort in organizing and maintaining metadata that precisely describes their data files. This information is invaluable for users and for software developers that provide users with user-friendly VO-enabled applications. For example, such metadata can characterize the different axes of the reference system in which the data is expressed, or the history of a measurement, like the publication where the measurement was drawn from, the calibration type, and so forth. In order to be interoperable, this metadata must refer to some Data Model that is known to all parties: the IVOA defines and maintains such standardized Data Models that describe astronomical data in an abstract, interoperable way.</p>
+<p>In order to enable such interoperable, extensible, portable annotation of data files, one needs:</p>
+<ol style="list-style-type: lower-roman">
+<li>A language to unambiguously and efficiently describe Data Models and their elements' identificators <span class="citation">(Lemson <a href="#ref-vodml">2015</a>)</span>.</li>
+<li>Pointers linking a specific piece of information (data or metadata) to the Data Model element it represents.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></li>
+<li>A mapping specification that unambiguously describes the mapping strategies that lead to faithful representations of Data Model instances in a specific format.</li>
+</ol>
+<p>Without a consistent language for describing Data Models there can be no interoperability, both between them, reuse of models by models, or in their use in other specifications. Such a language must be expressive and formal enough to enable the serialization of data types of growing complexity and the development of reusable, extensible software components and libraries that can make the technological uptake of the VO standards seamless and scalable. </p>
+<p>For serializations to non-standard representations one needs to map the abstract Data Model to a particular format meta-model. For instance, the VOTable format defines <code>RESOURCE</code>s, <code>TABLE</code>s, <code>PARAM</code>s, <code>FIELD</code>s, and so forth, and provides explicit attributes such as units, <code>UCD</code>s, and <code>utypes</code>: in order to represent instances of a Data Model, one needs to define an unambiguous mapping between these meta-model elements and the Data Model language, so to make it possible for software to be able to parse a file according to its Data Model and to Data Providers to mark up their data products.</p>
+<p>While one might argue that a standard for portable, interoperable Data Model representation would have been required before one could think about such a mapping, we are specifying it only at a later stage. In particular several different interpretations of <code>UTYPE</code>s have been proposed and used.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> This specification aims to resolve this ambiguity.</p>
+<p>Any standard trying to reconcile these very different usages must take them into account and make the transition from the current usages to the new standard as seamless as possible. For this reason, this document also shows how the current <code>UTYPE</code>s usages can be seamlessly integrated with the new scheme, so to minimize the transition effort.</p>
+<p>As a matter of fact, existing files and services can be made compliant according to this specification by simply adding annotations and keeping the old ones. So they do not need to change them in such a way that would necessarily make them incompatible with existing software.</p>
+<p>Several sections of this document are utterly informative: in particular, the appendices provide more information about the impact of this specification to the current and future IVOA practices.</p>
+<p>This specification describes how to represent Data Model instances using the VOTable schema. This representation uses the <code>&lt;VODML&gt;</code> element introduced for this purpose in VOTable v1.4 <span class="citation">(Ochsenbein)</span> and the structure of the VOTable meta-model elements to indicate how instances of data models are stored in VOTable documents. We show many examples and give a complete listing of allowed mapping patterns.</p>
+<p>In sections <a href="#sec:motivation">sec. 2</a> to <span class="citation">(<span class="citeproc-not-found" data-reference-id="sec:examples"><strong>???</strong></span>)</span> we give an introduction to why and how the VODML elements can be used to hold pointers into the data models and several examples that illustrate the mapping.</p>
+<p><span class="citation">(<span class="citeproc-not-found" data-reference-id="Sec:normative"><strong>???</strong></span>)</span> is a rigorous listing of all valid annotations, and the normative part of the specification. <span class="citation">(<span class="citeproc-not-found" data-reference-id="Sec:absences"><strong>???</strong></span>)</span> describes what patterns and usages this specification does not cover; moreover, it describes how legacy and custom <code>@utypes</code> can be treated in this specification's framework: as such, this section actually describes the transition from the current usages and this specification. <span class="citation">(<span class="citeproc-not-found" data-reference-id="Sec:others"><strong>???</strong></span>)</span> describes ideas on how this specification might be used for annotating other tabular formats, and how to generalize it to other, more structured data serialization formats.</p>
+<p>The appendices contain additional material: <span class="citation">(<span class="citeproc-not-found" data-reference-id="sec:annotations"><strong>???</strong></span>)</span> describes the VODML annotation element that was added to the VOTable schema to support this mapping specification. <span class="citation">(<span class="citeproc-not-found" data-reference-id="Sec:clients"><strong>???</strong></span>)</span> describes different types of client software and how they could deal with VOTables annotated according to the current specification. <span class="citation">(<span class="citeproc-not-found" data-reference-id="Sec:regexp"><strong>???</strong></span>)</span> defines a set-based &quot;language&quot; for expressing mapping patterns in a more formal manner. <span class="citation">(<span class="citeproc-not-found" data-reference-id="Sec:faq"><strong>???</strong></span>)</span> tries to answer some frequently asked questions.</p>
+<p><strong> Throughout the document we will refer to some real or example Data Models. Please remember that such models have been designed to be fairly simple, yet complex enough to illustrate all the possible constructs that this specification covers. They are not to be intended as actual DMs, nor, by any means, this specification suggests their adoption by the IVOA or by users and or Data Providers. In some cases we refer to actual DMs in order to provide an idea of how this specification relates to real life cases involving actual DMs. </strong></p>
+<h1 id="usecases"><span class="header-section-number">2</span> Use Cases</h1>
+<h1 id="sec:motivation"><span class="header-section-number">3</span> The need for a mapping language</h1>
+<h1 id="sec:mapping"><span class="header-section-number">4</span> Mapping with the <code>&lt;VODML&gt;</code> element</h1>
+<h1 id="sec:general"><span class="header-section-number">5</span> General information about this spec</h1>
+<h1 id="sec:examples"><span class="header-section-number">6</span> Examples: Mapping VO-DML =&gt; VOTable</h1>
+<h1 id="sec:normative"><span class="header-section-number">7</span> Patterns for annotating VOTable [NORMATIVE]</h1>
+<p>In this section we list all legal mapping patterns that can be used to express how instances of VO-DML-defined types are represented in a VOTable and the possible roles they play. It defines which VOTable elements can be annotated with <code>&lt;VODML&gt;</code> elements described in <span class="citation">(<span class="citeproc-not-found" data-reference-id="sec:mapping"><strong>???</strong></span>)</span>, what restrictions there are and how to interpret the annotation.</p>
+<p>The organization of the following sections is based on the different VO-DML concepts that can be represented. Each of these subsections contains sub-subsections which represent the different possible ways the concept may be encountered in a VOTable and discuss rules and constraints on those annotations. We start with <code>Model</code>, and then we discuss value types (<code>PrimitiveType</code>, <code>Enumeration</code>, and <code>DataType</code>) and <code>Attribute</code>s. Then <code>ObjectType</code> and the relationships, <code>Composition</code> (collection), <code>Reference</code>, and <code>Inheritance</code> (extends). <code>Package</code> is not mapped: none of the use cases required this element to be actually mapped to a VOTable instance.</p>
+<p>Each subsection contains a concise, formal description of a mapping pattern, according to a simple <em>grammar</em> described in <span class="citation">(<span class="citeproc-not-found" data-reference-id="sec:regexp"><strong>???</strong></span>)</span> ... </p>
+<p>For example the pattern expression:</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left">{GROUP G| G <span class="math inline"> ∈ </span> TABLE &amp; G/VODML/TYPE <span class="math inline"> ⇒ </span> <strong>ObjectType</strong> &amp; G/VODML/ROLE = NULL}</td>
+</tr>
+</tbody>
+</table>
+<p>Defines the pattern: <code>GROUP</code> directly under a <code>TABLE</code>, with <code>VODML/TYPE</code> element identifying an <code>ObjectType</code> and without <code>VODML/ROLE</code> element. For example</p>
+<table>
+<colgroup>
+<col width="80%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left">{GROUP|VODML/TYPE='vo-dml:Model' <span class="math inline"> ⇒ </span> <strong>Model</strong>}</td>
+</tr>
+</tbody>
+</table>
+<p>implies the <code>GROUP</code> with <code>VODML/TYPE</code> set to <code>vo-dml:Model</code> is mapped to a <code>Model</code>. </p>
+<p>Some comments on how we refer to VOTable and VO-DML elements </p>
+<ul>
+<li>When referring to VOTable elements we will use the notation by which these elements will occur in VOTable documents, i.e. in general <em>all caps</em>, e.g. <code>GROUP</code>, <code>FIELD</code>, (though <code>FIELDref</code>).</li>
+<li>When referring to rows in a <code>TABLE</code> element in a VOTable, we will use <code>TR</code>, when referring to individual cells, <code>TD</code>. Even though such elements only appear in the <code>TABLEDATA</code> serialization of a <code>TABLE</code>. When referring to a column in the <code>TABLE</code> we will use <code>FIELD</code>, also if we do not intend the actual <code>FIELD</code> element annotating the column.</li>
+<li>When referring to an <code>XML</code> attribute on a VOTable element we will prefix it with a <code>@</code>, e.g. <code>@id</code>, <code>@ref</code>.</li>
+<li>References to VO-DML elements will be capitalized and <strong>bold face</strong>, using their <code>VO-DML/XSD</code> type definitions. E.g. <code>ObjectType</code>, <code>Attribute</code>. Some mapping solutions require a reference to a <code>GROUP</code> defined elsewhere in the same VOTable. We refer to such a construct as a <code>GROUPref</code>, which is not an element of the current VOTable standard (v1.3). It refers to a <code>GROUP</code> with a <code>@ref</code> attribute, which must always identify another <code>GROUP</code> in the same document. The target <code>GROUP</code> must have an <code>@id</code> attribute. In cases where this is important we will indicate that this combination is to be interpreted as a <code>GROUPref</code>.</li>
+</ul>
+<h2 id="model"><span class="header-section-number">7.1</span> Model</h2>
+<h3 id="model-declaration-group-in-votable"><span class="header-section-number">7.1.1</span> Model declaration: <code>GROUP</code> in <code>VOTABLE</code></h3>
+<p>Pattern expression:</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left">{GROUP G| G <span class="math inline"> ∈ </span> VOTABLE &amp; G/VODML/TYPE=&quot;vo-dml:Model&quot;}</td>
+</tr>
+</tbody>
+</table>
+<p>A GROUP element with VODML element identifying a Model and placed directly under the root VOTABLE element indicates that the corresponding VO-DML model is used in VODML associations.</p>
+<p>Restrictions:</p>
+<ul>
+<li><code>GROUP</code> element representing a VO-DML Model must exist directly under <code>VOTABLE</code> Each such <code>GROUP</code> <strong>MUST</strong> have a VODML element with <code>VODML/TYPE=&quot;vo-dml:Model&quot;</code>, no <code>VODML/ROLE</code></li>
+<li><strong>MUST</strong> have child <code>PARAM</code> element with <code>VODML/ROLE=&quot;vo-dml:Model.identifier&quot;</code> and <code>@value</code> the URI of the VO-DML document representing the model. <code>@name</code> is irrelevant, <code>@datatype=&quot;char&quot;</code> and <code>arraysize=&quot;*&quot;</code>. This annotation allows clients to discover whether a particular model is used in the document, the prefix of the <code>vodmlrefs</code> in the document, and to resolve the Model to its VO-DML description. The URI <strong>MUST</strong> be a <code>IVORN</code> for models registered in a VO registry.</li>
+<li><strong>SHOULD</strong> have child <code>PARAM</code> element with <code>VODML/ROLE=&quot;vo-dml:Model.url&quot;</code> and <code>@value</code> the URL of the VO-DML document representing the model. <code>@name</code> is irrelevant, <code>@datatype=&quot;char&quot;</code> and <code>arraysize=&quot;*&quot;</code>. This is a convenient shortcut for the resolution of the URI. Data providers should make sure the URL is not broken. Clients should make sure that they fall back to resolving the URI if the URL is broken.</li>
+<li><strong>MUST</strong> have child PARAM element with <code>VODML/ROLE=&quot;vo-dml:Model.name&quot;</code> and <code>@value</code> the name of the Model, which also works as the <code>vodmlref</code> prefix (see <span class="citation">(<span class="citeproc-not-found" data-reference-id="sec:mapping"><strong>???</strong></span>)</span>). <code>@name</code> is irrelevant, <code>@datatype=&quot;char&quot;</code> and <code>arraysize=&quot;*&quot;</code>. The <code>@value</code> attribute <strong>MUST</strong> have the same value as the name of the Model in the VO-DML/XML document defining it.</li>
+</ul>
+<div class="sourceCode" caption="Model example"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;GROUP&gt;</span>
+  <span class="kw">&lt;VODML&gt;&lt;TYPE&gt;</span>vo-dml:Model<span class="kw">&lt;/TYPE&gt;&lt;/VODML&gt;</span>
+  <span class="kw">&lt;PARAM</span><span class="ot"> name=</span><span class="st">&quot;name&quot;</span><span class="ot"> datatype=</span><span class="st">&quot;char&quot;</span><span class="ot"> arraysize=</span><span class="st">&quot;*&quot;</span><span class="ot"> value=</span><span class="st">&quot;src&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;VODML&gt;&lt;ROLE&gt;</span>vo-dml:Model.name<span class="kw">&lt;/ROLE&gt;&lt;/VODML&gt;</span>
+  <span class="kw">&lt;/PARAM&gt;</span>
+  <span class="kw">&lt;PARAM</span><span class="ot"> name=</span><span class="st">&quot;version&quot;</span><span class="ot"> datatype=</span><span class="st">&quot;char&quot;</span><span class="ot"> arraysize=</span><span class="st">&quot;*&quot;</span><span class="ot"> value=</span><span class="st">&quot;1.0&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;VODML&gt;&lt;ROLE&gt;</span>vo-dml:Model.version<span class="kw">&lt;/ROLE&gt;&lt;/VODML&gt;</span>
+  <span class="kw">&lt;/PARAM&gt;</span>
+  <span class="kw">&lt;PARAM</span><span class="ot"> name=</span><span class="st">&quot;url&quot;</span><span class="ot"> datatype=</span><span class="st">&quot;char&quot;</span><span class="ot"> arraysize=</span><span class="st">&quot;*&quot;</span>
+<span class="ot">    value=</span><span class="st">&quot;https://volute.googlecode.com/svn/trunk/projects/dm/vo-dml/models/sample/Source.vo-dml.xml&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;VODML&gt;&lt;ROLE&gt;</span>vo-dml:Model.url<span class="kw">&lt;/ROLE&gt;&lt;/VODML&gt;</span>
+  <span class="kw">&lt;/PARAM&gt;</span>
+<span class="kw">&lt;/GROUP&gt;</span></code></pre></div>
+<h2 id="objecttype"><span class="header-section-number">7.2</span> ObjectType</h2>
+<p>See also <span class="citation">(<span class="citeproc-not-found" data-reference-id="sec:composition"><strong>???</strong></span>)</span> for more patterns regarding serialisation of <strong><code>ObjectType</code></strong> instances.</p>
+<h3 id="standalone-root-objecttype-direct-group"><span class="header-section-number">7.2.1</span> Standalone root <strong><code>ObjectType</code></strong>: direct <code>GROUP</code></h3>
+<p>Pattern expression:</p>
+<table>
+<colgroup>
+<col width="100%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left">{GROUP G| G <span class="math inline"> ⊂ </span> RESOURCE &amp; G <span class="math inline"> ⊄ </span> TABLE &amp; G <span class="math inline"> ⊄ </span> GROUP[VODML] &amp; G/VODML/TYPE <span class="math inline"> ⇒ </span> <strong><code>ObjectType</code></strong> &amp; G/VODML/ROLE = NULL}</td>
+</tr>
+</tbody>
+</table>
+<h1 id="sec:absences"><span class="header-section-number">8</span> Notable Absences</h1>
+<h1 id="sec:others"><span class="header-section-number">9</span> Serializing to other file formats</h1>
+<p></p>
+<h1 id="sec:annotations"><span class="header-section-number">10</span> The VODML annotation elements in the VOTable schema</h1>
+<h1 id="sec:clients"><span class="header-section-number">11</span> Growing complexity: naive, advanced, and guru clients</h1>
+<h1 id="sec:regexp"><span class="header-section-number">12</span> Regular expressions for mapping</h1>
+<h1 id="sec:faq"><span class="header-section-number">13</span> Frequently Asked Questions</h1>
+<p></p>
+<div class="references">
+<h1 id="bibliography" class="unnumbered">Bibliography</h1>
+<div id="ref-usages">
+<p>Graham, Matthew. 2013. “UTypes: Current Usages and Practices in the IVOA.” <a href="http://www.ivoa.net/documents/Notes/UTypesUsage/index.html" class="uri">http://www.ivoa.net/documents/Notes/UTypesUsage/index.html</a>.</p>
+</div>
+<div id="ref-vodml">
+<p>Lemson, Gerard. 2015. “VO - DML: A Consistent Modeling Language for IVOA Data Models.” <a href="http://www.ivoa.net/documents/VODML/20151010/index.html" class="uri">http://www.ivoa.net/documents/VODML/20151010/index.html</a>.</p>
+</div>
+<div id="ref-votable1.4">
+<p>Ochsenbein, Francois“VOTable Format Definition.” <a href="http://www.ivoa.net/documents/xxxx" class="uri">http://www.ivoa.net/documents/xxxx</a>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>This used to be the assumed role of the <code>@utype</code> attribute in VOTable and for example TAP. This document introduces the new <code>&lt;VODML&gt;</code> element for this purpose in VOTable, as agreed on in interop meeting in Banff, 2014.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>See <span class="citation">(Graham <a href="#ref-usages">2013</a>)</span><a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+</body>
+</html>

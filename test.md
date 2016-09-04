@@ -75,7 +75,7 @@ elements to indicate how instances of data models are stored in VOTable
 documents. We show many examples and give a complete listing of allowed mapping
 patterns.
 
-In sections [@sec:motivation] to [@sec:examples] we give an introduction to why
+In sections [@sec:motivation) to [@sec:examples] we give an introduction to why
 and how the VODML elements can
 be used to hold pointers into the data models and several examples that
 illustrate the mapping.

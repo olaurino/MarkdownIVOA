@@ -1,0 +1,5 @@
+This is a draft for an erratum to an IVOA recommendation made
+available for public review.  Interested parties are invited
+to evaluate the erratum's validity and impact, but at this stage
+the erratum does not yet change the normative content of the
+recommendation.

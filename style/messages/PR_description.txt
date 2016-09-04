@@ -1,0 +1,5 @@
+This is an IVOA Proposed Recommendation made available for
+public review. It is appropriate to reference this document
+only as a recommended standard that is under review and
+which may be changed before it is accepted as a full
+Recommendation.

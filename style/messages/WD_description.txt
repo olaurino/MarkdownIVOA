@@ -1,0 +1,6 @@
+This is an IVOA Working Draft for review by IVOA members
+and other interested parties.  It is a draft document and
+may be updated, replaced, or obsoleted by other documents
+at any time. It is inappropriate to use IVOA Working Drafts
+as reference materials or to cite them as other than ``work
+in progress''.

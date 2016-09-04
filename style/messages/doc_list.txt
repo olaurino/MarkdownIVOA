@@ -1,0 +1,2 @@
+A list of current IVOA Recommendations and other technical documents
+can be found at [http://www.ivoa.net/Documents/].

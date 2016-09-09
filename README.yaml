@@ -7,12 +7,13 @@ version: '1.0-201506xx'
 # in `style/messages`, following the examples.
 type: NOTE
 date: '2016-09-02'
+datecode: '20160902'
 author:
     - name: Omar Laurino
       url: http://www.ivoa.net/cgi-bin/twiki/bin/view/IVOA/OmarLaurino
 editor:
     - name: Omar Laurino
-ivoaGroup: Data Models
+group: Data Models
 previousVersion:
     - ver: xx
       url: http://www.ivoa.net/documents/xx

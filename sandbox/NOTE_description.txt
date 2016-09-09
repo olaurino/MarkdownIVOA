@@ -1,6 +1,0 @@
-This is an IVOA Note expressing suggestions from and
-opinions of the authors. It is intended to share best
-practices, possible approaches, or other perspectives on
-interoperability with the Virtual Observatory. It should
-not be referenced or otherwise interpreted as a standard
-specification.

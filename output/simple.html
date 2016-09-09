@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2016-09-02" />
+  <title>Using Markdown for IVOA standards</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="../style/ivoa_doc.css" type="text/css" />
+  <link rel="stylesheet" href="../style/ivoa-plus.css" type="text/css" />
+</head>
+<body>
+<div><table xmlns="http://www.w3.org/1999/xhtml" cellspacing="0"
+  cellpadding="0" width="450"><tr><td><a href="http://www.ivoa.net/"><img
+  height="169" alt="IVOA" src="http://www.ivoa.net/icons/IVOA_wb_300.jpg"
+  width="300" border="0"/></a></td><td><div style="padding: 3.6pt
+  7.2pt;"><p><b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);"><span>
+  </span>I</span></i></b><i><span style="font-size: 14pt; color: rgb(0, 90,
+  156);">nternational</span></i></p><p><b><i><span style="font-size: 14pt;
+  color: rgb(0, 90, 156);"><span>   </span>V</span></i></b><i><span
+  style="font-size: 14pt; color: rgb(0, 90,
+  156);">irtual</span></i></p><p><b><i><span style="font-size: 14pt; color:
+  rgb(0, 90, 156);"><span> </span><span>  </span>O</span></i></b><i><span
+  style="font-size: 14pt; color: rgb(0, 90,
+  156);">bservatory</span></i></p><p><b><i><span style="font-size: 14pt; color:
+  rgb(0, 90, 156);">A</span></i></b><i><span style="font-size: 14pt; color:
+  rgb(0, 90, 156);">lliance</span></i><i/></p></div><i/></td></tr></table><br
+  xmlns="http://www.w3.org/1999/xhtml"/></div>
+
+<div id="header">
+<h1 class="title">Using Markdown for IVOA standards</h1>
+
+<div id="versionstatement">Version 1.0-201506xx</div>
+<div id="dateline"><span class="NOTE" id="docdate">2016-09-02</span></div>
+
+<dl id="docmeta">
+<dt>Working Group</dt><dd id="ivoagroup">Data Models</dd>
+<dt>This Version</dt><dd><a class="currentlink"
+href="http://www.ivoa.net/documents/IvoaMarkdown/20160902">
+http://www.ivoa.net/documents/IvoaMarkdown/20160902</a></dd>
+<dt>Latest Version</dt>
+<dd><a class="latestlink"
+href="http://www.ivoa.net/documents/IvoaMarkdown">
+http://www.ivoa.net/documents/IvoaMarkdown</a></dd>
+<dt>Previous Versions</dt>
+<dd><ul class="previousversions">
+<li class="previousVersion"><a
+href="http://www.ivoa.net/documents/xx">
+xx</a></li>
+</ul></dd>
+<dt>Author(s)</dt><dd><ul class="authors">
+<li class="author"><a href="http://www.ivoa.net/cgi-bin/twiki/bin/view/IVOA/OmarLaurino">
+Omar Laurino</a></li>
+</ul></dd>
+<dt>Editor(s)</dt><dd><ul class="editors">
+<li class="editor">
+Omar Laurino</li>
+</ul></dd>
+</div>
+
+<h2>Contents</h2>
+<div id="TOC">
+<ul>
+<li><a href="#goals"><span class="toc-section-number">1</span> Goals</a></li>
+<li><a href="#comparison-with-ivoatex"><span class="toc-section-number">2</span> Comparison with IVOATex</a></li>
+<li><a href="#dependencies"><span class="toc-section-number">3</span> Dependencies</a></li>
+<li><a href="#working-without-any-dependencies"><span class="toc-section-number">4</span> Working without any dependencies</a><ul>
+<li><a href="#limitations"><span class="toc-section-number">4.1</span> Limitations</a></li>
+</ul></li>
+<li><a href="#the-metadata-header"><span class="toc-section-number">5</span> The metadata header</a></li>
+<li><a href="#simple-html-output"><span class="toc-section-number">6</span> Simple <code>HTML</code> output</a><ul>
+<li><a href="#installation"><span class="toc-section-number">6.1</span> Installation</a><ul>
+<li><a href="#pandoc"><span class="toc-section-number">6.1.1</span> pandoc</a></li>
+</ul></li>
+<li><a href="#rendering"><span class="toc-section-number">6.2</span> Rendering</a></li>
+<li><a href="#sec:simple-limitations"><span class="toc-section-number">6.3</span> Limitations</a></li>
+</ul></li>
+<li><a href="#full-html-output"><span class="toc-section-number">7</span> Full <code>HTML</code> output</a><ul>
+<li><a href="#installation-1"><span class="toc-section-number">7.1</span> Installation</a></li>
+</ul></li>
+</ul>
+</div>
+
+<h2>Abstract</h2>
+<p class="abstract">
+<p>Markdown is a lightweight markup language. This note introduces a set of <code>pandoc</code> templates and filters meant to make writing IVOA standards in Markdown possible in a convienient, portable, versionable way.</p>
+</p>
+
+<div>
+<h2>Status of this document</h2>
+<p id="status" class="NOTE">A list of current IVOA Recommendations and other
+ technical documents can be found at <a
+ href='http://www.ivoa.net/Documents/'>http://www.ivoa.net/Documents/</a>.</p>
+</div>
+
+<h1 id="goals"><span class="header-section-number">1</span> Goals</h1>
+<p>This project aims at providing IVOA authors and editors with a versatile tool to edit and collaborate on IVOA documents.</p>
+<p>The goals could be summarized as follows:</p>
+<ul>
+<li>enable documents to be properly versioned and authored concurrently;</li>
+<li>adopt a lightweight markup language, thus focusing on the content rather than on the presentation;</li>
+<li>require as few dependencies as possible;</li>
+<li>be cross-platform;</li>
+<li>produce high-quality typesetting renderings of the same master document in different formats.</li>
+</ul>
+<h1 id="comparison-with-ivoatex"><span class="header-section-number">2</span> Comparison with IVOATex</h1>
+<p>This project reuses IVOATex <span class="citation">(Demleitner <a href="#ref-ivoatex">2016</a>)</span> facilities as much as possible. The motivation for departing from IvoaTex itself significantly, however, is that some IVOA authors do not perceive authoring LaTex documents as an option.</p>
+<p>A potential solution could have been to create <code>pandoc</code> templates that would render Markdown as <code>IVOATex</code> latex files to be compiled with <code>IVOATex</code> itself.</p>
+<p>However, this would have not provided much control over the rendering of the contents, at least without adding <code>pandoc</code>-specific complexity. Moreover, this would have increased the number of dependencies required to produce outputs, which is already significant in <code>IVOATex</code>. Finally, It is easy enough to adapt <code>IVOATex</code> to a bunch of templates for <code>pandoc</code>, while reducing the complexity of the system.</p>
+<h1 id="dependencies"><span class="header-section-number">3</span> Dependencies</h1>
+<p>In order to edit files you only need a text editor and whatever source control system is required by your collaboration.</p>
+<p>In order to build <code>html</code> documents only <a href="http://pandoc.org"><code>pandoc</code></a> is required. It is also recommended to install the <a href="https://github.com/lierdakil/pandoc-crossref"><code>pandoc cross-ref</code></a> filter.</p>
+<p><code>Pandoc</code> is open source and available for Linux, OSX, and Windows.</p>
+<p>The <code>cross-ref</code> filter is available as source code and can be built from sources. For Windows, pre-compiled binaries are available.</p>
+<p>More advanced filters require a <code>Python</code> interpreter to run. These filters allow to:</p>
+<ul>
+<li>include external source files.</li>
+<li>build complete documents with <code>IVOA</code> style.</li>
+</ul>
+<p>Finally, if a <code>latex</code> distribution is installed, <code>PDF</code> documents can be produced.</p>
+<p><strong>NOTE</strong>: On Windows, it should be possible to install all dependencies as native packages with regular installers. It is also possible to build many if not all the dependencies from sources, if desired.</p>
+<p>The project is currently in an early development stage, so the user interface is simple and not necessarily pretty. That will come with time.</p>
+<h1 id="working-without-any-dependencies"><span class="header-section-number">4</span> Working without any dependencies</h1>
+<p>A Markdown file is a text document, you can edit with any text editor.</p>
+<p>Being a markup language, albeit a lightweight one, you might want to make sure you are using the correct syntax. Any reasonably advanced text editor or Integrated Development Environment currently supports Markdown syntax highligthing and previews.</p>
+<p>If the text editor does not support such previews, one can use browser extensions that render Markdown files.</p>
+<p>Some text editors, like <code>vim</code> and <code>emacs</code>, have add-ons that allow users to preview Markdown through the browser: they render the file to <code>html</code> using default templates and they instruct the browser to display them.</p>
+<h2 id="limitations"><span class="header-section-number">4.1</span> Limitations</h2>
+<p>In this mode you cannot get a full rendering of the specific <code>pandoc</code> Markdown flavor, let alone run special filters defined in this project or use the IVOA-specific <code>pandoc</code> templates.</p>
+<p>However, we are trying to make sure that we remain as faithful as possible to Markdown, so that any special features (e.g. <code>TODO</code> lists) are rendered in a meaningful way in generic Markdown-to-<code>html</code> previews.</p>
+<p>As described in the following sections, a document is usually made of a metadata file and of one or more files with the actual content. One limitation while working</p>
+<p>One of the goals of this project is to allow IVOA documents to be written and collaborated upon while focusing on the content only, without worrying about the presentation. In other terms, authors should able to edit an IVOA document without any dependencies and using a lightweight markup language.</p>
+<h1 id="the-metadata-header"><span class="header-section-number">5</span> The metadata header</h1>
+<p>In the following sections we will assume your document is split in two files. While this is not required, i.e. you might have a single file with all the info, it is the most portable<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> solution and we recommend it.</p>
+<p>The first file contains the metadata about your document, including references you mean to cite and the abstract. The metadata file for the document you are currently reading, for example, is called <code>README.yaml</code>.</p>
+<p>The second file contains the content itself. For this document, this file is called <code>README.md</code>. Note that you can concatenate any number of files.</p>
+<p>The metadata header</p>
+<h1 id="simple-html-output"><span class="header-section-number">6</span> Simple <code>HTML</code> output</h1>
+<p>If one has <code>pandoc</code> installed, it is easy to produce <code>html</code> outputs that are rather close to the final format of a published IVOA document, with few limitations explained <a href="#sec:simple-limitations">below</a>.</p>
+<p>By running the master Markdown document through the <code>pandoc</code> command one gets the following advantages:</p>
+<ul>
+<li>specific <code>pandoc</code> features (e.g. cross-references, table of contents, etc.) can be used and correctly rendered.</li>
+<li>all metadata is used, including the abstract (see following sections).</li>
+<li>rendering is very close to that of a published IVOA document</li>
+</ul>
+<p>In order to make the translation process as easy and portable as possible, we provide some batch scripts for different platforms. If you have a Windows system, you can use the <code>.bat</code> files in a native shell (<code>cmd</code> or <code>powershell</code>). If you have a *nix system (including OSX and Linux), you can use the <code>.sh</code> commands in a terminal.</p>
+<p><strong>NOTE</strong>: you might also have a Windows system with an emulation platform (<code>cygwin</code>) or native non-<code>POSIX</code> shells like <code>Git Bash</code> or <code>MinGW/MSys</code> installed, you can use the <code>.sh</code> commands on Windows as well.</p>
+<h2 id="installation"><span class="header-section-number">6.1</span> Installation</h2>
+<h3 id="pandoc"><span class="header-section-number">6.1.1</span> pandoc</h3>
+<h2 id="rendering"><span class="header-section-number">6.2</span> Rendering</h2>
+<p>From a command line terminal, you can produce the <em>simple</em> <code>html</code> rendering by typing, from within the project's folder:</p>
+<pre><code> C:\MinGW\msys\1.0\home\Omar\pandocIvoa&gt; .\bin\simple.bat README.yaml README.md
+ $ ./bin/simple.sh README.yaml README.md</code></pre>
+<p>If you open a browser window and point it to the <code>output/simple.html</code> file you will see the <code>html</code> rendering of the file. Note that many features are actually enabled. For instance, you should see the references listed at the end of the document, citations should be hot links to the references section, and similarly footnotes should be properly rendered as hot link superscript numbers pointing to footnotes at the bottom of the document. Another link should get you back from a footnote to its reference.</p>
+<h2 id="sec:simple-limitations"><span class="header-section-number">6.3</span> Limitations</h2>
+<p>The <code>simple</code> mode assumes there are no other dependencies available other than <code>pandoc</code> itself. So, advanced features described in the following section are not properly rendered.</p>
+<h1 id="full-html-output"><span class="header-section-number">7</span> Full <code>HTML</code> output</h1>
+<p>This mode allows to take full advantage of some advanced features defined in some <code>pandoc</code> extensions and in <em>ad hoc</em> filters defined in this project.</p>
+<h2 id="installation-1"><span class="header-section-number">7.1</span> Installation</h2>
+<p>Python<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> needs to be installed and available in the terminal used to produce the documents. This should be easily achieved on all platforms.</p>
+<p>Optionally, in order to use smart cross references, the <code>pandoc-crossref</code> needs to be installed. On Windows, binaries are available on the [project's repository] (https://github.com/lierdakil/pandoc-crossref/releases). On all platforms, it can be built from sources, which requires the installation of the <a href="https://www.haskell.org/platform/">Haskell Platform</a>.</p>
+<div class="references">
+<h1 id="references" class="unnumbered">References</h1>
+<div id="ref-ivoatex">
+<p>Demleitner, Gerard. 2016. “The IVOATEX Document Preparation System.” <a href="http://www.ivoa.net/documents/Notes/IVOATex/index.html" class="uri">http://www.ivoa.net/documents/Notes/IVOATex/index.html</a>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>portable in the sense that not all editors and renderers will treat the metadata block in a nice way, since the metadata block is a <code>pandoc</code>-specific feature.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>at this point, only Python 2.7 has been tested, but we will make sure Python 3 is supported eventually.<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+</body>
+</html>

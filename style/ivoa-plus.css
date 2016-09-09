@@ -82,3 +82,73 @@ span.nolinkurl {
 .basicstyle__footnotesize {
 	font-size: 80%;
 }
+
+span#docdate.NOTE::before {
+	content: "IVOA Note ";
+}
+
+span#docdate.PR::before {
+	content: "IVOA Proposed Recommendation ";
+}
+
+span#docdate.REC::before {
+	content: "IVOA Recommendation ";
+}
+
+span#docdate.WD::before {
+	content: "IVOA Working Draft ";
+}
+
+span#docdate.DERR::before {
+	content: "IVOA Draft Erratum ";
+}
+
+#status {
+		font-style: italic;
+}
+
+#status.NOTE::before {
+	content: "This is an IVOA Note expressing suggestions from and\
+	opinions of the authors. It is intended to share best\
+	practices, possible approaches, or other perspectives on\
+	interoperability with the Virtual Observatory. It should\
+	not be referenced or otherwise interpreted as a standard\
+	specification. ";
+}
+
+#status.DERR::before {
+	content: "This is a draft for an erratum to an IVOA recommendation made\
+	available for public review.  Interested parties are invited\
+	to evaluate the erratum's validity and impact, but at this stage\
+	the erratum does not yet change the normative content of the\
+	recommendation. ";
+}
+
+#status.PR::before {
+	content: "This is an IVOA Proposed Recommendation made available for
+	public review. It is appropriate to reference this document
+	only as a recommended standard that is under review and
+	which may be changed before it is accepted as a full
+	Recommendation. ";
+}
+
+#status.REC::before {
+	content: "This document has been reviewed by IVOA Members and other
+	interested parties, and has been endorsed by the IVOA
+	Executive Committee as an IVOA Recommendation. It is a
+	stable document and may be used as reference material or
+	cited as a normative reference from another document.
+	IVOA's role in making the Recommendation is to draw
+	attention to the specification and to promote its
+	widespread deployment. This enhances the functionality and
+	interoperability inside the Astronomical Community. ";
+}
+
+#status.WD::before {
+	content: "This is an IVOA Working Draft for review by IVOA members
+	and other interested parties.  It is a draft document and
+	may be updated, replaced, or obsoleted by other documents
+	at any time. It is inappropriate to use IVOA Working Drafts
+	as reference materials or to cite them as other than 'work
+	in progress'. ";
+}

@@ -1,9 +1,3 @@
-HEADER
-======
-
-ABSTRACT
-========
-
 Goals
 =====
 
@@ -61,7 +55,7 @@ allow to:
 Finally, if a `latex` distribution is installed, `PDF` documents can be
 produced.
 
-**NOTE:** On Windows, it should be possible to install all dependencies as
+**NOTE**: On Windows, it should be possible to install all dependencies as
 native packages with regular installers. It is also possible to build many
 if not all the dependencies from sources, if desired.
 
@@ -190,17 +184,17 @@ some `pandoc` extensions and in *ad hoc* filters defined in this project.
 Installation
 ------------
 
-Python[^pyver] needs to be installed and available in the terminal used to
+Python needs to be installed and available in the terminal used to
 produce the documents. This should be easily achieved on all platforms.
+
+**TODO**: At this point, only Python 2.7 has been tested, but we must test
+Python 3 is supported.
 
 Optionally, in order to use smart cross references, the `pandoc-crossref` needs
 to be installed. On Windows, binaries are available on the [project's
 repository] (https://github.com/lierdakil/pandoc-crossref/releases). On all
 platforms, it can be built from sources, which requires the installation of the
 [Haskell Platform](https://www.haskell.org/platform/).
-
-[^pyver]: at this point, only Python 2.7 has been tested, but we will make sure
-Python 3 is supported eventually.
 
 References
 ==========

@@ -34,24 +34,22 @@ $endfor$
 $for(include-before)$
 $include-before$
 $endfor$
-
-<!-- IVOA Header -->
-<table xmlns="http://www.w3.org/1999/xhtml" cellspacing="0"
-cellpadding="0" width="450"><tr><td><a href="http://www.ivoa.net/"><img
-height="169" alt="IVOA" src="http://www.ivoa.net/icons/IVOA_wb_300.jpg"
-width="300" border="0"/></a></td><td><div style="padding: 3.6pt
-7.2pt;"><p><b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);"><span>
-</span>I</span></i></b><i><span style="font-size: 14pt; color: rgb(0, 90,
-156);">nternational</span></i></p><p><b><i><span style="font-size: 14pt;
-color: rgb(0, 90, 156);"><span>   </span>V</span></i></b><i><span
-style="font-size: 14pt; color: rgb(0, 90,
-156);">irtual</span></i></p><p><b><i><span style="font-size: 14pt; color:
-rgb(0, 90, 156);"><span> </span><span>  </span>O</span></i></b><i><span
-style="font-size: 14pt; color: rgb(0, 90,
-156);">bservatory</span></i></p><p><b><i><span style="font-size: 14pt; color:
-rgb(0, 90, 156);">A</span></i></b><i><span style="font-size: 14pt; color:
-rgb(0, 90, 156);">lliance</span></i><i/></p></div><i/></td></tr></table>
-<!-- End IVOA Header -->
+<div><table xmlns="http://www.w3.org/1999/xhtml" cellspacing="0"
+  cellpadding="0" width="450"><tr><td><a href="http://www.ivoa.net/"><img
+  height="169" alt="IVOA" src="http://www.ivoa.net/icons/IVOA_wb_300.jpg"
+  width="300" border="0"/></a></td><td><div style="padding: 3.6pt
+  7.2pt;"><p><b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);"><span>
+  </span>I</span></i></b><i><span style="font-size: 14pt; color: rgb(0, 90,
+  156);">nternational</span></i></p><p><b><i><span style="font-size: 14pt;
+  color: rgb(0, 90, 156);"><span>   </span>V</span></i></b><i><span
+  style="font-size: 14pt; color: rgb(0, 90,
+  156);">irtual</span></i></p><p><b><i><span style="font-size: 14pt; color:
+  rgb(0, 90, 156);"><span> </span><span>  </span>O</span></i></b><i><span
+  style="font-size: 14pt; color: rgb(0, 90,
+  156);">bservatory</span></i></p><p><b><i><span style="font-size: 14pt; color:
+  rgb(0, 90, 156);">A</span></i></b><i><span style="font-size: 14pt; color:
+  rgb(0, 90, 156);">lliance</span></i><i/></p></div><i/></td></tr></table><br
+  xmlns="http://www.w3.org/1999/xhtml"/></div>
 
 $if(title)$
 <div id="$idprefix$header">
@@ -61,32 +59,65 @@ $if(subtitle)$
 $endif$
 
 $if(version)$
-<div xmlns="http://www.w3.org/1999/xhtml" id="versionstatement">
-  Version $version$</div>
+<div id="versionstatement">Version $version$</div>
 $endif$
-
-<div xmlns="http://www.w3.org/1999/xhtml" id="dateline">
-%{type}
-<span xmlns="" id="docdate">2016-04-30</span></div>
-
-$for(author)$
-\author$if(author.url)$[$author.url$]$endif${$author.name$}
-$endfor$
-
-$for(editor)$
-\editor{$editor.name$}
-$endfor$
 $if(date)$
-<h3 class="date">$date$</h3>
-$endif$
-</div>
+<div id="dateline"><span class="$type$" id="docdate">$date$</span></div>
 $endif$
 
+<dl id="docmeta">
+<dt>Working Group</dt><dd id="ivoagroup">$group$</dd>
+<dt>This Version</dt><dd><a class="currentlink"
+href="http://www.ivoa.net/documents/$name$/$datecode$">
+http://www.ivoa.net/documents/$name$/$datecode$</a></dd>
+<dt>Latest Version</dt>
+<dd><a class="latestlink"
+href="http://www.ivoa.net/documents/$name$">
+http://www.ivoa.net/documents/$name$</a></dd>
+<dt>Previous Versions</dt>
+<dd><ul class="previousversions">
+$for(previousVersion)$
+<li class="previousVersion">$if(previousVersion.url)$<a
+href="$previousVersion.url$">$endif$
+$previousVersion.ver$$if(previousVersion.url)$</a>$endif$</li>
+$endfor$
+</ul></dd>
+<dt>Author(s)</dt><dd><ul class="authors">
+$for(author)$
+<li class="author">$if(author.url)$<a href="$author.url$">$endif$
+$author.name$$if(author.url)$</a>$endif$</li>
+$endfor$
+</ul></dd>
+<dt>Editor(s)</dt><dd><ul class="editors">
+$for(editor)$
+<li class="editor">$if(editor.url)$<a href="$editor.url$">$endif$
+$editor.name$$if(editor.url)$</a>$endif$</li>
+$endfor$
+</ul></dd>
+</div>
+
+$endif$
 $if(toc)$
+<h2>Contents</h2>
 <div id="$idprefix$TOC">
 $toc$
 </div>
 $endif$
+
+$if(abstract)$
+<h2>Abstract</h2>
+<p class="abstract">
+$abstract$
+</p>
+$endif$
+
+<div>
+<h2>Status of this document</h2>
+<p id="status" class="$type$">A list of current IVOA Recommendations and other
+ technical documents can be found at <a
+ href='http://www.ivoa.net/Documents/'>http://www.ivoa.net/Documents/</a>.</p>
+</div>
+
 $body$
 $for(include-after)$
 $include-after$

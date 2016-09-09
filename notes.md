@@ -56,3 +56,11 @@ ReST              sphinx           Python
 AsciiDoc          AsciiDoctor      Ruby            No robust PDF support
 
 --------------------------------------------------------------------------------
+
+Pandoc/Markdown
+===============
+
+Limitations:
+
+  * cannot include complex blocks in captions
+  * cannot highlight lines in code blocks

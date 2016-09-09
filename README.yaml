@@ -1,0 +1,38 @@
+---
+title: Using Markdown for IVOA standards
+name: IvoaMarkdown
+version: '1.0-201506xx'
+# supported types: WD, PR, NOTE, REC, DERR
+# custom types may be provided by creating files
+# in `style/messages`, following the examples.
+type: NOTE
+date: '2016-09-02'
+author:
+    - name: Omar Laurino
+      url: http://www.ivoa.net/cgi-bin/twiki/bin/view/IVOA/OmarLaurino
+editor:
+    - name: Omar Laurino
+ivoaGroup: Data Models
+previousVersion:
+    - ver: xx
+      url: http://www.ivoa.net/documents/xx
+
+abstract: |
+    Markdown is a lightweight markup language. This note introduces a set  of
+    `pandoc` templates and filters meant to make writing IVOA standards in
+    Markdown possible in a convienient, portable, versionable way.
+
+references:
+  - id: ivoatex
+    type: article
+    author:
+      - family: Demleitner
+        given: Gerard
+    title: 'The IVOATEX Document Preparation System'
+    issued:
+      year: 2016
+      month: 04
+      day: 30
+    URL: 'http://www.ivoa.net/documents/Notes/IVOATex/index.html'
+link-citations: true
+---

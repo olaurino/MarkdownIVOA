@@ -16,7 +16,7 @@ author:
     - name: Patrick Dowler
     - name: Markus Demleitner
     - name: Matthew Graham
-    - name: Jesus Salgado 
+    - name: Jesus Salgado
 editor:
     - name: Omar Laurino
     - name: Gerard Lemson
@@ -41,11 +41,11 @@ abstract: |
     assumes agreement on a VOTable extension that adds an explicit mapping
     element `<VODML>` to selected VOTable elements (`GROUP`, `PARAM`, `PARAMref`,
     `FIELDref`) and which indicates that those elements are representing
-    particular elements from some VO-DML model. 
+    particular elements from some VO-DML model.
 
 references:
     - id: vodml
-      type: article 
+      type: article
       author:
         - family: Lemson
           given: Gerard
@@ -54,9 +54,9 @@ references:
           year: 2015
           month: 10
           day: 10
-      URL: 'http://www.ivoa.net/documents/VODML/20151010/index.html' 
+      URL: 'http://www.ivoa.net/documents/VODML/20151010/index.html'
     - id: usages
-      type: article 
+      type: article
       author:
         - family: Graham
           given: Matthew
@@ -65,9 +65,9 @@ references:
           year: 2013
           month: 2
           day: 13
-      URL: 'http://www.ivoa.net/documents/Notes/UTypesUsage/index.html' 
-    - id: votable1.4 
-      type: article 
+      URL: 'http://www.ivoa.net/documents/Notes/UTypesUsage/index.html'
+    - id: votable1.4
+      type: article
       author:
         - family: Ochsenbein
           given: Francois
@@ -76,6 +76,6 @@ references:
           year: xxxx
           month: xxxx
           day: xxxx
-      URL: 'http://www.ivoa.net/documents/xxxx' 
+      URL: 'http://www.ivoa.net/documents/xxxx'
 link-citations: true
 ---

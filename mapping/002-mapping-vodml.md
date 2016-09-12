@@ -74,9 +74,7 @@ formally in section 6.7.3 (**TODO** fix reference).
 
 [^6]: This was foreseen for example in the note on referencing STC in
     VOTable [@stc_in_vot], as well as in a presentation by S.
-    Derriere in Naples:
-
-    ([http://wiki.ivoa.net/internal/IVOA/InterOpMay2011SED/PPDMDesc\_Naples.pdf](../customXml/item1.xml)).\
+    Derriere in Naples: [http://wiki.ivoa.net/internal/IVOA/InterOpMay2011SED/PPDMDesc_Naples.pdf].
     Lacking a formal target modelling language these developments
     remained ad hoc.
 
@@ -253,7 +251,7 @@ notation: the **vodml-id** will be the fragment part of the URI.
 Thus, the extended notation for a **vdmlref** with **vodml-id**
 ‘Foo.bar’ will be:
 
-ivo://authorityID/DM-ID\#Foo.bar
+ivo://authorityID/DM-ID#Foo.bar
 
 Such IDs can be referenced in any context and can be resolved to the
 VO-DML document description using the standard mechanism for resolving
@@ -317,32 +315,32 @@ with mapping instances?). These can be used to create specialized
 mapping patterns. We have already encountered some examples in the
 previous section to identify Models represented in a VOTable.
 
-We actuall use the same mapping patterns defined in this specification
+We actually use the same mapping patterns defined in this specification
 for this. This implies we need a special data model, which we name
 *VO-DML Instance Mapping* and whose prefix is *vo-dml* (**TODO** should
-maybe change this to *vodml-i*). The model can be found
-[here](https://volute.googlecode.com/svn/trunk/projects/dm/vo-dml/models/vo-dml/VO-DML.vo-dml.xml)[^10].
+maybe change this to *vodml-i*). The model[^10] can be found
+[https://volute.googlecode.com/svn/trunk/projects/dm/vo-dml/models/vo-dml/VO-DML.vo-dml.xml] here.
 
 [^10]: Note that this model does **not yet** obey all of the data
     modelling rules imposed on real data models. It is defined to keep
     up the invariant that each vodmlref MUST refer to an element in a
     formal VO-DML/XML element.
 
-General information about this spec
+General information about this spec {#sec:info}
 ===================================
 
 Sample model and instances
 --------------------------
 
 For examples we use a highly simplified version of a possible Source
-data model, illustrated by its UML representation in Figure 1.
+data model, illustrated by its UML representation in [@fig:model].
 
-![Figure 1 Data model used in
+![Data model used in
 examples. It represents a simplified Source data model, containing
 luminosities that refer to the imported PhotDM. It also defines a
 simplistic version of an STC model with some types for defining
 coordinates on the sky, for the sake of simplicity and just for example
-purposes.](media/image3.png)
+purposes.](media/image3.png){#fig:model}
 
 The model defines some types allowing one to define a Source with
 position on the sky and a collection of luminosities. The position is
@@ -369,14 +367,13 @@ to be unique and give some indication of the location of the element
 they point to in the data model.
 
 We also use some sample instances of the models. These are here
-illustrated by UML instance diagrams. The diagram in Figure 2 represents
+illustrated by UML instance diagrams. The diagram in {#fig:instance} represents
 the first two lines returned from a query[^query] to the SDSS DR7 database.
 
 ![Figure 2 Instance diagram representing SDSS
 objetcs as sources in the sample data model. The first few results are
 represented from the default radial SDSS query at
-<http://skyserver.sdss.org/dr7/en/tools/search/radial.asp>]
-(media/sdss_instance.jpg)
+<http://skyserver.sdss.org/dr7/en/tools/search/radial.asp>](media/sdss_instance.jpg){#fig:instance}
 
 [^query]: Specifically:
 ``` sql

@@ -1,4 +1,4 @@
-Patterns for annotating VOTable [NORMATIVE]
+Patterns for annotating VOTable [NORMATIVE] {#sec:normative}
 ===========================================
 
 In this section we list all legal mapping patterns that can be used to
@@ -1267,7 +1267,7 @@ rules apply:
 
 (**TODO** Extend this pattern to datatype, arraysize? ivoa:Quantity DM.)
 
-Notable absences
+Notable absences {#sec:absences}
 ================
 
 The VOTable schema allows for redundancy in meta-data assignment. For
@@ -1380,7 +1380,7 @@ PARAM *that is directly contained in a TABLE or RESOURCE*. The context
 this element a PARAMref or a PARAM inside a GROUP is to be used. This
 again enables backward compatibility.
 
-Serializing to other file formats
+Serializing to other file formats {#sec:other}
 =================================
 
 VOTable is expressive enough to allow the mapping patterns described in

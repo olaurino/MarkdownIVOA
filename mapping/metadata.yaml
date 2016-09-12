@@ -77,5 +77,27 @@ references:
           month: xxxx
           day: xxxx
       URL: 'http://www.ivoa.net/documents/xxxx'
+    - id: votable
+      title: 'VOTable document(s)'
+    - id: simdm
+      title: 'Simulation DM spec'
+    - id: chardm
+      title: 'Characterization DM spec'
+    - id: spectrumdm
+      title: 'Spectrum DM spec'
+    - id: stcdm
+      title: 'STC spec'
+    - id: orm
+      title: 'ORM mapping tools: Hibernate, JPA spec'
+    - id: ucd
+      title: 'UCDs'
+    - id: stc_in_vot
+      title: 'STC in VOTable note'
+    - id: skos
+      title: 'PR on use of SKOS vocabularies in IVOA'
+    - id: ids
+      title: 'IVOA Identifiers'
+    - id: vourp
+      title: 'VOURP'
 link-citations: true
 ---

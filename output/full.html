@@ -113,7 +113,7 @@ Gerard Lemson</li>
 <ul>
 <li><a href="#history-of-this-document">History of this document</a></li>
 <li><a href="#introduction"><span class="toc-section-number">1</span> Introduction</a></li>
-<li><a href="#use-cases"><span class="toc-section-number">2</span> Use Cases</a></li>
+<li><a href="#sec:usecases"><span class="toc-section-number">2</span> Use Cases</a></li>
 <li><a href="#the-need-for-a-mapping-language"><span class="toc-section-number">3</span> The need for a mapping language</a></li>
 <li><a href="#mapping-with-the-vodml-element."><span class="toc-section-number">4</span> Mapping with the <code>VODML</code> element.</a><ul>
 <li><a href="#complextype-vodmlannotation"><span class="toc-section-number">4.1</span> complexType: VODMLAnnotation</a></li>
@@ -124,12 +124,12 @@ Gerard Lemson</li>
 <li><a href="#the-vo-dml-preamble"><span class="toc-section-number">4.3</span> The VO-DML preamble</a></li>
 <li><a href="#special-annotations-from-the-vo-dml-mapping-model"><span class="toc-section-number">4.4</span> Special annotations from the VO-DML Mapping model</a></li>
 </ul></li>
-<li><a href="#general-information-about-this-spec"><span class="toc-section-number">5</span> General information about this spec</a><ul>
+<li><a href="#sec:info"><span class="toc-section-number">5</span> General information about this spec</a><ul>
 <li><a href="#sample-model-and-instances"><span class="toc-section-number">5.1</span> Sample model and instances</a></li>
 <li><a href="#data-carriers-in-votable"><span class="toc-section-number">5.2</span> Data carriers in VOTable</a></li>
 <li><a href="#single-table-representations-and-object-relational-mapping"><span class="toc-section-number">5.3</span> Single-table representations and Object-Relational Mapping</a></li>
 </ul></li>
-<li><a href="#patterns-for-annotating-votable-normative"><span class="toc-section-number">6</span> Patterns for annotating VOTable [NORMATIVE]</a><ul>
+<li><a href="#sec:normative"><span class="toc-section-number">6</span> Patterns for annotating VOTable [NORMATIVE]</a><ul>
 <li><a href="#model"><span class="toc-section-number">6.1</span> Model</a><ul>
 <li><a href="#model-declaration-group-in-votable"><span class="toc-section-number">6.1.1</span> Model declaration: GROUP in VOTABLE</a></li>
 </ul></li>
@@ -167,13 +167,22 @@ Gerard Lemson</li>
 <li><a href="#extends-inheritance-todo-needs-work"><span class="toc-section-number">6.8</span> Extends, inheritance (<strong>TODO</strong> needs work!)</a></li>
 <li><a href="#value-unit-ucd"><span class="toc-section-number">6.9</span> Value, Unit, UCD</a></li>
 </ul></li>
-<li><a href="#notable-absences"><span class="toc-section-number">7</span> Notable absences</a><ul>
+<li><a href="#sec:absences"><span class="toc-section-number">7</span> Notable absences</a><ul>
 <li><a href="#atomic-types-support-for-custom-and-legacy-utypes"><span class="toc-section-number">7.1</span> Atomic Types: support for custom and legacy UTYPEs</a></li>
 <li><a href="#packages"><span class="toc-section-number">7.2</span> Packages</a></li>
 <li><a href="#objecttype-to-table"><span class="toc-section-number">7.3</span> ObjectType to TABLE</a></li>
 <li><a href="#attribute-to-fieldparam-in-table"><span class="toc-section-number">7.4</span> Attribute to FIELD|PARAM in TABLE</a></li>
 </ul></li>
-<li><a href="#serializing-to-other-file-formats"><span class="toc-section-number">8</span> Serializing to other file formats</a></li>
+<li><a href="#sec:other"><span class="toc-section-number">8</span> Serializing to other file formats</a></li>
+<li><a href="#sec:schema"><span class="toc-section-number">9</span> The VODML annotation elements in the VOTable schema</a></li>
+<li><a href="#sec:clients"><span class="toc-section-number">10</span> Growing complexity: naïve, advanced, and guru clients</a><ul>
+<li><a href="#naïve-clients"><span class="toc-section-number">10.1</span> Naïve clients</a></li>
+<li><a href="#advanced-clients"><span class="toc-section-number">10.2</span> Advanced clients</a></li>
+<li><a href="#guru-clients"><span class="toc-section-number">10.3</span> Guru clients</a></li>
+</ul></li>
+<li><a href="#sec:regexp"><span class="toc-section-number">11</span> Regular expressions for mapping</a></li>
+<li><a href="#sec:FAQ"><span class="toc-section-number">12</span> Frequently Asked Questions</a></li>
+<li><a href="#references-1"><span class="toc-section-number">13</span> References</a></li>
 </ul>
 </div>
 
@@ -195,23 +204,22 @@ Gerard Lemson</li>
 <p>Data providers put a lot of effort in organizing and maintaining metadata that precisely describes their data files. This information is invaluable for users and for software developers that provide users with user-friendly VO-enabled applications. For example, such metadata can characterize the different axes of the reference system in which the data is expressed, or the history of a measurement, like the publication where the measurement was drawn from, the calibration type, and so forth. In order to be interoperable, this metadata must refer to some Data Model that is known to all parties: the IVOA defines and maintains such standardized Data Models that describe astronomical data in an abstract, interoperable way.</p>
 <p>In order to enable such interoperable, extensible, portable annotation of data files, one needs:</p>
 <ul>
-<li><p>A language to unambiguously and efficiently describe Data Models and their elements’ identificators (VO-DML, <span class="citation">(Lemson <a href="#ref-vodml">2015</a>)</span>).</p></li>
+<li><p>A language to unambiguously and efficiently describe Data Models and their elements’ identifiers (VO-DML, <span class="citation">(Lemson <a href="#ref-vodml">2015</a>)</span>).</p></li>
 <li><p>Pointers linking a specific piece of information (data or metadata) to the Data Model element it represents<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p></li>
 <li><p>A mapping specification that unambiguously describes the mapping strategies that lead to faithful representations of Data Model instances in a specific format.</p></li>
 </ul>
 <p>Without a consistent language for describing Data Models there can be no interoperability, both between them, reuse of models by models, or in their use in other specifications. Such a language must be expressive and formal enough to enable the serialization of data types of growing complexity and the development of reusable, extensible software components and libraries that can make the technological uptake of the VO standards seamless and scalable.</p>
 <p>For serializations to non-standard representations one needs to map the abstract Data Model to a particular format meta-model. For instance, the VOTable format defines <code>RESOURCE</code>s, <code>TABLE</code>s, <code>PARAM</code>s, <code>FIELD</code>s, and so forth, and provides explicit attributes such as <code>units</code>, <code>UCD</code>s, and <code>utypes</code>: in order to represent instances of a Data Model, one needs to define an unambiguous mapping between these meta-model elements and the Data Model language, so to make it possible for software to be able to parse a file according to its Data Model and to Data Providers to mark up their data products.</p>
-<p>While one might argue that a standard for portable, interoperable Data Model representation would have been required before one could think about such a mapping, we are specifying it only at a later stage. In particular several different interpretations of <code>UTYPE</code>s have been proposed and used<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>. This specification aims to resolve this ambiguity.</p>
+<p>While one might argue that a standard for portable, interoperable Data Model representation would have been required before one could think about such a mapping, we are specifying it only at a later stage. In particular several different interpretations of <code>UTYPE</code>s have been proposed and used <span class="citation">(Graham <a href="#ref-usages">2013</a>)</span>. This specification aims to resolve this ambiguity.</p>
 <p>Any standard trying to reconcile these very different usages must take them into account and make the transition from the current usages to the new standard as seamless as possible. For this reason, this document also shows how the current <code>UTYPE</code>s usages can be seamlessly integrated with the new scheme, so to minimize the transition effort.</p>
 <p>As a matter of fact, existing files and services can be made compliant according to this specification by simply <em>adding</em> annotations and keeping the old ones. So they do not need to <em>change</em> them in such a way that would necessarily make them incompatible with existing software.</p>
 <p>Several sections of this document are utterly informative: in particular, the appendices provide more information about the impact of this specification to the current and future IVOA practices.</p>
-<p>This specification describes how to represent Data Model instances using the VOTable schema. This representation uses the <code>&lt;VODML&gt;</code>; element introduced for this purpose in VOTable v1.4 <span class="citation">(<span class="citeproc-not-found" data-reference-id="votable"><strong>???</strong></span>)</span> and the structure of the VOTable meta-model elements to indicate how instances of data models are stored in VOTable documents. We show many examples and give a complete listing of allowed mapping patterns.</p>
-<p>In sections 1-6 we give an introduction to why and how the VODML elements can be used to hold pointers into the data models and several examples that illustrate the mapping.</p>
-<p>Section 6.7.3 is a rigorous listing of all valid annotations, and the normative part of the specification. Section 8 describes what patterns and usages this specification does <em>not</em> cover; moreover, it describes how legacy and custom <code>@utype</code>s can be treated in this specification’s framework: as such, this section actually describes the <em>transition</em> from the current usages and this specification. Section 9 described ideas how this specification might be used for annotating other tabular formats, and how to generalize it to other, more structured data serialization formats. Section 10 contains references.</p>
-<p>The appendices contain additional material. Appendix A describes the VODML annotation element that was added to the VOTable schema to support this mapping specification. Appendix B describes different types of client software and how they could deal with VOTables annotated according to the current specification. Appendix C defines a set-based “language” for expressing mapping patterns in a more formal manner. Appendix D tries to answer some frequently asked questions.</p>
-<p><strong>TODO</strong> section numbers in paragraphs above and below.</p>
+<p>This specification describes how to represent Data Model instances using the VOTable schema. This representation uses the <code>&lt;VODML&gt;</code>; element introduced for this purpose in VOTable v1.4 <span class="citation">(“VOTable Document(s),” n.d.)</span> and the structure of the VOTable meta-model elements to indicate how instances of data models are stored in VOTable documents. We show many examples and give a complete listing of allowed mapping patterns.</p>
+<p>In sections sec. 2 to sec. 5 we give an introduction to why and how the VODML elements can be used to hold pointers into the data models.</p>
+<p>Section sec. 6 is a rigorous listing of all valid annotations, and the normative part of the specification. Section sec. <strong>??</strong> describes what patterns and usages this specification does <em>not</em> cover; moreover, it describes how legacy and custom <code>@utype</code>s can be treated in this specification’s framework: as such, this section actually describes the <em>transition</em> from the current usages and this specification. Section sec. 8 describes ideas how this specification might be used for annotating other tabular formats, and how to generalize it to other, more structured data serialization formats.</p>
+<p>The appendices contain additional material. sec. 9 describes the VODML annotation element that was added to the VOTable schema to support this mapping specification. sec. 10 describes different types of client software and how they could deal with VOTables annotated according to the current specification. sec. 11 defines a set-based “language” for expressing mapping patterns in a more formal manner. sec. 12 tries to answer some frequently asked questions.</p>
 <p><strong>Throughout the document we will refer to some real or example Data Models. Please remember that such models have been designed to be fairly simple, yet complex enough to illustrate all the possible constructs that this specification covers. They are not to be intended as actual DMs, nor, by any means, this specification suggests their adoption by the IVOA or by users and or Data Providers. In some cases we refer to actual DMs in order to provide an idea of how this specification relates to real life cases involving actual DMs.</strong></p>
-<h1 id="use-cases"><span class="header-section-number">2</span> Use Cases</h1>
+<h1 id="sec:usecases"><span class="header-section-number">2</span> Use Cases</h1>
 <p>The use cases enabled by this mapping definition are limitless. This bold statement can be easily validated by considering that what we describe is analogous to the natural mapping between Data Models and XSD schemata, where instances are expressed in XML documents. XML is widely used in so many ways that it is impossible to list them all. As a matter of fact, XML can even express lists of its own use cases.</p>
 <p>However, to give a sense of what it is possible to accomplish with this specification, we provide some explicit use cases relative to the VO domain.</p>
 <p><strong>Find a value representing a specific concept.</strong> Given a VOTable annotated with VODML concepts, a client can extract a piece of information by finding a <code>PARAM</code> or <code>FIELDref</code> annotated with a predefined <code>VODML/ROLE</code> or <code>VODML/TYPE</code>. For example, the client can find the luminosity measurement(s) in a file by looking for the <code>GROUP</code> element containing a VODML/TYPE with value <code>src:source.LuminosityMeasurement</code>.</p>
@@ -223,9 +231,9 @@ Gerard Lemson</li>
 <p><strong>VO Importer.</strong> Users and Data Providers may have non-compliant files that they want to convert to a VO-compliant format according to some data model: a DM-unaware Importer application may allow them to do so for any standard Data Model.</p>
 <p><strong>Extensibility.</strong> Most often each astronomical facility, instrument, or mission needs to express measurements and metadata attributes that are unique to the facility, instrument, or mission. A data provider may want to <em>extend</em> a Data Model, adding to the common information about astronomical sources and data products the metadata that is specific for their instruments or domain. The added metadata can be serialized in a standardized fashion so that the user can take advantage of the information.</p>
 <h1 id="the-need-for-a-mapping-language"><span class="header-section-number">3</span> The need for a mapping language</h1>
-<p>When encountering a data container, i.e. a file or database containing data, one may wish to interpret its contents according to some external, predefined data model. That is, one may want to try to identify and extract instances of the data model from amongst the information. For example in the “global as view” approach to information integration, one identifies elements (e.g. tables) defined in a global schema with views defined on the distributed databases<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>.</p>
+<p>When encountering a data container, i.e. a file or database containing data, one may wish to interpret its contents according to some external, predefined data model. That is, one may want to try to identify and extract instances of the data model from amongst the information. For example in the “global as view” approach to information integration, one identifies elements (e.g. tables) defined in a global schema with views defined on the distributed databases<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>.</p>
 <p>If one is told that the data container is structured according to some standard serialization format of the data model, one is done. I.e. if the local database is an exact <em>implementation</em> of the global schema, one needs no special annotation mechanism to identify these instances. An example of this is an XML document conforming to an XML schema that is an exact physical <em>representation</em> of the data model. We call such representations <em>faithful</em>.</p>
-<p>But in an information integration project like the IVOA, which aims to homogenize access to many distributed heterogeneous data sets, databases and documents are in general <em>not</em> structured according to a standard representation of some predefined, global data model. The best one may hope for is to obtain an <em>interpretation</em> of the data set, defining it as a <em>custom serialization</em> of the result of a <em>transformation</em> of the global data model<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>. For example, even if databases themselves are exact replications of a global data model, results of general queries will be such custom serializations.</p>
+<p>But in an information integration project like the IVOA, which aims to homogenize access to many distributed heterogeneous data sets, databases and documents are in general <em>not</em> structured according to a standard representation of some predefined, global data model. The best one may hope for is to obtain an <em>interpretation</em> of the data set, defining it as a <em>custom serialization</em> of the result of a <em>transformation</em> of the global data model<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. For example, even if databases themselves are exact replications of a global data model, results of general queries will be such custom serializations.</p>
 <p>To interpret such a custom serialization one generally needs extra information that can provide a <em>mapping</em> of the serialization to the original model. If the serialization <em>format</em> is known, this mapping may be given in phrases containing elements both from the serialization format and the data model. For example if our serialization contains data stored in ‘rows’ in one or more ‘tables’ that each have a unique ‘name’ and contain ‘columns’ also with a ‘name’, you might be able to say things like:</p>
 <ul>
 <li><p>The rows in this table named SOURCE contain <em>instances</em> of <em>object type</em> ‘Source’ as defined in <em>data model</em> ‘SourceDM’ <strong>(SourceDM is an example model formally defined later in this document)</strong>.</p></li>
@@ -262,11 +270,11 @@ Gerard Lemson</li>
 <p><strong>TODO</strong> Missing Votable reference</p>
 <p>First, a formal definition of the target of the pointers was missing. To solve this, data models were usually accompanied by a list of “utypes” (<strong>TODO</strong> [TBD refer to STC, Characterization, Spectrum]), and these could be used as values for said <code>@utype</code>, be it in VOTable or for example in the Table Access Protocol metadata. These were not linked in any formal, machine readable way to the underlying data model.</p>
 <p>Basically it means that the data model is represented solely by a list of attributes, which does not do justice to the complexity of data models describing complex data products like Data Cubes or the provenance of Simulations. These contain complex object hierarchies organized in graphs with various types of relations between individual objects. It also proved difficult to express the relationship among different, but overlapping, data models, with much discussion centred on the question how to reuse utypes from one model in the definition of another.</p>
-<p>The approach is basically not much more than another vocabulary, similar to UCDs <span class="citation">(<span class="citeproc-not-found" data-reference-id="ucd"><strong>???</strong></span>)</span>, or SKOS vocabularies <span class="citation">(<span class="citeproc-not-found" data-reference-id="skos"><strong>???</strong></span>)</span>, obtained by different means. Efforts were made to provide some structure to these values that might provide some hints of their location in a model, but there was no formal mechanism on how to derive that structure and it was unclear whether it could truly represent the richness of the existing and future data models. In particular there was no standard defined how this could be achieved and no common usage patterns were discovered <span class="citation">(Graham <a href="#ref-usages">2013</a>)</span>.</p>
+<p>The approach is basically not much more than another vocabulary, similar to UCDs <span class="citation">(“UCDs,” n.d.)</span>, or SKOS vocabularies <span class="citation">(“PR on Use of SKOS Vocabularies in IVOA,” n.d.)</span>, obtained by different means. Efforts were made to provide some structure to these values that might provide some hints of their location in a model, but there was no formal mechanism on how to derive that structure and it was unclear whether it could truly represent the richness of the existing and future data models. In particular there was no standard defined how this could be achieved and no common usage patterns were discovered <span class="citation">(Graham <a href="#ref-usages">2013</a>)</span>.</p>
 <p>As described above (<strong>TODO</strong> TBD check, true?) VO-DML has solved the problem that there was no formal target for these pointers in the data model itself and formally defines how models can be reused in the definition of other, dependent models. Precisely <em>how</em> to use these pointers in a VOTable to provide a complete annotation useful for interoperability requires more work though. It requires restrictions on which VOTable elements can point to which concepts and how they are organized.</p>
 <p>The current specification provides such a definition. It shows how data publishers can identify also the more complex data model elements such as structured types and relationships inside some published data source, be it a VOTable or relational database published through the TAP protocol. It notes that in fact the meta-model defined by the VOTable schema is perfectly suited for supporting such a <em>mapping</em> in an almost 1-1 and completely logical fashion.</p>
-<p>This specification defines various <em>mapping patterns</em> from VOTable to VO-DML. Such a pattern identifies a VOTable element with a VO-DML element. The VO-DML element is said to be <em>represented</em> by the VOTable element. The mapping pattern indicates that instances of identified VO-DML types are present in the VOTable. These may be atomic <em>values</em> (instances of VO-DML ValueTypes <span class="citation">(Lemson <a href="#ref-vodml">2015</a>)</span>), represented by <code>PARAM@value</code> or by cells in a table column identified by a FIELDref. Alternatively they may be instances of structured types (<strong>TODO</strong> ref to location of VO-DML doc) represented by GROUPS consisting of multiple PARAMs, PARAMrefs, or FIELDrefs. Especially this use of the GROUP element, introduced already in version 1.10 of the VOTable specification, that distinguishes this approach from the previous ones. The GROUP element can be directly mapped to the structured types defied in VO-DM and by mapping its components to corresponding components in the VO-DML type definition a 1-1 mapping is achieved almost trivially<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>. The complete set of mapping patterns supported by this specification will be defined formally in section 6.7.3 (<strong>TODO</strong> fix reference).</p>
-<p>In the rest of this chapter we discuss <em>how</em> the VOTable elements are to identify the corresponding VO-DML element. Originally it was assumed that the <code>@utype</code> attribute of these VOTable elements (PARAM, PARAMref, FIELDref and GROUP) would be used to identify which data model element is represented. But it was decided <em>not</em> to use <code>@utype</code> after all<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a>. Instead it was agreed that the VOTable schema would be extended with a new type elements, <code>&lt;VODML&gt;</code> to be added to these VOTable elements. This element would take the task that was originally intended for <code>@utype</code>, namely to point into a data model. The requirement of extending the VOTable schema is unfortunate and the existing schema would have sufficed to represent the mapping patterns<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a>, on the other hand it allows us to design a much more explicit annotation mechanism than would be possible when using <code>@utype</code>-s only.</p>
+<p>This specification defines various <em>mapping patterns</em> from VOTable to VO-DML. Such a pattern identifies a VOTable element with a VO-DML element. The VO-DML element is said to be <em>represented</em> by the VOTable element. The mapping pattern indicates that instances of identified VO-DML types are present in the VOTable. These may be atomic <em>values</em> (instances of VO-DML ValueTypes <span class="citation">(Lemson <a href="#ref-vodml">2015</a>)</span>), represented by <code>PARAM@value</code> or by cells in a table column identified by a FIELDref. Alternatively they may be instances of structured types (<strong>TODO</strong> ref to location of VO-DML doc) represented by GROUPS consisting of multiple PARAMs, PARAMrefs, or FIELDrefs. Especially this use of the GROUP element, introduced already in version 1.10 of the VOTable specification, that distinguishes this approach from the previous ones. The GROUP element can be directly mapped to the structured types defied in VO-DM and by mapping its components to corresponding components in the VO-DML type definition a 1-1 mapping is achieved almost trivially<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>. The complete set of mapping patterns supported by this specification will be defined formally in section 6.7.3 (<strong>TODO</strong> fix reference).</p>
+<p>In the rest of this chapter we discuss <em>how</em> the VOTable elements are to identify the corresponding VO-DML element. Originally it was assumed that the <code>@utype</code> attribute of these VOTable elements (PARAM, PARAMref, FIELDref and GROUP) would be used to identify which data model element is represented. But it was decided <em>not</em> to use <code>@utype</code> after all<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>. Instead it was agreed that the VOTable schema would be extended with a new type elements, <code>&lt;VODML&gt;</code> to be added to these VOTable elements. This element would take the task that was originally intended for <code>@utype</code>, namely to point into a data model. The requirement of extending the VOTable schema is unfortunate and the existing schema would have sufficed to represent the mapping patterns<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a>, on the other hand it allows us to design a much more explicit annotation mechanism than would be possible when using <code>@utype</code>-s only.</p>
 <p>The extension to the VOTable schema is reproduced in Appendix A. (<strong>TODO</strong> fix reference) In the next few sub-sections we discuss this element in detail.</p>
 <p><strong>TODO</strong> TBD see if we need next paragraphs here or in other parts of text</p>
 <p>A typical usage scenario may be a VOTable naïve (see Appendix B) client that is sensitive to certain models only, say STC. Such a tool can be written to understand annotation with STC types. Finding an element mapped to a type definition from STC it might infer for example that it represents a coordinate on the sky and use this information according to its requirements.</p>
@@ -305,7 +313,7 @@ Gerard Lemson</li>
 <p>Such IDs can be referenced in any context and can be resolved to the VO-DML document description using the standard mechanism for resolving IVORNs in Resource Registries.</p>
 <h2 id="the-vo-dml-preamble"><span class="header-section-number">4.3</span> The VO-DML preamble</h2>
 <p>This section assumes Alternative 1 in section 4.2</p>
-<p>In order to signal to the reader that a VOTable document falls under this specification, a VOTable instance MUST declare all the Data Models it includes, their versions, and the <strong>vodmlref</strong> prefixes for this model. They MUST also declare the actual URL of the VO-DML/XML description as a shortcut<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a>.</p>
+<p>In order to signal to the reader that a VOTable document falls under this specification, a VOTable instance MUST declare all the Data Models it includes, their versions, and the <strong>vodmlref</strong> prefixes for this model. They MUST also declare the actual URL of the VO-DML/XML description as a shortcut<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a>.</p>
 <p>Any number of such declarations can be included in a document.</p>
 <div class="sourceCode"><table class="sourceCode xml numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>1
 2
@@ -338,19 +346,22 @@ Gerard Lemson</li>
 <p>Note that the VO-DML preamble MUST include the models corresponding to ALL the different prefixes used for the <strong>vodmlrefs</strong> in the VOTable. As a matter of fact, the preamble can be seen as a way to declare such prefixes and map them to models. Note furthermore that the <strong>vo-dml</strong> prefix used in the above annotations itself refers to an explicitly defined data model. It will be described in the next section.</p>
 <h2 id="special-annotations-from-the-vo-dml-mapping-model"><span class="header-section-number">4.4</span> Special annotations from the VO-DML Mapping model</h2>
 <p>There are some special <strong>vodmlrefs</strong> with prefix <em>vo-dml</em> (<strong>TODO</strong> TBD should we use different name? E.g. vodml-i or so? To identify this models deals with mapping instances?). These can be used to create specialized mapping patterns. We have already encountered some examples in the previous section to identify Models represented in a VOTable.</p>
-<p>We actuall use the same mapping patterns defined in this specification for this. This implies we need a special data model, which we name <em>VO-DML Instance Mapping</em> and whose prefix is <em>vo-dml</em> (<strong>TODO</strong> should maybe change this to <em>vodml-i</em>). The model can be found <a href="https://volute.googlecode.com/svn/trunk/projects/dm/vo-dml/models/vo-dml/VO-DML.vo-dml.xml">here</a><a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a>.</p>
-<h1 id="general-information-about-this-spec"><span class="header-section-number">5</span> General information about this spec</h1>
+<p>We actually use the same mapping patterns defined in this specification for this. This implies we need a special data model, which we name <em>VO-DML Instance Mapping</em> and whose prefix is <em>vo-dml</em> (<strong>TODO</strong> should maybe change this to <em>vodml-i</em>). The model<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a> can be found [https://volute.googlecode.com/svn/trunk/projects/dm/vo-dml/models/vo-dml/VO-DML.vo-dml.xml] here.</p>
+<h1 id="sec:info"><span class="header-section-number">5</span> General information about this spec</h1>
 <h2 id="sample-model-and-instances"><span class="header-section-number">5.1</span> Sample model and instances</h2>
-<p>For examples we use a highly simplified version of a possible Source data model, illustrated by its UML representation in Figure 1.</p>
+<p>For examples we use a highly simplified version of a possible Source data model, illustrated by its UML representation in fig. 1.</p>
 <div class="figure">
-<img src="media/image3.png" alt="Figure 1 Data model used in examples. It represents a simplified Source data model, containing luminosities that refer to the imported PhotDM. It also defines a simplistic version of an STC model with some types for defining coordinates on the sky, for the sake of simplicity and just for example purposes." />
-<p class="caption">Figure 1 Data model used in examples. It represents a simplified Source data model, containing luminosities that refer to the imported PhotDM. It also defines a simplistic version of an STC model with some types for defining coordinates on the sky, for the sake of simplicity and just for example purposes.</p>
+<img src="media/image3.png" alt="Figure 1: Data model used in examples. It represents a simplified Source data model, containing luminosities that refer to the imported PhotDM. It also defines a simplistic version of an STC model with some types for defining coordinates on the sky, for the sake of simplicity and just for example purposes." id="fig:model" />
+<p class="caption">Figure 1: Data model used in examples. It represents a simplified Source data model, containing luminosities that refer to the imported PhotDM. It also defines a simplistic version of an STC model with some types for defining coordinates on the sky, for the sake of simplicity and just for example purposes.</p>
 </div>
 <p>The model defines some types allowing one to define a Source with position on the sky and a collection of luminosities. The position is modeled as a DataType, ‘SkyCoordinate’. SkyCoordinate has a reference to a coordinate frame that is required to interpret its longitude and latitude attributes. The luminosities are really <em>measurements</em> of luminosities in a given filter that is indicated by a reference to a PhotometryFilter, which is imported from the PhotometryDM; hence they have a value <em>and</em> an error. A Quantity DataType is introduced that provides a real value and a unit.</p>
 <p>The models are <em>by no means</em> meant to be comprehensive and include some admittedly artificial elements such as an Equinox PrimitiveType, which is supposed to be a simple string and might carry enough semantic value of its own to use it as an annotation on PARAM elements for example.</p>
 <p>Note that this sample model defines a Package that contains all the types. This package shows up in the values of the <strong>vodml-ids</strong> we use to identify the different elements. The values we use for these <strong>vodml-id</strong> identifiers are generated from the VO-DML using a particular grammar: they are path-like expressions that are guaranteed to be unique and give some indication of the location of the element they point to in the data model.</p>
-<p>We also use some sample instances of the models. These are here illustrated by UML instance diagrams. The diagram in Figure 2 represents the first two lines returned from a query<a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a> to the SDSS DR7 database.</p>
-<p>[Figure 2 Instance diagram representing SDSS objetcs as sources in the sample data model. The first few results are represented from the default radial SDSS query at <a href="http://skyserver.sdss.org/dr7/en/tools/search/radial.asp" class="uri">http://skyserver.sdss.org/dr7/en/tools/search/radial.asp</a>] (media/sdss_instance.jpg)</p>
+<p>We also use some sample instances of the models. These are here illustrated by UML instance diagrams. The diagram in {#fig:instance} represents the first two lines returned from a query<a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a> to the SDSS DR7 database.</p>
+<div class="figure">
+<img src="media/sdss_instance.jpg" alt="Figure 2: Figure 2 Instance diagram representing SDSS objetcs as sources in the sample data model. The first few results are represented from the default radial SDSS query at http://skyserver.sdss.org/dr7/en/tools/search/radial.asp" id="fig:instance" />
+<p class="caption">Figure 2: Figure 2 Instance diagram representing SDSS objetcs as sources in the sample data model. The first few results are represented from the default radial SDSS query at <a href="http://skyserver.sdss.org/dr7/en/tools/search/radial.asp" class="uri">http://skyserver.sdss.org/dr7/en/tools/search/radial.asp</a></p>
+</div>
 <h2 id="data-carriers-in-votable"><span class="header-section-number">5.2</span> Data carriers in VOTable</h2>
 <p>VO-DML describes four different kinds of types: PrimitiveType (PT), Enumeration (E), DataType (DT) and ObjectType (OT). PT, E and DT are value types; OT is an object - or reference type. PT and E are atomic, their values consist of a single value; DT and OT are structured, they are built from multiple values, organized as attributes, and possibly of reference relations to OTs. An OT can also have composition relations, or collections of other OTs, and can have an identifier, an attribute of undetermined type that is implicitly defined for ObjectTypes.</p>
 <p>To store instances (<em>values</em> and <em>objects</em>) of these types in a VOTable various options are available. Atomic values (i.e. instances of PT and E) are stored in cells in a row in a table (i.e. a TD) or in the value attribute of a PARAM (<code>@value</code>). To store an instance of a structured type one must store its components. To identify the structured instance in a serialization one must be able to identify the individual components and how they are to be combined. This aggregation is done using a GROUP element. It is the main representation of structured types, both ObjectType and DataType. It is also used to represent relations to object types. These may be stored using foreign-key-like mechanisms or through some kind of hierarchy.</p>
@@ -364,7 +375,7 @@ Gerard Lemson</li>
 <p>This specification covers both requirements. Serializations of simple models in a flattened table are easier to achieve than complex ORM mappings where information is normalized into different tables, but they are both achievable in VOTable. Moreover, the hybrid case of partly de-normalized representations, where the model is only partly normalized, is more challenging but should also be addressable in terms of this specification.</p>
 <p>In any case, the examples in section 6, and most of section 6.7.3 (the normative part of this document) are focused on the single-table, flattened representations of instances according to some data model. Some of the patterns described in these sections are also applicable to simple ORM cases. Especially the sections dealing with mapping reference and composition relations also deal with the more complex cases of proper ORM mappings, where data is partly or completely normalized into different tables.</p>
 <p>The simple and complex ORM patterns described by this specification usually belong to very different concrete use cases, so it should be acceptable in a broad range of cases that implementers, both on the server and on the client side, focus on the single-table mappings. Data providers requiring more complex patterns, more advanced applications, or applications built on top of standard software libraries that implement this specification as a whole will need to take advantage of the ORM mapping patterns.</p>
-<h1 id="patterns-for-annotating-votable-normative"><span class="header-section-number">6</span> Patterns for annotating VOTable [NORMATIVE]</h1>
+<h1 id="sec:normative"><span class="header-section-number">6</span> Patterns for annotating VOTable [NORMATIVE]</h1>
 <p>In this section we list all legal mapping patterns that can be used to express how instances of VO-DML-defined types are represented in a VOTable and the possible roles they play. It defines which VOTable elements can be annotated with <code>&lt;VODML&gt;</code> elements described in section 4, what restrictions there are and how to interpret the annotation.</p>
 <p>The organization of the following sections is based on the different VO-DML concepts that can be represented. Each of these subsections contains sub-subsections which represent the different possible ways the concept may be encountered in a VOTable and discuss rules and constraints on those annotations. We start with <strong>Model</strong>, and then we discuss value types (<strong>PrimitiveType</strong>, <strong>Enumeration</strong> and <strong>DataType</strong>) and <strong>Attributes</strong>. Then <strong>ObjectType</strong> and the relationships, <strong>Composition</strong> (collection), <strong>Reference</strong> and <strong>Inheritance</strong> (extends). <strong>Package</strong> is not mapped: none of the use cases required this element to be actually mapped to a VOTable instance.</p>
 <p>Each subsection contains a concise, formal description of a mapping pattern, according to a simple “grammar” described in Appendix C. (<strong>TODO</strong> TBC)</p>
@@ -375,7 +386,7 @@ Gerard Lemson</li>
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{GROUP G| G <span class="math inline"> ∈ </span> TABLE &amp; G/VODML/TYPE <span class="math inline"> ⇒ </span> <strong>ObjectType</strong> &amp; G/VODML/ROLE = NULL}</td>
+<td align="left">{GROUP G| G <span class="math inline">∈</span> TABLE &amp; G/VODML/TYPE <span class="math inline">⇒</span> <strong>ObjectType</strong> &amp; G/VODML/ROLE = NULL}</td>
 </tr>
 </tbody>
 </table>
@@ -403,7 +414,7 @@ Gerard Lemson</li>
 <p><strong>Regarding the <em>normative</em> aspects of this specification</strong></p>
 <p>When we say this section is NORMATIVE we mean that:</p>
 <ol style="list-style-type: decimal">
-<li>when a client finds an annotation pattern conforming to one defined here, that client is justified in interpreting it as described in the comments for that pattern. It is an ANNOTATION ERROR if that were to lead to inconsistencies<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a>.</li>
+<li>when a client finds an annotation pattern conforming to one defined here, that client is justified in interpreting it as described in the comments for that pattern. It is an ANNOTATION ERROR if that were to lead to inconsistencies<a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a>.</li>
 <li>when a client encounters a pattern not in this list, the client SHOULD ignore it. Interpreting it as a mapping to a data model MAY work, but is not mandated and other clients need not conform to this.</li>
 </ol>
 <h2 id="model"><span class="header-section-number">6.1</span> Model</h2>
@@ -465,7 +476,7 @@ Gerard Lemson</li>
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{GROUP G | G <span class="math inline"><em>s</em><em>u</em><em>b</em><em>s</em><em>e</em><em>t</em></span> RESOURCE &amp; G <span class="math inline"> ⊄ </span> TABLE &amp; G <span class="math inline"> ⊄ </span> GROUP[VODML] &amp; G/VODML/TYPE <span class="math inline"> ⇒ </span> <strong>ObjectType</strong> &amp; G/VODML/ROLE = NULL}</td>
+<td align="left">{GROUP G | G <span class="math inline"><em>s</em><em>u</em><em>b</em><em>s</em><em>e</em><em>t</em></span> RESOURCE &amp; G <span class="math inline">⊄</span> TABLE &amp; G <span class="math inline">⊄</span> GROUP[VODML] &amp; G/VODML/TYPE <span class="math inline">⇒</span> <strong>ObjectType</strong> &amp; G/VODML/ROLE = NULL}</td>
 </tr>
 </tbody>
 </table>
@@ -484,7 +495,7 @@ Gerard Lemson</li>
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{GROUP G | G <span class="math inline"> ⊂ </span> TABLE &amp; G <span class="math inline"> ⊄ </span> GROUP[VODML] &amp; G/VODML/TYPE <span class="math inline"> ⇒ </span> <strong>ObjectType</strong> &amp; G/VODML/ROLE = NULL}</td>
+<td align="left">{GROUP G | G <span class="math inline">⊂</span> TABLE &amp; G <span class="math inline">⊄</span> GROUP[VODML] &amp; G/VODML/TYPE <span class="math inline">⇒</span> <strong>ObjectType</strong> &amp; G/VODML/ROLE = NULL}</td>
 </tr>
 </tbody>
 </table>
@@ -496,7 +507,7 @@ Gerard Lemson</li>
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{GROUP G, GROUP I, FIELDref F | I <span class="math inline"> ∈ </span> G &amp; G <span class="math inline"> ⊂ </span> TABLE &amp; G <span class="math inline"> ⊄ </span> GROUP[VODML] &amp; G/VODML/TYPE <span class="math inline"> ⇒ </span> <strong>ObjectType</strong> &amp; G/VODML/ROLE = NULL &amp; I/VODML/ROLE = “<em>vo-dml:ObjectTypeInstance.ID</em>” &amp; F <span class="math inline"> ∈ </span> I &amp; F/VODML/ROLE = “<em>vodml:Identifier.field</em>”}</td>
+<td align="left">{GROUP G, GROUP I, FIELDref F | I <span class="math inline">∈</span> G &amp; G <span class="math inline">⊂</span> TABLE &amp; G <span class="math inline">⊄</span> GROUP[VODML] &amp; G/VODML/TYPE <span class="math inline">⇒</span> <strong>ObjectType</strong> &amp; G/VODML/ROLE = NULL &amp; I/VODML/ROLE = “<em>vo-dml:ObjectTypeInstance.ID</em>” &amp; F <span class="math inline">∈</span> I &amp; F/VODML/ROLE = “<em>vodml:Identifier.field</em>”}</td>
 </tr>
 </tbody>
 </table>
@@ -519,7 +530,7 @@ Gerard Lemson</li>
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{GROUP G | G <span class="math inline"> ⊂ </span> RESOURCE &amp; G <span class="math inline"> ⊄ </span> TABLE &amp; G <span class="math inline"> ⊄ </span> GROUP[VODML]&amp; G/VODML/TYPE <span class="math inline"> ⇒ </span> <strong>DataType</strong> &amp; G/VODML/ROLE = NULL}</td>
+<td align="left">{GROUP G | G <span class="math inline">⊂</span> RESOURCE &amp; G <span class="math inline">⊄</span> TABLE &amp; G <span class="math inline">⊄</span> GROUP[VODML]&amp; G/VODML/TYPE <span class="math inline">⇒</span> <strong>DataType</strong> &amp; G/VODML/ROLE = NULL}</td>
 </tr>
 </tbody>
 </table>
@@ -610,7 +621,7 @@ Gerard Lemson</li>
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{GROUP G | G <span class="math inline"> ⊂ </span> TABLE &amp; G <span class="math inline"> ⊄ </span> GROUP[VODML] &amp; G/VODML/TYPE <span class="math inline"> ⇒ </span> <strong>DataType</strong> &amp; G/VODML/ROLE = NULL}</td>
+<td align="left">{GROUP G | G <span class="math inline">⊂</span> TABLE &amp; G <span class="math inline">⊄</span> GROUP[VODML] &amp; G/VODML/TYPE <span class="math inline">⇒</span> <strong>DataType</strong> &amp; G/VODML/ROLE = NULL}</td>
 </tr>
 </tbody>
 </table>
@@ -671,7 +682,7 @@ Gerard Lemson</li>
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{GROUP A, GROUP G | A <span class="math inline"> ∈ </span> G &amp; A/VODML/ROLE <span class="math inline"> ⇒ </span> <strong>Attribute</strong> &amp; G/VODML <span class="math inline"> ⇒ </span> <strong>StructuredType</strong>}</td>
+<td align="left">{GROUP A, GROUP G | A <span class="math inline">∈</span> G &amp; A/VODML/ROLE <span class="math inline">⇒</span> <strong>Attribute</strong> &amp; G/VODML <span class="math inline">⇒</span> <strong>StructuredType</strong>}</td>
 </tr>
 </tbody>
 </table>
@@ -727,7 +738,7 @@ Gerard Lemson</li>
 ...
 <span class="kw">&lt;/GROUP&gt;</span></code></pre></td></tr></table></div>
 <h2 id="primitivetype-and-enumeration"><span class="header-section-number">6.4</span> PrimitiveType and Enumeration</h2>
-<p><strong>PrimitiveTypes</strong> and <strong>Enumerations</strong> represent atomic values. They appear in serializations of data models predominantly in their role as attributes defined on structured types (<strong>ObjectType</strong> or <strong>DataType</strong>) and this specification focuses on that role. There is only limited extra information in identifying an individual FIELD or PARAM as representing some primitive type or enumeration from a data model, without indicating the role the FIELD or PARAM plays in some complex type. VO-DML assumes the existence of a standard data model (<strong>TODO</strong> <em>ivoa,</em> see [1] TBD refer to actual model) defining primitive types such as <em>ivoa:integer</em>, <em>ivoa:string</em> etc. But there is no new semantics implied by these types beyond the ones their counterparts in the VOTable schema carry<a href="#fn12" class="footnoteRef" id="fnref12"><sup>12</sup></a>.</p>
+<p><strong>PrimitiveTypes</strong> and <strong>Enumerations</strong> represent atomic values. They appear in serializations of data models predominantly in their role as attributes defined on structured types (<strong>ObjectType</strong> or <strong>DataType</strong>) and this specification focuses on that role. There is only limited extra information in identifying an individual FIELD or PARAM as representing some primitive type or enumeration from a data model, without indicating the role the FIELD or PARAM plays in some complex type. VO-DML assumes the existence of a standard data model (<strong>TODO</strong> <em>ivoa,</em> see [1] TBD refer to actual model) defining primitive types such as <em>ivoa:integer</em>, <em>ivoa:string</em> etc. But there is no new semantics implied by these types beyond the ones their counterparts in the VOTable schema carry<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a>.</p>
 <h3 id="singleton-primitive-value-as-param"><span class="header-section-number">6.4.1</span> Singleton primitive value as PARAM</h3>
 <p>Pattern expression:</p>
 <table>
@@ -736,7 +747,7 @@ Gerard Lemson</li>
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{PARAM P| P <span class="math inline"> ∉ </span> G[VODML] &amp; P/VODML/ROLE = NULL &amp; G/VODML/TYPE <span class="math inline"> ⇒ </span> <strong>PrimitiveType</strong>|<strong>Enumeration</strong>}</td>
+<td>{PARAM P| P <span class="math inline">∉</span> G[VODML] &amp; P/VODML/ROLE = NULL &amp; G/VODML/TYPE <span class="math inline">⇒</span> <strong>PrimitiveType</strong>|<strong>Enumeration</strong>}</td>
 </tr>
 </tbody>
 </table>
@@ -750,7 +761,7 @@ Gerard Lemson</li>
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{FIELDref FR, FIELD F, OPTION O| <code>FR/@ref</code>=<code>F/@ID</code> &amp; O <span class="math inline"> ⊂ </span> F &amp; FR/VODML <span class="math inline"> ⇒ </span> Enumeration &amp; FR/VODML/OPTION/NAME = <code>O/@value</code> &amp; FR/VODML/OPTION/LITERAL <span class="math inline"> ⇒ </span> EnumLiteral}</td>
+<td align="left">{FIELDref FR, FIELD F, OPTION O| <code>FR/@ref</code>=<code>F/@ID</code> &amp; O <span class="math inline">⊂</span> F &amp; FR/VODML <span class="math inline">⇒</span> Enumeration &amp; FR/VODML/OPTION/NAME = <code>O/@value</code> &amp; FR/VODML/OPTION/LITERAL <span class="math inline">⇒</span> EnumLiteral}</td>
 </tr>
 </tbody>
 </table>
@@ -771,7 +782,7 @@ Gerard Lemson</li>
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{FIELDref F, GROUP G| F <span class="math inline"> ∈ </span> G &amp; G <span class="math inline"> ⊂ </span> TABLE &amp; F/VODML/ROLE <span class="math inline"> ⇒ </span> <strong>Attribute </strong> &amp; G/VODML <span class="math inline"> ⇒ </span> <strong>StructuredType</strong> }</td>
+<td>{FIELDref F, GROUP G| F <span class="math inline">∈</span> G &amp; G <span class="math inline">⊂</span> TABLE &amp; F/VODML/ROLE <span class="math inline">⇒</span> <strong>Attribute </strong> &amp; G/VODML <span class="math inline">⇒</span> <strong>StructuredType</strong> }</td>
 </tr>
 </tbody>
 </table>
@@ -795,7 +806,7 @@ Gerard Lemson</li>
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{PARAM P, GROUP G | P <span class="math inline"> ∈ </span> G &amp; G/VODML/ROLE <span class="math inline"> ⇒ </span> <strong>Attribute</strong> &amp; G/VODML <span class="math inline"> ⇒ </span> <strong>StructuredType}</strong></td>
+<td align="left">{PARAM P, GROUP G | P <span class="math inline">∈</span> G &amp; G/VODML/ROLE <span class="math inline">⇒</span> <strong>Attribute</strong> &amp; G/VODML <span class="math inline">⇒</span> <strong>StructuredType}</strong></td>
 </tr>
 </tbody>
 </table>
@@ -817,7 +828,7 @@ Gerard Lemson</li>
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{PARAMref P, GROUP G | P <span class="math inline"> ∈ </span> G &amp; P/VODML/ROLE <span class="math inline"> ⇒ </span> Attribute &amp; GROUP/VODML <span class="math inline"> ⇒ </span> <strong>StructuredType</strong>]</td>
+<td align="left">{PARAMref P, GROUP G | P <span class="math inline">∈</span> G &amp; P/VODML/ROLE <span class="math inline">⇒</span> Attribute &amp; GROUP/VODML <span class="math inline">⇒</span> <strong>StructuredType</strong>]</td>
 </tr>
 </tbody>
 </table>
@@ -835,7 +846,7 @@ Gerard Lemson</li>
 <p>A <strong>Reference</strong> is a relation between a structured type (the “referrer”, an <strong>ObjectType</strong> or <strong>DataType</strong>) and an <strong>ObjectType</strong>, the “target object”, or “referenced object”. The reference is a property defined on the referrer; it is one of the roles an <strong>ObjectType</strong> can play in the definition of another structured type. <strong>Reference</strong> is a many-to-1 relation, many referrers can reference the same target object. The implication of a Reference relation is that the referenced object is somehow “used” by the referrer. Often, especially when the referrer is a <strong>DataType</strong>, it defines reference data that helps interpret the values its attributes assume. See the VO-DML document [1] for more information.</p>
 <p>In explicit serialization languages [TBD must define and discuss this term earlier in this document, say in section 3] such as XML Schema or the relational model there is support for representing this relation. E.g. XML schema allows one to define an attribute of type ID, which must have a value unique in the document. Another element can “refer” to this element using an attribute of type IDREF. It does so by assigning a value to the IDERF attribute and that same value MUST have been assigned to the ID attribute of another element for the document to be valid. This equality of values implies the relationship between the two elements, but there is in the definition no restriction on the type of the referenced element.</p>
 <p>If a restriction on the referenced element is desired, XML Schema also allows one to define a “key/keyref” combination. A <em>key</em> has a unique name and is defined using an XPath [REF] “selector”, identifying a set of elements in a document and one or more fields that define the unique values distinguishing between these elements. A <em>keyref</em> can similarly be defined by the name of the target key, a selector identifying the referrer elements and the fields used for identifying the specific referenced elements among the ones defined by the key.</p>
-<p>In a relational database a column on one table can be defined as a (primary) key, its values must be unique in that table<a href="#fn13" class="footnoteRef" id="fnref13"><sup>13</sup></a>. Another table (or even the same one) can declare a column to be a “foreign key”, which “references” the first table through its key column.</p>
+<p>In a relational database a column on one table can be defined as a (primary) key, its values must be unique in that table<a href="#fn12" class="footnoteRef" id="fnref12"><sup>12</sup></a>. Another table (or even the same one) can declare a column to be a “foreign key”, which “references” the first table through its key column.</p>
 <p>In all three cases the reference relationship is implemented using pairs of elements which take up the same value, the ID or key, being referenced using the IDREF and keyref/foreign key column(s). These elements can be seen as addresses and pointers, the way by which similar relationships can be made in programming languages, sometimes explicit, as in C/C++, sometimes implicit as in Java/C#.</p>
 <p>The mapping prescription laid out in this specification follows the same approach. It identifies three different patterns for representing references between instances of <strong>Types</strong>. Their difference lies in the way the target object is represented and identified, which puts demands on the way to identify them on the referrer objects. If the target object is serialized in the same document as the referrer it may be either represented as a singleton object represented by a direct Group (7.2.1) or as an object in a table (7.2.2 – 7.2.3).</p>
 <p>The specification also allows for the case where the target object is <em>not</em> represented in the same VOTable document as the referrer. It may exist in another VOTable, or in some alternative, possibly standardized serialized form. An example of the latter could be an XML document following a standardized XML schema explicitly defined to represent the data model, or possibly a location in some publicly accessible database with a relational schema mapped to the model in a standardized Object-Relational manner.</p>
@@ -850,7 +861,7 @@ Gerard Lemson</li>
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{GROUP S, GROUP R, GROUP T| S/VODML <span class="math inline"> ⇒ </span> <strong>StructuredType</strong> &amp; R <span class="math inline"> ∈ </span> S &amp; <code>R/@ref</code> = <code>T@ID</code> &amp; T/VODML <span class="math inline"> ⇒ </span> <strong>ObjectType</strong> &amp; R/VODML/ROLE <span class="math inline"> ⇒ </span> <strong>Reference</strong> &amp; T <span class="math inline"> ∉ </span> TABLE &amp; T <span class="math inline"> ⊂ </span> RESOURCE [&amp; R/VODML/TYPE = <em>“vo-dml:GROUPref”</em>]}</td>
+<td align="left">{GROUP S, GROUP R, GROUP T| S/VODML <span class="math inline">⇒</span> <strong>StructuredType</strong> &amp; R <span class="math inline">∈</span> S &amp; <code>R/@ref</code> = <code>T@ID</code> &amp; T/VODML <span class="math inline">⇒</span> <strong>ObjectType</strong> &amp; R/VODML/ROLE <span class="math inline">⇒</span> <strong>Reference</strong> &amp; T <span class="math inline">∉</span> TABLE &amp; T <span class="math inline">⊂</span> RESOURCE [&amp; R/VODML/TYPE = <em>“vo-dml:GROUPref”</em>]}</td>
 </tr>
 </tbody>
 </table>
@@ -921,7 +932,7 @@ Gerard Lemson</li>
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{GROUP S, GROUP R, GROUP T, TABLE TB| S/VODML <span class="math inline"> ⇒ </span> <strong>StructuredType</strong> &amp; R <span class="math inline"> ∈ </span> S &amp; <code>R/@ref</code> = <code>T@ID</code> &amp; TB/VODML <span class="math inline"> ⇒ </span> <strong>ObjectType</strong> &amp; R/VODML/ROLE <span class="math inline"> ⇒ </span> <strong>Reference</strong> &amp; S <span class="math inline"> ⊂ </span> TB &amp; T <span class="math inline"> ⊂ </span> TB [&amp; R/VODML/TYPE = <em>“vo-dml:GROUPref”</em>] }</td>
+<td>{GROUP S, GROUP R, GROUP T, TABLE TB| S/VODML <span class="math inline">⇒</span> <strong>StructuredType</strong> &amp; R <span class="math inline">∈</span> S &amp; <code>R/@ref</code> = <code>T@ID</code> &amp; TB/VODML <span class="math inline">⇒</span> <strong>ObjectType</strong> &amp; R/VODML/ROLE <span class="math inline">⇒</span> <strong>Reference</strong> &amp; S <span class="math inline">⊂</span> TB &amp; T <span class="math inline">⊂</span> TB [&amp; R/VODML/TYPE = <em>“vo-dml:GROUPref”</em>] }</td>
 </tr>
 </tbody>
 </table>
@@ -937,14 +948,14 @@ Gerard Lemson</li>
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{GROUP S, GROUP R, GROUP T, GROUP PK, GROUP FK | S <span class="math inline"> ⊂ </span> TABLE &amp; T <span class="math inline"> ⊂ </span> TABLE &amp; S/VODML <span class="math inline"> ⇒ </span> <strong>StructuredType</strong> &amp; T/VODML <span class="math inline"> ⇒ </span> <strong>ObjectType</strong> &amp; PK <span class="math inline"> ∈ </span> T &amp; PK/VODML/ROLE=<em>”vo-dml:ObjectTypeInstance.ID”</em> &amp; R <span class="math inline"> ∈ </span> S &amp; R/VODML/ROLE <span class="math inline"> ⇒ </span> <strong>reference</strong> &amp; R/VODML/TYPE = <em>“vo-dml:ORMReference”</em> &amp; FK <span class="math inline"> ∈ </span> R &amp; FK/VODML/ROLE=<em>”vo-dml:ObjectTypeInstance.ID”</em> [&amp; <code>R/@ref</code> = <code>T@ID</code>] }</td>
+<td>{GROUP S, GROUP R, GROUP T, GROUP PK, GROUP FK | S <span class="math inline">⊂</span> TABLE &amp; T <span class="math inline">⊂</span> TABLE &amp; S/VODML <span class="math inline">⇒</span> <strong>StructuredType</strong> &amp; T/VODML <span class="math inline">⇒</span> <strong>ObjectType</strong> &amp; PK <span class="math inline">∈</span> T &amp; PK/VODML/ROLE=<em>”vo-dml:ObjectTypeInstance.ID”</em> &amp; R <span class="math inline">∈</span> S &amp; R/VODML/ROLE <span class="math inline">⇒</span> <strong>reference</strong> &amp; R/VODML/TYPE = <em>“vo-dml:ORMReference”</em> &amp; FK <span class="math inline">∈</span> R &amp; FK/VODML/ROLE=<em>”vo-dml:ObjectTypeInstance.ID”</em> [&amp; <code>R/@ref</code> = <code>T@ID</code>] }</td>
 </tr>
 </tbody>
 </table>
 <p>This is the most complex pattern in this specification. It is the analogue of a foreign key constraint in a relational database. The pattern represents a “reference GROUP” R, contained in “source GROUP” S representing a structured type, referencing a “target GROUP T”. S and T may be contained in the same TABLE, but in general this need not be the case.</p>
 <p>This pattern indicates that each row in the TABLE annotated by GROUP S contains a corresponding structured object, which has a reference to an object represented by GROUP T, located in some row in its TABLE. The reference is represented by the GROUP R. The GROUP R MUST identify which reference it represents through its VODML/ROLE. R MUST explicitly identify its VODML/TYPE as being <em>vo-dml:ORMReference</em>.</p>
 <p>This latter requirement indicates that this pattern represents an object-relational mapping pattern. It is clear that in contrast to the previous two cases the combination of <code>S/@ref</code> and <code>T/@ID</code> is not sufficient to identify which objects are related. To make the connection this specification prescribes that the relation must be based on a kind of foreign key pattern.<br />
-First, the objects T MUST be explicitly identified as described in 7.2.3. So T MUST contain a GROUP PK with VODML/ROLE=”<em>vo-dml:ObjectTypeInstance.ID</em>” and I must contain components which allow one to distinguish between different instances of type T in table T2. This may be a unique<a href="#fn14" class="footnoteRef" id="fnref14"><sup>14</sup></a> identifier, but this is not mandatory.</p>
+First, the objects T MUST be explicitly identified as described in 7.2.3. So T MUST contain a GROUP PK with VODML/ROLE=”<em>vo-dml:ObjectTypeInstance.ID</em>” and I must contain components which allow one to distinguish between different instances of type T in table T2. This may be a unique<a href="#fn13" class="footnoteRef" id="fnref13"><sup>13</sup></a> identifier, but this is not mandatory.</p>
 <p>To identify which T is referenced, the reference GROUP R MUST contain a “foreign key GROUP” FK that also has VODML/ROLE=”<em>vo-dml:ObjectTypeInstance.ID</em>”. It’s structure MUST be compatible with the structure of the GROUP PK. In general this means that if PK contains <em>N</em> FIELDrefs, also FK must contain <em>N</em> FIELDrefs. In general N=1, but if not, this specification prescribes that the order is important. I.e. FK’s FIELDref 1 must be matched to PKs FIELDref 1 etc. to find the referenced objects. Note also that it is allowed that FIELDref-s in PK are matched by PARAMs in FK. [TBD other way as well?]</p>
 <p>Example:</p>
 <p>TBD</p>
@@ -956,7 +967,7 @@ First, the objects T MUST be explicitly identified as described in 7.2.3. So T M
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{GROUP O, GROUP S, PARAM P| O/VODML <span class="math inline"> ⇒ </span> <strong>StructuredType</strong> &amp; S <span class="math inline"> ∈ </span> O &amp; <code>S/@ref</code> = NULL &amp; S/VODML/ROLE <span class="math inline"> ⇒ </span> <strong>Reference</strong> &amp; S/VODML/TYPE = <em>“vo-dml:RemoteReference”</em> &amp; P <span class="math inline"> ∈ </span> S &amp; (P/VODML/ROLE = “<em>vo-dml:RemoteReference.ivoid”</em> | P/VODML/ROLE = “<em>vo-dml:RemoteReference.uri”</em>) }</td>
+<td>{GROUP O, GROUP S, PARAM P| O/VODML <span class="math inline">⇒</span> <strong>StructuredType</strong> &amp; S <span class="math inline">∈</span> O &amp; <code>S/@ref</code> = NULL &amp; S/VODML/ROLE <span class="math inline">⇒</span> <strong>Reference</strong> &amp; S/VODML/TYPE = <em>“vo-dml:RemoteReference”</em> &amp; P <span class="math inline">∈</span> S &amp; (P/VODML/ROLE = “<em>vo-dml:RemoteReference.ivoid”</em> | P/VODML/ROLE = “<em>vo-dml:RemoteReference.uri”</em>) }</td>
 </tr>
 </tbody>
 </table>
@@ -1033,7 +1044,7 @@ First, the objects T MUST be explicitly identified as described in 7.2.3. So T M
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{GROUP P, GROUP C | C <span class="math inline"> ∈ </span> P &amp; P/VODML <span class="math inline"> ⇒ </span> <strong>ObjectType</strong> &amp; C/VODML/ROLE <span class="math inline"> ⇒ </span> <strong>Composition</strong> [&amp; C/VODML/TYPE <span class="math inline"> ⇒ </span> <strong>ObjectType</strong>] }</td>
+<td align="left">{GROUP P, GROUP C | C <span class="math inline">∈</span> P &amp; P/VODML <span class="math inline">⇒</span> <strong>ObjectType</strong> &amp; C/VODML/ROLE <span class="math inline">⇒</span> <strong>Composition</strong> [&amp; C/VODML/TYPE <span class="math inline">⇒</span> <strong>ObjectType</strong>] }</td>
 </tr>
 </tbody>
 </table>
@@ -1052,12 +1063,12 @@ First, the objects T MUST be explicitly identified as described in 7.2.3. So T M
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{GROUP CH, GROUP R, GROUP P, GROUP PK, GROUP FK | CH <span class="math inline"> ⊂ </span> TABLE &amp; P <span class="math inline"> ⊂ </span> TABLE &amp; CH/VODML <span class="math inline"> ⇒ </span> <strong>ObjectType</strong> &amp; P/VODML <span class="math inline"> ⇒ </span> <strong>ObjectType</strong> &amp; PK <span class="math inline"> ∈ </span> P &amp; PK/VODML/ROLE=”<em>vo-dml:ObjectTypeInstance.ID</em>” &amp; R <span class="math inline"> ∈ </span> CH &amp; R/VODML/ROLE = “<em>vo-dml:ObjectTypeInstance.container</em>” &amp; R/VODML/TYPE = “<em>vo-dml:ORMReference</em>” &amp; FK <span class="math inline"> ∈ </span> R &amp; FK/VODML/ROLE=”<em>vo-dml:ObjectTypeInstance.ID</em>” [&amp; <code>CH/@ref</code> = <code>P@ID</code>] }</td>
+<td align="left">{GROUP CH, GROUP R, GROUP P, GROUP PK, GROUP FK | CH <span class="math inline">⊂</span> TABLE &amp; P <span class="math inline">⊂</span> TABLE &amp; CH/VODML <span class="math inline">⇒</span> <strong>ObjectType</strong> &amp; P/VODML <span class="math inline">⇒</span> <strong>ObjectType</strong> &amp; PK <span class="math inline">∈</span> P &amp; PK/VODML/ROLE=”<em>vo-dml:ObjectTypeInstance.ID</em>” &amp; R <span class="math inline">∈</span> CH &amp; R/VODML/ROLE = “<em>vo-dml:ObjectTypeInstance.container</em>” &amp; R/VODML/TYPE = “<em>vo-dml:ORMReference</em>” &amp; FK <span class="math inline">∈</span> R &amp; FK/VODML/ROLE=”<em>vo-dml:ObjectTypeInstance.ID</em>” [&amp; <code>CH/@ref</code> = <code>P@ID</code>] }</td>
 </tr>
 </tbody>
 </table>
 <p>The GROUP CH represents a collection of child objects that are contained in parent objects represented by GROUP P. CH and P are generally stored in different tables. CH references P following the ORM reference pattern described in section 7.6.3 above. The only constraint is that the VODML/ROLE on the GROUP representing the reference MUST be <em>vo-dml:ObjectTypeInstance.container</em>.</p>
-<p>For clients it is useful if an identification is made <em>which</em> collection on the parent object the type represented by GROUP CH belongs to. The VO-DML spec restricts types to be the child in at most one composition relation, where inheritance/polymorphism is taken into account<a href="#fn15" class="footnoteRef" id="fnref15"><sup>15</sup></a>. Hence that information is in principle available through the VO-DML model and an explicit indication would be redundant, but it may make implementation of clients simpler.</p>
+<p>For clients it is useful if an identification is made <em>which</em> collection on the parent object the type represented by GROUP CH belongs to. The VO-DML spec restricts types to be the child in at most one composition relation, where inheritance/polymorphism is taken into account<a href="#fn14" class="footnoteRef" id="fnref14"><sup>14</sup></a>. Hence that information is in principle available through the VO-DML model and an explicit indication would be redundant, but it may make implementation of clients simpler.</p>
 <p>One way to make this reference is to allow the GROUP CH to have a VODML/ROLE identifying the collection as well as the VODML/TYPE. An objection to this could be if we want to keep the invariant that only those GROUPs can have a VODML/ROLE that are contained inside another GROUP defining a type on which the role is available [TBD ref to statement along these lines in this spec, <em>if</em> we impose this rule]. The following pattern is a possible implementation that preserves this invariant:</p>
 <table>
 <colgroup>
@@ -1065,7 +1076,7 @@ First, the objects T MUST be explicitly identified as described in 7.2.3. So T M
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{GROUP CH, GROUP R, PARAM P | P <span class="math inline"> ∈ </span> R &amp; P/VODML/ROLE = ”<em>vo-dml:ORReference.container</em>” &amp; <code>P/@value</code> <span class="math inline"> ⇒ </span> <strong>collection</strong> &amp; <code>P/@datatype</code> = ”string” [ &amp; P/VODML/TYPE = ”<em>vo-dml:ref</em>”] }</td>
+<td align="left">{GROUP CH, GROUP R, PARAM P | P <span class="math inline">∈</span> R &amp; P/VODML/ROLE = ”<em>vo-dml:ORReference.container</em>” &amp; <code>P/@value</code> <span class="math inline">⇒</span> <strong>collection</strong> &amp; <code>P/@datatype</code> = ”string” [ &amp; P/VODML/TYPE = ”<em>vo-dml:ref</em>”] }</td>
 </tr>
 </tbody>
 </table>
@@ -1077,7 +1088,7 @@ First, the objects T MUST be explicitly identified as described in 7.2.3. So T M
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{GROUP P, GROUP C, GROUP CH| C <span class="math inline"> ∈ </span> P &amp; C/VODML/ROLE = <strong>collection</strong> &amp; C/VODML/TYPE = “<em>vo-dml:CollectionReference</em>” &amp; <code>C/@ref</code> = <code>CH@ID</code> }</td>
+<td align="left">{GROUP P, GROUP C, GROUP CH| C <span class="math inline">∈</span> P &amp; C/VODML/ROLE = <strong>collection</strong> &amp; C/VODML/TYPE = “<em>vo-dml:CollectionReference</em>” &amp; <code>C/@ref</code> = <code>CH@ID</code> }</td>
 </tr>
 </tbody>
 </table>
@@ -1095,7 +1106,7 @@ First, the objects T MUST be explicitly identified as described in 7.2.3. So T M
 <p>This pattern can be supported as well.</p>
 <p>Pattern Expression:</p>
 <p>(<strong>TODO</strong> Pattern missing?)</p>
-<p>In this case the <span class="math inline"> ⇑ </span> symbol means that the leftmost ObjectType <em>extends</em> the rightmost ObjectType, adding some Attributes to it. Attributes can be structured or unstructured, direct or indirect, recursively. This mapping pattern leverages the patterns introduced in the previous sections.</p>
+<p>In this case the <span class="math inline">⇑</span> symbol means that the leftmost ObjectType <em>extends</em> the rightmost ObjectType, adding some Attributes to it. Attributes can be structured or unstructured, direct or indirect, recursively. This mapping pattern leverages the patterns introduced in the previous sections.</p>
 <p>The extending type inherits all of the parent type’s Attributes and their VO-DML-refs (including the prefixes), and adds its own Attributes and their VO-DML-refs (including the prefixes).</p>
 <p>The extending type also inherits all of the parent’s ancestors, recursively. Thus, the serialization of the child type MUST include all the ancestors’ declarations of <em>vo-dml:Instance.type</em>. This makes it possible for clients of any ancestor to recognize the instance and to correctly apply polymorphism.</p>
 <p>It is possible that types in a Model extend types in the same Model. In this case one can already tell them apart from the a priori knowledge of a Model, or by parsing the VO-DML description of the Model, and <strong>vodml-id</strong>-s cannot clash by definition. So, the pattern described above, where the child representation carries over the vo-dml:Instance.type from its ancestors only applies to inter-Model extensions, UNLESS the extended type is abstract. In this case, clients may want to look for the abstract type before interpreting the actual concrete type. For instance, a client may look for all the “<em>src:source.SkyError</em>” instances before interpreting them as a circle error, an elliple error, and so on.</p>
@@ -1202,7 +1213,7 @@ First, the objects T MUST be explicitly identified as described in 7.2.3. So T M
 <li>the value of the 'ucd' attribute is mapped to the <code>@ucd</code> attribute of the annotated FIELD or PARAM</li>
 </ul>
 <p>(<strong>TODO</strong> Extend this pattern to datatype, arraysize? ivoa:Quantity DM.)</p>
-<h1 id="notable-absences"><span class="header-section-number">7</span> Notable absences</h1>
+<h1 id="sec:absences"><span class="header-section-number">7</span> Notable absences</h1>
 <p>The VOTable schema allows for redundancy in meta-data assignment. For example it allows assigning a UCD or UTYPE to FIELDrefs, but also to the FIELD it references. How is one to interpret or use this? Our approach is to try to avoid this redundancy.</p>
 <p>The design laid out in the previous sections focuses UTYPE assignments on the GROUP element and its components. The main reason is that in all but the most simplistic use cases we will not be able to void the use of GROUPs, and that at the same time they provide all functionality (and more) that TABLE and FIELD could provide. Choosing this approach implies client coders do not need to take the possibly conflicting assignments into account, they only need consider GROUPs.</p>
 <p>Here we list a few possible assignments that we avoid, though they might seem valid.</p>
@@ -1221,7 +1232,7 @@ First, the objects T MUST be explicitly identified as described in 7.2.3. So T M
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">{ TABLE <span class="math inline"> ⇒ </span> <strong>ObjectType</strong> }</td>
+<td align="left">{ TABLE <span class="math inline">⇒</span> <strong>ObjectType</strong> }</td>
 </tr>
 </tbody>
 </table>
@@ -1235,7 +1246,7 @@ First, the objects T MUST be explicitly identified as described in 7.2.3. So T M
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">[Field <span class="math inline"> ⇒ </span> Attribute] <span class="math inline"> ∈ </span> [TABLE <span class="math inline"> ⇒ </span> ObjectType]</td>
+<td align="left">[Field <span class="math inline">⇒</span> Attribute] <span class="math inline">∈</span> [TABLE <span class="math inline">⇒</span> ObjectType]</td>
 </tr>
 </tbody>
 </table>
@@ -1246,60 +1257,313 @@ First, the objects T MUST be explicitly identified as described in 7.2.3. So T M
 </colgroup>
 <tbody>
 <tr class="odd">
-<td align="left">[PARAM <span class="math inline"> ⇒ </span> Attribute] <span class="math inline"> ∈ </span> [TABLE <span class="math inline"> ⇒ </span> ObjectType]</td>
+<td align="left">[PARAM <span class="math inline">⇒</span> Attribute] <span class="math inline">∈</span> [TABLE <span class="math inline">⇒</span> ObjectType]</td>
 </tr>
 </tbody>
 </table>
 <p>Assigning an Attribute to a FIELD would only make sense in the context of a structured container, which can only be TABLE. But as we propose not to use TABLE to represent a DM element directly, consequently FIELD need not have this capability. We use FIELDref for that.</p>
 <p>For the same reason that makes us avoid the assignment of Attribute to FIELD, we avoid assigning an attribute to a standalone PARAM, i.e. a PARAM <em>that is directly contained in a TABLE or RESOURCE</em>. The context (TABLE) is not used to indicate the type containing the Attribute. For this element a PARAMref or a PARAM inside a GROUP is to be used. This again enables backward compatibility.</p>
-<h1 id="serializing-to-other-file-formats"><span class="header-section-number">8</span> Serializing to other file formats</h1>
+<h1 id="sec:other"><span class="header-section-number">8</span> Serializing to other file formats</h1>
 <p>VOTable is expressive enough to allow the mapping patterns described in this specification. Other formats (notably FITS) cannot support such annotations. In particular FITS does not support the GROUP-ing of columns, which is of prime importance for the current specification. A solution to this, which is even one of the motivations behind the VOTable specification, is to annotate other format’s tables with a VOTable <em>wrapper</em>. VOTable (see [2], section 5.2) already supports wrapping FITS tables using a TABLE/DATA/FITS. This has a <code>STREAM/@href</code> URL to specify which FITS file is represented and an <code>@extnum</code> attribute to indicate which FITS extension is used.</p>
 <p>Some FITS formats also allow a VOTable header to be included in an HDU. Whilst this would allow data and meta-data to be combined in a single file, this solution seems to be less portable, since some FITS readers do not support these files.</p>
-<p>A similar solution could be used to annotate the tables in the schema of a TAP service. Here no specific support yet exists, but could be easily added to the TAP specification. I fact a VOTable representing all TAP tables as “empty” TABLE elements with only header, no DATA information has been proposed in the past as one of the ways by which a TAP schema’s metadata could be declared. If this were to be a formalized option it would automatically allow the mapping patterns from the current specification to be included. The main challenge for TAP is whether that annotation can be carried over to the results of queries against its schema. For the simple, column-only annotations such as UCDs or descriptions, this is already a non-trivial task, and not always possible<a href="#fn16" class="footnoteRef" id="fnref16"><sup>16</sup></a>. General ADQL queries can easily unravel the GROUP-ing of columns and their nesting and produce results that cannot be annotated with concepts of the original data models. However we believe this is a 90-10 problem, and for the most common queries it should be possible to identify the data model concepts with not much more work than is already required to carry along the UCDs.</p>
+<p>A similar solution could be used to annotate the tables in the schema of a TAP service. Here no specific support yet exists, but could be easily added to the TAP specification. I fact a VOTable representing all TAP tables as “empty” TABLE elements with only header, no DATA information has been proposed in the past as one of the ways by which a TAP schema’s metadata could be declared. If this were to be a formalized option it would automatically allow the mapping patterns from the current specification to be included. The main challenge for TAP is whether that annotation can be carried over to the results of queries against its schema. For the simple, column-only annotations such as UCDs or descriptions, this is already a non-trivial task, and not always possible<a href="#fn15" class="footnoteRef" id="fnref15"><sup>15</sup></a>. General ADQL queries can easily unravel the GROUP-ing of columns and their nesting and produce results that cannot be annotated with concepts of the original data models. However we believe this is a 90-10 problem, and for the most common queries it should be possible to identify the data model concepts with not much more work than is already required to carry along the UCDs.</p>
 <p>This should in particular not be a problem for the results of standard protocols such as the simple cone search. There the service provider is in charge of designing the result set, which, being tabular, can be easily annotated using the current specification. In fact, in the absence of a TAP_SCHEMA-like mechanism, it could be argued that the current specification presents a perfect mechanism by which an SCS service can declare the contents of its holdings.</p>
-<p>Whereas similar approaches can likely be used for other tabular formats, an interesting question is whether mapping patterns can be defined also for annotating serialization formats other than tables. In particular the more structured formats such as XML or JSON, or more modern ones such as Google Protocol Buffers<a href="#fn17" class="footnoteRef" id="fnref17"><sup>17</sup></a> or Apache Avro<a href="#fn18" class="footnoteRef" id="fnref18"><sup>18</sup></a>, would pose different problems.</p>
+<p>Whereas similar approaches can likely be used for other tabular formats, an interesting question is whether mapping patterns can be defined also for annotating serialization formats other than tables. In particular the more structured formats such as XML or JSON, or more modern ones such as Google Protocol Buffers<a href="#fn16" class="footnoteRef" id="fnref16"><sup>16</sup></a> or Apache Avro<a href="#fn17" class="footnoteRef" id="fnref17"><sup>17</sup></a>, would pose different problems.</p>
 <p>The first approach would be to see if and how such formats can be used to provide <em>faithful</em> representations as defined in section 3. For XML it has been shown in a similar effort (see [3] and [13]) that one can derive an XML schema that represents the types and relations of a well-defined data model in a 1-1 fashion. It is even possible to do so in an automated manner using code generation and we believe it would be a useful effort to define such . As long as a well-defined meta-model exists for the target serialization, and as long as it is rich enough we believe this will carry over to other serialization formats.</p>
 <p>The problem is when one want to annotate existing XML documents that have not been designed as such. It has as yet not been explore whether a simple annotation mechanism such as the current one will work there as well. We believe that <em>if</em> the concepts of a data model can be identified in an informal manner, it may be possible to at least partially reproduce the target serialization as a <em>view</em> on a faithful serialization. For example one might define an XSLT document that, when working on a faithfully serialized data model would produce the desired one.</p>
 <p>More useful would likely be the opposite, i.e. a document that would produce a faithful serialization of a non-faithful one. Such a document would allow clients to first transform the document to a known serialization for further processing. This brings one close to the global-as-view approach, in that the global schema, the data model, is represented as a view on the source.</p>
 <p>More discussion will be needed to address these issues.</p>
-<div class="references">
+<h1 id="sec:schema" class="AppendixA"><span class="header-section-number">9</span> The VODML annotation elements in the VOTable schema</h1>
+<p>The VOTable’s <em>Param</em>, <em>Paramref</em>, <em>Fieldref</em> and <em>Group</em> definitions obtain an extra element named <code>&lt;VODML&gt;</code> with type <em>VODMLAnnotation</em>. That type is defined by the next fragment extracted from the proposal <a href="https://volute.googlecode.com/svn/trunk/projects/dm/vo-dml/doc/samples/votable/VOTable-1.3_vodml.xsd">VOTable-1.3_vodml.xsd</a> (as of volute 2873).</p>
+<div class="sourceCode"><table class="sourceCode xml numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+</pre></td><td class="sourceCode"><pre><code class="sourceCode xml"><span class="co">&lt;!-- VODMLAnnotation section --&gt;</span>
+
+  <span class="kw">&lt;xs:simpleType</span><span class="ot"> name=</span><span class="st">&quot;VODMLReference&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;xs:annotation&gt;</span>
+      <span class="kw">&lt;xs:documentation&gt;</span>
+      The valid format of a reference to a VO-DML element. (Used to be &#39;UTYPE&#39;).
+      MUST have a prefix that elsewhere in the VOTable is defined to correspond to a VO-DML model defining the referenced element.
+            Suffix, separated from the prefix by a &#39;:&#39;, MUST correspond to the vodml-id of the referenced element in the VO-DML/XML representation
+      of that model.
+      <span class="kw">&lt;/xs:documentation&gt;</span>
+    <span class="kw">&lt;/xs:annotation&gt;</span>
+    <span class="kw">&lt;xs:restriction</span><span class="ot"> base=</span><span class="st">&quot;xs:string&quot;</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;xs:pattern</span><span class="ot"> value=</span><span class="st">&quot;[\w_-]+:[\w_\-/\./*]+&quot;</span> <span class="kw">/&gt;</span>
+    <span class="kw">&lt;/xs:restriction&gt;</span>
+  <span class="kw">&lt;/xs:simpleType&gt;</span>
+
+    <span class="kw">&lt;xs:complexType</span><span class="ot"> name=</span><span class="st">&quot;VODMLOptionMapping&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;xs:annotation&gt;</span>
+      <span class="kw">&lt;xs:documentation&gt;</span>
+      Allows one to map particular values defined in a VALUES/OPTION list to enumerayion literals
+      in the VO-DML model.
+      <span class="kw">&lt;/xs:documentation&gt;</span>
+    <span class="kw">&lt;/xs:annotation&gt;</span>
+        <span class="kw">&lt;xs:sequence&gt;</span>
+            <span class="kw">&lt;xs:element</span><span class="ot"> name=</span><span class="st">&quot;OPTION&quot;</span><span class="ot"> type=</span><span class="st">&quot;xs:string&quot;</span><span class="ot"> minOccurs=</span><span class="st">&quot;1&quot;</span><span class="ot"> maxOccurs=</span><span class="st">&quot;1&quot;</span> <span class="kw">/&gt;</span>
+            <span class="kw">&lt;xs:element</span><span class="ot"> name=</span><span class="st">&quot;LITERAL&quot;</span><span class="ot"> type=</span><span class="st">&quot;VODMLReference&quot;</span><span class="ot"> minOccurs=</span><span class="st">&quot;1&quot;</span><span class="ot"> maxOccurs=</span><span class="st">&quot;1&quot;</span> <span class="kw">/&gt;</span>
+        <span class="kw">&lt;/xs:sequence&gt;</span>
+    <span class="kw">&lt;/xs:complexType&gt;</span>
+<span class="co">&lt;!--</span>
+<span class="co">--&gt;</span>
+    <span class="kw">&lt;xs:complexType</span><span class="ot"> name=</span><span class="st">&quot;VODMLAnnotation&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;xs:sequence&gt;</span>
+            <span class="kw">&lt;xs:element</span><span class="ot"> name=</span><span class="st">&quot;ROLE&quot;</span><span class="ot"> type=</span><span class="st">&quot;VODMLReference&quot;</span><span class="ot"> minOccurs=</span><span class="st">&quot;0&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;xs:annotation&gt;</span>
+                    <span class="kw">&lt;xs:documentation&gt;</span>
+                        MUST be provided on annotations of FIELDref and PARAMref and, if contained in a VO-DML annotated GROUP or PARAM.
+                        If not provided on a root GROUP, indicates that it represents a stand-alone object.
+                    <span class="kw">&lt;/xs:documentation&gt;</span>
+                <span class="kw">&lt;/xs:annotation&gt;</span>
+            <span class="kw">&lt;/xs:element&gt;</span>
+            <span class="kw">&lt;xs:element</span><span class="ot"> name=</span><span class="st">&quot;TYPE&quot;</span><span class="ot"> type=</span><span class="st">&quot;VODMLReference&quot;</span><span class="ot"> minOccurs=</span><span class="st">&quot;0&quot;</span><span class="ot"> maxOccurs=</span><span class="st">&quot;unbounded&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;xs:annotation&gt;</span>
+                    <span class="kw">&lt;xs:documentation&gt;</span>
+                        MUST reference the exact VO-DML type of the instance represented by the container of the annotation element.
+                        Q: should we make minOccurs=&quot;1&quot;?
+                    <span class="kw">&lt;/xs:documentation&gt;</span>
+                <span class="kw">&lt;/xs:annotation&gt;</span>
+            <span class="kw">&lt;/xs:element&gt;</span>
+            <span class="kw">&lt;xs:element</span><span class="ot"> name=</span><span class="st">&quot;OPTION&quot;</span><span class="ot"> type=</span><span class="st">&quot;VODMLOptionMapping&quot;</span><span class="ot"> minOccurs=</span><span class="st">&quot;0&quot;</span><span class="ot"> maxOccurs=</span><span class="st">&quot;unbounded&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;xs:annotation&gt;</span>
+                    <span class="kw">&lt;xs:documentation&gt;</span>
+                        Identifies a mapping between an OPTION value and an EnumLiteral.
+                        Only to be used in PARAM/PARAMref/FIELDref.
+                        TODO make new subtype of VODMLAnnotation for these three contexts, extending ?
+                    <span class="kw">&lt;/xs:documentation&gt;</span>
+                <span class="kw">&lt;/xs:annotation&gt;</span>
+            <span class="kw">&lt;/xs:element&gt;</span>
+        <span class="kw">&lt;/xs:sequence&gt;</span>
+    <span class="kw">&lt;/xs:complexType&gt;</span></code></pre></td></tr></table></div>
+<h1 id="sec:clients" class="AppendixA"><span class="header-section-number">10</span> Growing complexity: naïve, advanced, and guru clients</h1>
+<p>This document defines a complete, unambiguous, standard specification that can be used to serialize and de-serialize instances of Data Model types. It was designed to be simple and straightforward to implement by Data Providers and by different kind of clients. We can classify clients in terms of how they parse the VOTable in order to harvest its content. Of course, in the real word such distinction is somewhat fuzzy, but this section tries and describe the different levels of usage of this specification.</p>
+<h2 id="naïve-clients"><span class="header-section-number">10.1</span> Naïve clients</h2>
+<p>We say that a client is naïve if:</p>
+<ul>
+<li><p>it does not parse the VO-DML description file</p></li>
+<li><p>it assumes the a priori knowledge of one or more Data Models</p></li>
+<li><p>it discovers information by looking for a set of predefined VO-DML-refs in the VOTable</p></li>
+</ul>
+<p>In other terms, a naïve client has knowledge of the Data Model it is sensitive to, and simply discovers information useful to its own use cases by traversing the document, seeking the elements it needs by looking at their <code>&lt;VODML&gt;</code> element.</p>
+<p>Examples of such clients are the DAL service clients that allow users to discover and fetch datasets. They will just inspect the response of a service and present the user with a subset of its metadata. They do not <em>reason</em> on the content, and they are not interested in the structure of the serialized objects.</p>
+<p>If such clients allow users to download the files that they load into memory, they should make sure to preserve the structure of the metadata, so to be interoperable with other applications that might ingest the same file at a later stage.</p>
+<h2 id="advanced-clients"><span class="header-section-number">10.2</span> Advanced clients</h2>
+<p>We say that a client is advanced if:</p>
+<ul>
+<li><p>it does not parse the VO-DML description file</p></li>
+<li><p>it is interested in the structure of the serialized instances</p></li>
+<li><p>can follow the mapping patterns defined in this specification, for example collections, references, and inheritance</p></li>
+</ul>
+<p>Examples of such clients are science applications that display information to the user in a structured way (e.g. by plotting it, or by displaying its metadata in a user-friendly format), that <em>reason</em> on the serialized instances, perform operations on those instances, and possibly allow the users to save the manipulated version of the serialization.</p>
+<p>Notice that the fact that an application does not directly use some elements that are out of the scope of its requirements does not mean that the application cannot provide them to the user in a useful way. For example, an application might allow users to build Boolean filters on a table, using a user-friendly tree representing the whole metadata. This exposes all the metadata provided by the Data Provider in a way that might not be meaningful for the application, but that may be meaningful for the user.</p>
+<p>Notice, also, that advanced clients <em>may</em> be DM-agnostic: for instance, an Advanced Data Discovery application may allow the user to filter the results of a query by using a structured view of its metadata, even though it does not possess any knowledge of Data Models.</p>
+<h2 id="guru-clients"><span class="header-section-number">10.3</span> Guru clients</h2>
+<p>We say that a client falls into this category if:</p>
+<ul>
+<li><p>it parses the VO-DML descriptions</p></li>
+<li><p>it does not assume any a priori knowledge of any Data Models.</p></li>
+</ul>
+<p>Such applications can, for example, dynamically allow users and Data Providers to map their files or databases to the IVOA Data Models in order to make them compliant, or display the content of any file annotated according to this standard.</p>
+<p>This specification allows the creation of universal validators equivalent to the XML/XSD ones.</p>
+<p>It also allows the creation of VO-enabled frameworks and universal libraries. For instance, a Python universal I/O library can parse any VOTable according to the Data Models it uses, and dynamically build objects on the fly, so that users can directly interact with those objects or use them in their scripts or in science applications, and then save the results in a VO-compliant format.</p>
+<p>Java guru clients could automatically generate interfaces for representing Data Models and dynamically implement those interfaces at runtime, maybe building different views of the same file in different contexts.</p>
+<p>Notice that Guru frameworks and libraries can be used to build Advanced or even Naïve applications in a user-friendly way, abstracting the developers from the technical details of the standards and using first class scientific objects instead.</p>
+<h1 id="sec:regexp" class="AppendixA"><span class="header-section-number">11</span> Regular expressions for mapping</h1>
+<p>Expressions for VOTable elements:</p>
+<ul>
+<li><p>ELEMENT : any VOTable element that can be annotated, i.e. a GROUP, PARAM, FIELDref or PARAMref</p></li>
+<li><p>E <span class="math inline">∈</span> F : VOTable element E is directly contained under F</p></li>
+<li><p>E <span class="math inline">∉</span> F : E is not directly contained under F</p></li>
+<li><p>E <span class="math inline">⊂</span> F : E has F in ancestry</p></li>
+<li><p>E <span class="math inline">⊄</span> F : E has no F in ancestry</p></li>
+<li><p><span class="math inline">¬</span>E/VODML/ROLE : E’s VODML element has no ROLE</p></li>
+<li><p>G[R] : an element G for which R is true</p></li>
+<li><p>...</p></li>
+<li><p><span class="math inline">⊃</span>, <span class="math inline">⊅</span></p></li>
+<li><p>...</p></li>
+</ul>
+<p>For VO-DML elements</p>
+<ul>
+<li><p><strong>R</strong><span class="math inline">∈</span><strong>T</strong> : VO-DML Role <strong>R</strong> is defined on <strong>T</strong></p></li>
+<li><p><strong>R</strong><span class="math inline">⊂</span><strong>T</strong> : VO-DML Role <strong>R</strong> is „available“ on <strong>T</strong>, i.e. <strong>R</strong> is defined on <strong>T</strong> or a supertype of <strong>T</strong></p></li>
+<li><p><strong>R</strong><span class="math inline">⊄</span><strong>T</strong> : VO-DML Role <strong>R</strong> is not available“ on <strong>T</strong>, i.e. <strong>R</strong> is not defined on <strong>T</strong> or any supertype of <strong>T</strong></p></li>
+<li><p><strong>...</strong></p></li>
+</ul>
+<p>Mixed:</p>
+<ul>
+<li><p>E/VODML/TYPE <span class="math inline">⇒</span> <strong>D</strong> : VOTable element E identifies VO-DML concept <strong>D</strong> as its VODML/TYPE</p></li>
+<li><p>E/VODML/TYPE = “a:b.c” : VOTable element E’s VODML element has a TYPE with value “a:b.c”</p></li>
+<li><p>...</p></li>
+<li><p>{GROUP G| G <span class="math inline">∈</span> VOTABLE &amp; G/VODML/TYPE=”<em>vo-dml:Model</em>” &amp; <span class="math inline">¬</span>G/VODML/ROLE} :</p>
+<ul>
+<li><p>Model declaration</p></li>
+<li><p>A GROUP G is contained directly under the VOTABLE element, it has a VODML element with TYPE set to “vo-dml:Model” and without ROLE.</p></li>
+</ul></li>
+<li><p>{GROUP G | G <span class="math inline">⊄</span> TABLE &amp; G <span class="math inline">⊄</span> GROUP[VODML &amp; VODML/TYPE<span class="math inline">⇒</span><strong>ObjectType</strong> &amp; <span class="math inline">¬</span>G/VODML/ROLE} :</p>
+<ul>
+<li><p>standalone/singleton <strong>ObjectType</strong> instance</p></li>
+<li><p>A GROUP G that is not contained in a TABLE, nor in a GROUP with a VODML annotation. It has a VODML element with TYPE indicating an <strong>ObjectType</strong> and no ROLE element</p></li>
+</ul></li>
+<li><p>{GROUP G | G <span class="math inline">⊄</span> TABLE &amp; VODML/TYPE<span class="math inline">⇒</span><strong>DataType</strong> &amp; <span class="math inline">¬</span>G/VODML/ROLE} : standalone/singleton object type instance</p></li>
+<li><ul>
+<li><p>{ELEMENT E| E <span class="math inline">∈</span> GROUP[VODML &amp; <span class="math inline">¬</span>E/VODML/ROLE}</p></li>
+<li><p>Any element inside a GROUP that has a VODML annotation, MUST have a VODML/ROLE</p></li>
+</ul></li>
+<li><p>{ELEMENT E| E[VODML &amp; E <span class="math inline">⊄</span> GROUP[VODML &amp; <span class="math inline">¬</span>E/VODML/TYPE},<br />
+{ELEMENT E| E[VODML &amp; E <span class="math inline">⊄</span> GROUP[VODML &amp; E/VODML/ROLE}</p>
+<ul>
+<li>Any element with VODML annotation, that does NOT have an ancestor GROUP with a VODML annotation, MUST have a TYPE and must NOT have a ROLE MUST have a VODML/ROLE</li>
+</ul></li>
+<li><p>{ELEMENT E| E[VODML &amp; E/VODML/ROLE &amp; E/VODML/TYPE<br />
+&amp; E/VODML/ROLE <span class="math inline">⊄</span> E/VODML/TYPE}</p>
+<ul>
+<li>For an element with both a TYPE and ROLE annotation, the ROLE MUST be available on the declared TYPE.</li>
+</ul></li>
+<li></li>
+</ul>
+<h1 id="sec:FAQ" class="AppendixA"><span class="header-section-number">12</span> Frequently Asked Questions</h1>
+<p><strong>Q: I was used to discover elements in a VOTable by trivially matching strings: can I still do it?</strong></p>
+<p>A: Yes, actually even more so: in fact, according to this specification, the very same string for the very same element will be present in any context that includes such element. For example, if you want to find the error bar of an element you can simply look for a VO-DML-ref like Accuracy.StatError, which does not depend on whether the error refers to a Flux or a Wavelength. Consider the real case of SPLAT, a science application that deals with spectra: in order to use the “old” UTYPEs, SPLAT cannot trivially match strings, but uses a regular expression (even though very simple) to match the *.Accuracy.* portion of a UTYPE. With the new specification in place, SPLAT could just trivially match strings by checking that they are equal.</p>
+<p>**Q: Will this specification increase the number of UTYPEs?</p>
+<p>(<strong>TODO</strong> [TBD as UTYPEs are no longer relevant in this context, remove this question?)</p>
+<p>A: No. On the contrary, it will dramatically reduce them: consider for instance an Accuracy type, which basically encodes error bars. It is composed of few attributes that express symmetric and asymmetric error bars, systematic errors, upper and lower limits. In the new specification they can be univocally referenced by less than ten UTYPEs. In the “old” scheme, each of these elements was bound to other elements (e.g. the spectral axis, the flux axis, and so on): this means that for expressing the same concepts you needed more than one hundred UTYPEs only in the Spectrum Data Model!</p>
+<p>Consider IRIS, an application that deals with SEDs and spectra: in this application about a thousand UTYPEs needed to be hard-coded in order to fully represent instances and provide a Java library for their I/O and manipulation. With this specification IRIS would need one order of magnitude less UTYPEs to be hard-coded, and could actually even make without them, by simply using the VO-DML description and a set of intelligently designed Java interfaces and objects.</p>
+<p><strong>Q: Will this specification increase the number of Data Models?</strong></p>
+<p>A: The simple answer is: No. This spec is agnostic about which data models there are. However, a whole lot of Data Models are already out there, since basically each astronomical instrument needs an ad-hoc Data Model. This specification allows such Data Models to be expressed in a standard, machine-readable format <em>in terms</em> of common, more generic Data Models defined and maintained by the IVOA. So, the extended answer is: No, but it will effectively increase the number of <em>interoperable</em> Data Models, allowing Data Providers to register their own Models in an IVOA registry.</p>
+<p><strong>Q: Am I now forced to use UML for using this specification?</strong></p>
+<p>A: No. However, part of the larger picture includes UML as a convenient tool to design, display, document, and register Data Models. The larger picture of which this specification is part includes a VO-UML specification in the form of a UML profile that can make the creation of Data Models more standard and easier. However, using VO-UML is not a requirement.</p>
+<p><strong>Q: Am I now forced to use specific software for using this specification?</strong></p>
+<p>A: No. However, this specification enables the development of software that can make the creation and use of Data Models easier. For example, such software might allow the automatic generation of documentation, code, web applications, and services from a simple set of UML diagrams. Some software was already created as part of this specification effort, or other IVOA efforts from which this specification was derived.</p>
+<p><strong>Q: Does this specification break the current standards and protocols?</strong></p>
+<p>A: No. This specification does not require any changes in services and applications that implement current IVOA standards and protocols. However, it also enables new, more complex standards to be designed and implemented. Files complying with old standards can be made compliant with this specification by simply adding metadata to them.</p>
+<p><strong>Q: Can I use UTYPEs in a customized way without violating this specification?</strong></p>
+<p>A: Yes. This specification has nothing to say about UTYPEs.</p>
+<p><strong>Q:</strong> <strong>It looks like this specification needs clients to recursively concatenate strings to build the actual UTYPE. Is this the case? </strong></p>
+<p>A: No. UTYPEs are defined so to be opaque strings that do not need to be parsed or to be concatenated in order to be used. They are simply references that map the VOTable elements to a standard “model of models”.</p>
+<p><strong>Q: This specification is so complicated! Do I need to implement it all, even just for extracting a flux from a VOTable?</strong></p>
+<p>A: No. And it is not that complicated, actually. As a DNA strand is a simple concatenation of four basic components, but it is used in nature to build complex organisms, this specification shows how simple identifiers can be used to enable complex scientific applications. How complex an implementation is depends on the implementation requirements: if they are simple, the specification enables you to meet them in a very simple way. For example, you can extract a flux by simply looking for a <code>@utype</code> attribute like src:source.LuminosityMeasurement.value. If the requirements for your application are more complex, then this specification makes the best effort to enable them straightforwardly. If you are a Data Provider and you want to publish compliant files and databases, the complexity of the task depends pretty much on the complexity of your files: they might be very simple structures of VOTable groups, or they could require complicated Object-Relational Mapping patterns. However, software can be built using this specification in order to make the data publishing process easier.</p>
+<p><strong>Q: Should I parse UTYPEs?</strong></p>
+<p>A: No. [It is still to be discussed whether prefixes are fixed or not. In the second case, some strategies, but not all, might require clients to strip the prefix off the ‘localname’ in order to look it up in the VODML/XML, in a way similar to what happens now, e.g. obs:Target.Name vs sdm:Target.Name.</p>
+<h1 id="references-1"><span class="header-section-number">13</span> References</h1>
+<ol style="list-style-type: decimal">
+<li><p><span id="_Ref412877457" class="anchor"></span>VO-DML document</p></li>
+<li><p><span id="_Ref417881604" class="anchor"></span>VOTable document(s)</p></li>
+<li><p><span id="_Ref417883681" class="anchor"></span>Simulation DM spec</p></li>
+<li><p>Characterization spec</p></li>
+<li><p>Spectrum DM spec</p></li>
+<li><p>STC spec</p></li>
+<li><p><span id="_Ref417880637" class="anchor"></span>ORM mapping tools: Hibernate, JPA spec</p></li>
+<li><p><span id="_Ref413820347" class="anchor"></span>UCDs</p></li>
+<li><p><span id="_Ref413820452" class="anchor"></span>Investigation into existing UTYPE usages, document form UTYPEs tiger team.</p></li>
+<li><p><span id="_Ref413820652" class="anchor"></span>Note on STC in VOTable (M. Dempleitner)</p></li>
+<li><p><span id="_Ref414176449" class="anchor"></span>PR on use of SKOS vocabularies in IVOA</p></li>
+<li><p><span id="_Ref414949253" class="anchor"></span>IVOA Identifiers</p></li>
+<li><p><span id="_Ref417883709" class="anchor"></span>VO-URP</p></li>
+</ol>
+<div id="refs" class="references">
 <div id="ref-usages">
 <p>Graham, Matthew. 2013. “UTypes: Current Usages and Practices in the IVOA.” <a href="http://www.ivoa.net/documents/Notes/UTypesUsage/index.html" class="uri">http://www.ivoa.net/documents/Notes/UTypesUsage/index.html</a>.</p>
 </div>
 <div id="ref-vodml">
 <p>Lemson, Gerard. 2015. “VO - DML: A Consistent Modeling Language for IVOA Data Models.” <a href="http://www.ivoa.net/documents/VODML/20151010/index.html" class="uri">http://www.ivoa.net/documents/VODML/20151010/index.html</a>.</p>
 </div>
+<div id="ref-skos">
+<p>“PR on Use of SKOS Vocabularies in IVOA.” n.d.</p>
+</div>
+<div id="ref-stc_in_vot">
+<p>“STC in VOTable Note.” n.d.</p>
+</div>
+<div id="ref-ucd">
+<p>“UCDs.” n.d.</p>
+</div>
+<div id="ref-votable">
+<p>“VOTable Document(s).” n.d.</p>
+</div>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
 <li id="fn1"><p>This used to be the assumed role of the <code>@utype</code> attribute in VOTable and for example TAP. This document introduces the new <code>&lt;VODML&gt;</code> element for this purpose in VOTable, as agreed on in interop meeting in Banff, 2014.<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>See the Current Usages Note:</p>
-<p>http://www.ivoa.net/documents/Notes/UTypesUsage/20130213/NOTE-utypes-usage-1.0-20130213.pdf<a href="#fnref2">↩</a></p></li>
-<li id="fn3"><p>See, for example, http://logic.stanford.edu/dataintegration/chapters/chap01.html<a href="#fnref3">↩</a></p></li>
-<li id="fn4"><p>Or alternatively as a transformation of a (standard) serialization of the data model.<a href="#fnref4">↩</a></p></li>
-<li id="fn5"><p>This was foreseen for example in the note on referencing STC in VOTable <span class="citation">(<span class="citeproc-not-found" data-reference-id="stc_in_vot"><strong>???</strong></span>)</span>, as well as in a presentation by S. Derriere in Naples:</p>
-<p>(<a href="../customXml/item1.xml">http://wiki.ivoa.net/internal/IVOA/InterOpMay2011SED/PPDMDesc_Naples.pdf</a>).<br />
-Lacking a formal target modelling language these developments remained ad hoc.<a href="#fnref5">↩</a></p></li>
-<li id="fn6"><p>During various interoperability meetings, finalized in Banff 2014.<a href="#fnref6">↩</a></p></li>
-<li id="fn7"><p>See older versions of this document on volute, mentioned in the history above.<a href="#fnref7">↩</a></p></li>
-<li id="fn8"><p>If a model is registered in an IVOA compliant registry, its IVOID may be used instead of the URL to identify it. (<strong>TODO</strong> This will require a Registry extension and should be handled by VO-DML spec).<a href="#fnref8">↩</a></p></li>
-<li id="fn9"><p>Note that this model does <strong>not yet</strong> obey all of the data modelling rules imposed on real data models. It is defined to keep up the invariant that each vodmlref MUST refer to an element in a formal VO-DML/XML element.<a href="#fnref9">↩</a></p></li>
-<li id="fn10"><p>Specifically:</p>
+<li id="fn2"><p>See, for example, http://logic.stanford.edu/dataintegration/chapters/chap01.html<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>Or alternatively as a transformation of a (standard) serialization of the data model.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>This was foreseen for example in the note on referencing STC in VOTable <span class="citation">(“STC in VOTable Note,” n.d.)</span>, as well as in a presentation by S. Derriere in Naples: [http://wiki.ivoa.net/internal/IVOA/InterOpMay2011SED/PPDMDesc_Naples.pdf]. Lacking a formal target modelling language these developments remained ad hoc.<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p>During various interoperability meetings, finalized in Banff 2014.<a href="#fnref5">↩</a></p></li>
+<li id="fn6"><p>See older versions of this document on volute, mentioned in the history above.<a href="#fnref6">↩</a></p></li>
+<li id="fn7"><p>If a model is registered in an IVOA compliant registry, its IVOID may be used instead of the URL to identify it. (<strong>TODO</strong> This will require a Registry extension and should be handled by VO-DML spec).<a href="#fnref7">↩</a></p></li>
+<li id="fn8"><p>Note that this model does <strong>not yet</strong> obey all of the data modelling rules imposed on real data models. It is defined to keep up the invariant that each vodmlref MUST refer to an element in a formal VO-DML/XML element.<a href="#fnref8">↩</a></p></li>
+<li id="fn9"><p>Specifically:</p>
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">SELECT</span> top <span class="dv">10</span> p.objID, p.run, p.rerun, p.camcol, p.field, p.obj,
 p.type, p.ra, p.dec, p.u,p.g,p.r,p.i,p.z,
 p.Err\_u, p.Err\_g, p.Err\_r,p.Err\_i,p.Err\_z
 <span class="kw">FROM</span> fGetNearbyObjEq(<span class="dv">195</span>,<span class="fl">2.5</span>,<span class="dv">3</span>) n, PhotoPrimary p
 <span class="kw">WHERE</span> n.objID=p.objID</code></pre></div>
-<a href="#fnref10">↩</a></li>
-<li id="fn11"><p>E.g. when interpreting a GROUP as a certain ObjectType, if one of its children is not annotated or identifies a child element that is not available on the type, this is an error. Fr each pattern there is a set of rules that, if broken, are annotation errors. (<strong>TODO</strong> we better strive to make these comprehensive.)<a href="#fnref11">↩</a></p></li>
-<li id="fn12"><p><em>ivoa</em> types that do not exist in VOTable may there be represented using appropriate xtypes, e.g. adql:timestamp for <em>ivoa:datetime.</em><a href="#fnref12">↩</a></p></li>
-<li id="fn13"><p>One can use multiple columns, that together must be unique (and NOT NULL!).<a href="#fnref13">↩</a></p></li>
-<li id="fn14"><p>As discussed earlier, it is allowed that the same object is represented multiple times in the same table.<a href="#fnref14">↩</a></p></li>
-<li id="fn15"><p>I.e. if a super-type is declared as the child in a composition relation, this “property” is inherited by its sub-types.<a href="#fnref15">↩</a></p></li>
-<li id="fn16"><p>E.g. consider SELECT a-b FROM foo. Even if columns a and b have a UCD, what is the UCD of their difference?<a href="#fnref16">↩</a></p></li>
-<li id="fn17"><p>https://developers.google.com/protocol-buffers/<a href="#fnref17">↩</a></p></li>
-<li id="fn18"><p>https://avro.apache.org/<a href="#fnref18">↩</a></p></li>
+<a href="#fnref9">↩</a></li>
+<li id="fn10"><p>E.g. when interpreting a GROUP as a certain ObjectType, if one of its children is not annotated or identifies a child element that is not available on the type, this is an error. Fr each pattern there is a set of rules that, if broken, are annotation errors. (<strong>TODO</strong> we better strive to make these comprehensive.)<a href="#fnref10">↩</a></p></li>
+<li id="fn11"><p><em>ivoa</em> types that do not exist in VOTable may there be represented using appropriate xtypes, e.g. adql:timestamp for <em>ivoa:datetime.</em><a href="#fnref11">↩</a></p></li>
+<li id="fn12"><p>One can use multiple columns, that together must be unique (and NOT NULL!).<a href="#fnref12">↩</a></p></li>
+<li id="fn13"><p>As discussed earlier, it is allowed that the same object is represented multiple times in the same table.<a href="#fnref13">↩</a></p></li>
+<li id="fn14"><p>I.e. if a super-type is declared as the child in a composition relation, this “property” is inherited by its sub-types.<a href="#fnref14">↩</a></p></li>
+<li id="fn15"><p>E.g. consider SELECT a-b FROM foo. Even if columns a and b have a UCD, what is the UCD of their difference?<a href="#fnref15">↩</a></p></li>
+<li id="fn16"><p>https://developers.google.com/protocol-buffers/<a href="#fnref16">↩</a></p></li>
+<li id="fn17"><p>https://avro.apache.org/<a href="#fnref17">↩</a></p></li>
 </ol>
 </div>
 </body>

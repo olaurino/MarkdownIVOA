@@ -22,7 +22,7 @@ In order to enable such interoperable, extensible, portable annotation
 of data files, one needs:
 
 * A language to unambiguously and efficiently describe Data Models and
-    their elements’ identificators (VO-DML, [@vodml]).
+    their elements’ identifiers (VO-DML, [@vodml]).
 
 * Pointers linking a specific piece of information (data or metadata)
     to the Data Model element it represents[^2].
@@ -30,6 +30,11 @@ of data files, one needs:
 * A mapping specification that unambiguously describes the mapping
     strategies that lead to faithful representations of Data Model
     instances in a specific format.
+
+[^2]: This used to be the assumed role of the `@utype` attribute in
+    VOTable and for example TAP. This document introduces the new
+    `<VODML>` element for this purpose in VOTable, as agreed on in
+    interop meeting in Banff, 2014.
 
 Without a consistent language for describing Data Models there can be no
 interoperability, both between them, reuse of models by models, or in
@@ -53,7 +58,7 @@ While one might argue that a standard for portable, interoperable Data
 Model representation would have been required before one could think
 about such a mapping, we are specifying it only at a later stage. In
 particular several different interpretations of `UTYPE`s have been
-proposed and used[^3]. This specification aims to resolve this
+proposed and used [@usages]. This specification aims to resolve this
 ambiguity.
 
 Any standard trying to reconcile these very different usages must take
@@ -78,29 +83,25 @@ the VOTable meta-model elements to indicate how instances of data models
 are stored in VOTable documents. We show many examples and give a
 complete listing of allowed mapping patterns.
 
-In sections 1-6 we give an introduction to why and how the VODML
-elements can be used to hold pointers into the data models and several
-examples that illustrate the mapping.
+In sections [@sec:usecases] to [@sec:info] we give an introduction to why and how the VODML
+elements can be used to hold pointers into the data models.
 
-Section 6.7.3 is a rigorous listing of all valid annotations, and the
-normative part of the specification. Section 8 describes what patterns
-and usages this specification does *not* cover; moreover, it describes
+Section [@sec:normative] is a rigorous listing of all valid annotations, and the
+normative part of the specification. Section [@sec:abssences] describes what
+patterns and usages this specification does *not* cover; moreover, it describes
 how legacy and custom `@utype`s can be treated in this specification’s
-framework: as such, this section actually describes the *transition*
-from the current usages and this specification. Section 9 described
-ideas how this specification might be used for annotating other tabular
-formats, and how to generalize it to other, more structured data
-serialization formats. Section 10 contains references.
+framework: as such, this section actually describes the *transition* from the
+current usages and this specification. Section [@sec:other] describes ideas how this
+specification might be used for annotating other tabular formats, and how to
+generalize it to other, more structured data serialization formats.
 
-The appendices contain additional material. Appendix A describes the
+The appendices contain additional material. [@sec:schema] describes the
 VODML annotation element that was added to the VOTable schema to support
-this mapping specification. Appendix B describes different types of
+this mapping specification. [@sec:clients] describes different types of
 client software and how they could deal with VOTables annotated
-according to the current specification. Appendix C defines a set-based
+according to the current specification. [@sec:regexp] defines a set-based
 “language” for expressing mapping patterns in a more formal manner.
-Appendix D tries to answer some frequently asked questions.
-
-**TODO** section numbers in paragraphs above and below.
+[@sec:FAQ] tries to answer some frequently asked questions.
 
 **Throughout the document we will refer to some real or example Data
 Models. Please remember that such models have been designed to be fairly
@@ -111,7 +112,7 @@ the IVOA or by users and or Data Providers. In some cases we refer to
 actual DMs in order to provide an idea of how this specification relates
 to real life cases involving actual DMs.**
 
-Use Cases
+Use Cases {#sec:usecases}
 =========
 
 The use cases enabled by this mapping definition are limitless. This
@@ -335,15 +336,6 @@ VODML element which can provide this link in a rather simple manner.
 > this at the end of this document.
 
 [^1]: Assuming there is a suitable data model!
-
-[^2]: This used to be the assumed role of the `@utype` attribute in
-    VOTable and for example TAP. This document introduces the new
-    `<VODML>` element for this purpose in VOTable, as agreed on in
-    interop meeting in Banff, 2014.
-
-[^3]: See the Current Usages Note:
-
-    http://www.ivoa.net/documents/Notes/UTypesUsage/20130213/NOTE-utypes-usage-1.0-20130213.pdf
 
 [^4]: See, for example,
     http://logic.stanford.edu/dataintegration/chapters/chap01.html

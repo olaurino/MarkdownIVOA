@@ -12,4 +12,4 @@ pandoc -s -N --toc --template $bindir/../ivoa-template.tex\
   --filter $bindir/../filters/include.py --filter pandoc-crossref --filter pandoc-citeproc\
   --css $bindir/../style/ivoa_doc.css --css $bindir/../style/ivoa-plus.css\
   $*\
-  -o output/full.html
+  -o output/full.pdf

@@ -278,24 +278,23 @@ rendered.
 
 For instance, modify `content.md` to look like this:
 
-```
-Hello World
-===========
+    Hello World
+    ===========
 
-This is my first Markdown document[^1] written in my favorite text editor.
+    This is my first Markdown document[^1] written in my favorite text editor.
 
-[^1]: powered by [`cereal`](https://github.com/olaurino/cereal).
+    [^1]: powered by [`cereal`](https://github.com/olaurino/cereal).
 
-Can you do this with IVOATeX [@ivoatex]? Yes, you can, if you prefer LaTeX over
-Markdown!
+    Can you do this with IVOATeX [@ivoatex]? Yes, you can, if you prefer LaTeX over
+    Markdown!
 
-~~~~ {include=sample.xml .xml .numberLines}
-An xml snippet with a list of books
-~~~~
-
-References
-==========
-```
+    ~~~~ {include=sample.xml .xml .numberLines}
+    An xml snippet with a list of books
+    ~~~~
+    
+    References 
+    ==========
+ 
 
 Then, create a file named `sample.xml` with the following content:
 ```

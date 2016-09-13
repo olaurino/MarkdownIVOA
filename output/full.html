@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="date" content="2016-09-02" />
+  <title>Using Markdown for IVOA standards</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="C:/MinGW/msys/1.0/home/Omar/mydoc/cereal/bin/../style/ivoa_doc.css" type="text/css" />
+  <link rel="stylesheet" href="C:/MinGW/msys/1.0/home/Omar/mydoc/cereal/bin/../style/ivoa-plus.css" type="text/css" />
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+<div><table xmlns="http://www.w3.org/1999/xhtml" cellspacing="0"
+  cellpadding="0" width="450"><tr><td><a href="http://www.ivoa.net/"><img
+  height="169" alt="IVOA" src="http://www.ivoa.net/icons/IVOA_wb_300.jpg"
+  width="300" border="0"/></a></td><td><div style="padding: 3.6pt
+  7.2pt;"><p><b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);"><span>
+  </span>I</span></i></b><i><span style="font-size: 14pt; color: rgb(0, 90,
+  156);">nternational</span></i></p><p><b><i><span style="font-size: 14pt;
+  color: rgb(0, 90, 156);"><span>   </span>V</span></i></b><i><span
+  style="font-size: 14pt; color: rgb(0, 90,
+  156);">irtual</span></i></p><p><b><i><span style="font-size: 14pt; color:
+  rgb(0, 90, 156);"><span> </span><span>  </span>O</span></i></b><i><span
+  style="font-size: 14pt; color: rgb(0, 90,
+  156);">bservatory</span></i></p><p><b><i><span style="font-size: 14pt; color:
+  rgb(0, 90, 156);">A</span></i></b><i><span style="font-size: 14pt; color:
+  rgb(0, 90, 156);">lliance</span></i><i/></p></div><i/></td></tr></table><br
+  xmlns="http://www.w3.org/1999/xhtml"/></div>
+
+<div id="header">
+<h1 class="title">Using Markdown for IVOA standards</h1>
+
+<div id="versionstatement">Version 1.0-201506xx</div>
+<div id="dateline"><span class="NOTE" id="docdate">2016-09-02</span></div>
+
+<dl id="docmeta">
+<dt>Working Group</dt><dd id="ivoagroup">Data Models</dd>
+<dt>This Version</dt><dd><a class="currentlink"
+href="http://www.ivoa.net/documents/IvoaMarkdown/20160902">
+http://www.ivoa.net/documents/IvoaMarkdown/20160902</a></dd>
+<dt>Latest Version</dt>
+<dd><a class="latestlink"
+href="http://www.ivoa.net/documents/IvoaMarkdown">
+http://www.ivoa.net/documents/IvoaMarkdown</a></dd>
+<dt>Previous Versions</dt>
+<dd><ul class="previousversions">
+<li class="previousVersion"><a
+href="http://www.ivoa.net/documents/xx">
+xx</a></li>
+</ul></dd>
+<dt>Author(s)</dt><dd><ul class="authors">
+<li class="author"><a href="http://www.ivoa.net/cgi-bin/twiki/bin/view/IVOA/OmarLaurino">
+Omar Laurino</a></li>
+</ul></dd>
+<dt>Editor(s)</dt><dd><ul class="editors">
+<li class="editor">
+Omar Laurino</li>
+</ul></dd>
+</div>
+
+<h2>Contents</h2>
+<div id="TOC">
+<ul>
+<li><a href="#goals"><span class="toc-section-number">1</span> Goals</a></li>
+<li><a href="#comparison-with-ivoatex"><span class="toc-section-number">2</span> Comparison with IVOATeX</a></li>
+<li><a href="#dependencies"><span class="toc-section-number">3</span> Dependencies</a></li>
+<li><a href="#quick-start"><span class="toc-section-number">4</span> Quick start</a><ul>
+<li><a href="#git"><span class="toc-section-number">4.1</span> Git</a></li>
+<li><a href="#subversion"><span class="toc-section-number">4.2</span> Subversion</a></li>
+<li><a href="#hello-world"><span class="toc-section-number">4.3</span> Hello World</a></li>
+<li><a href="#hello-pandoc"><span class="toc-section-number">4.4</span> Hello Pandoc</a></li>
+<li><a href="#metadata-block"><span class="toc-section-number">4.5</span> Metadata block</a></li>
+<li><a href="#hello-python"><span class="toc-section-number">4.6</span> Hello Python</a></li>
+<li><a href="#hello-pdf"><span class="toc-section-number">4.7</span> Hello PDF</a></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+
+<h2>Abstract</h2>
+<p class="abstract">
+<p>Markdown is a lightweight markup language. This note introduces a set of <code>pandoc</code> templates and filters meant to make writing IVOA standards in Markdown possible in a convienient, portable, versionable way.</p>
+</p>
+
+<div>
+<h2>Status of this document</h2>
+<p id="status" class="NOTE">A list of current IVOA Recommendations and other
+ technical documents can be found at <a
+ href='http://www.ivoa.net/Documents/'>http://www.ivoa.net/Documents/</a>.</p>
+</div>
+
+<h1 id="goals"><span class="header-section-number">1</span> Goals</h1>
+<p>This project aims at providing IVOA authors and editors with a versatile tool to edit and collaborate on IVOA documents.</p>
+<p>The goals could be summarized as follows:</p>
+<ul>
+<li>enable documents to be properly versioned and authored concurrently;</li>
+<li>adopt a lightweight markup language, thus focusing on the content rather than on the presentation;</li>
+<li>require as few dependencies as possible;</li>
+<li>be cross-platform;</li>
+<li>produce high-quality typesetting renderings of the same master document in different formats.</li>
+</ul>
+<p><strong>NOTE</strong>: Renderings of this document produced with this project are available in the output folder.</p>
+<h1 id="comparison-with-ivoatex"><span class="header-section-number">2</span> Comparison with IVOATeX</h1>
+<p>This project shares the goals of IVOATeX <span class="citation">(Demleitner <a href="#ref-ivoatex">2016</a>)</span> and reuses its templates as much as possible. However, it significantly departs from IVOATeX in that it does not require LaTeX to be used to author documents. In <code>cereal</code> LaTeX is an optional dependency required by editors in order to produce a <code>PDF</code> version of the document.</p>
+<p>Also, <code>cereal</code> is designed to be cross-platform and easy to set up with as few dependencies as possible.</p>
+<p>A potential solution could have been to create <code>pandoc</code> templates that would render Markdown as IVOATeX LaTeX files to be compiled with IVOATeX itself.</p>
+<p>However, this would have not removed the hard dependency on LaTeX and increased the number of dependencies required to produce documents, which is already significant in IVOATeX.</p>
+<p>On the other hand, IVOATeX is probably more complete and far more tested that <code>cereal</code>, at the time of this writing.</p>
+<h1 id="dependencies"><span class="header-section-number">3</span> Dependencies</h1>
+<p>In order to edit files you only need a text editor and whatever source control system is required by your collaboration.</p>
+<p>In order to build <code>html</code> documents only <a href="http://pandoc.org"><code>pandoc</code></a> is required. It is also recommended to install the <a href="https://github.com/lierdakil/pandoc-crossref"><code>pandoc cross-ref</code></a> filter.</p>
+<p><code>Pandoc</code> is open source and available for Linux, OSX, and Windows.</p>
+<p>The <code>cross-ref</code> filter is available as source code and can be built from sources. For Windows, pre-compiled binaries are available.</p>
+<p>More advanced filters require a <code>Python</code> interpreter to run, along with the <code>pandocfilters</code> package. These filters allow to:</p>
+<ul>
+<li>include external source files.</li>
+<li>eventually, to process special elements like todo lists, but this is not yet implemented.</li>
+<li>Python filters could be created specifically for integrating documents with specific tools, for instance for creating <code>graphviz</code> diagrams from or into document elements.</li>
+</ul>
+<p>Finally, if a <code>LaTeX</code> distribution is installed, <code>PDF</code> documents can be produced.</p>
+<p><strong>NOTE</strong>: On Windows, it should be possible to install all dependencies as native packages with regular installers. It is also possible to build many if not all the dependencies from sources, if desired.</p>
+<p>The project is currently in an early development stage, so the user interface is simple and not necessarily pretty. That will come with time.</p>
+<h1 id="quick-start"><span class="header-section-number">4</span> Quick start</h1>
+<p>The very first goal of this project is to allow proper versioning of standard documents. In the following instructions we will thus assume that a versioning system is used. <code>Git</code> or <code>Subversion</code> are recommended. It should be easy to adapt these instructions to cases where a versioning system is not available. Since <code>cereal</code> is hosted on GitHub, one can download tarballs at any revision directly from the GitHub pages.</p>
+<p>With both systems, the general idea is to create a project for the document to be written, and then include the rendering framework as a dependency, either as a <code>git submodule</code> or as an <code>svn external</code>.</p>
+<p>Since <code>cereal</code> is hosted on GitHub both <code>git</code> and <code>svn</code> can be used as clients.</p>
+<h2 id="git"><span class="header-section-number">4.1</span> Git</h2>
+<p>The following instructions, valid for both *nix and Windows systems, will create a new folder, initialize an empty <code>git</code> repository in it, and then clone the <code>cereal</code> project as a submodule.</p>
+<pre><code>mydoc
+cd mydoc
+git init
+git commit --allow-empty -m &quot;init commit&quot;
+git submodule add https://github.com/olaurino/cereal cereal</code></pre>
+<p>A submodule is a pointer to a different repository. It is cloned in the user's working directory and can be used as any other local directory. However, <code>git</code> internally simply refers to it with the commit ID of the current <code>HEAD</code>.</p>
+<p><code>Git</code> is a distributed system, so you can start your project locally and then publish it to a public or private server where it can be forked and shared.</p>
+<h2 id="subversion"><span class="header-section-number">4.2</span> Subversion</h2>
+<p>The following instructions, valid for both *nix and Windows systems (make sure you change the paths, though), will create a new folder, initialize an empty <code>svn</code> repository in it, and then include the <code>cereal</code> project as an external.</p>
+<p>Since <code>svn</code> is not distributed, if you want the repository to reside on a server you will need to create the repo on that server first, and then checkout a working directory. Alternatively you can <code>relocate</code> or <code>switch</code>. For simplicity, below we create the repository locally and we checkout the working directory in a different folder.</p>
+<pre><code>svnadmin create mydoc_repo
+svn co file:///C:\Documents\mydoc_repo mydoc
+cd mydoc
+svn propset svn:externals &quot;cereal https://github.com/olaurino/cereal/trunk&quot; .
+svn update</code></pre>
+<h2 id="hello-world"><span class="header-section-number">4.3</span> Hello World</h2>
+<p>Open your favorite text editor and type the following text:</p>
+<div class="sourceCode"><pre class="sourceCode md"><code class="sourceCode markdown">Hello World
+===========
+
+This is my first Markdown document<span class="ot">[^1]</span> written in my favorite text editor.
+
+<span class="ot">[^1]</span>: powered by <span class="ot">[`cereal`](https://github.com/olaurino/cereal)</span>.</code></pre></div>
+<p>Save this file as <code>content.md</code> in the project's folder. If you are using an editor that renders Markdown, or if you have a browser extension that does the same, you can see that the <code>Hello World</code> text is being rendered as a header, while the page ends with a link to the <code>cereal</code> repository on GitHub.</p>
+<p>The footnote is recognizable as such, but since it is a <code>pandoc</code>-specific feature, it is not translated to appropriate <code>html</code>.</p>
+<p>By design, Markdown and its extensions focus on readability by the human eye. Even without any rendering, the above text makes sense.</p>
+<p>This is important because unless you are a document editor, you don't need any special requirements installed in order to contribute on a document.</p>
+<p>The following section shows how, with <code>pandoc</code> installed, one can properly render specific extensions using <code>cereal</code>.</p>
+<h2 id="hello-pandoc"><span class="header-section-number">4.4</span> Hello Pandoc</h2>
+<p>Assuming you have <code>pandoc</code> installed and available from the command line, you can run the following command (showing both Windows and *nix versions):</p>
+<pre><code>.\cereal\bin\simple.bat .\content.md
+./cereal/bin/simple.sh content.md</code></pre>
+<p>The rendered <code>html</code> will be produced in the <code>output</code> folder as <code>simple.html</code>.</p>
+<p>You can open it with any web browser. You should see several differences now.</p>
+<p>First, there is some IVOA branding. There is also a very simple table of contents. The footnote is now rendered as a couple of links referring to each other.</p>
+<p>This result can be achieved by simply installing <code>pandoc</code>, which is available on most platforms: on Windows, it is provided as a regular application installer.</p>
+<p>The IVOA branding is not particularly rich. We need to provide <code>cereal</code> with some metadata in order to fill some information in.</p>
+<h2 id="metadata-block"><span class="header-section-number">4.5</span> Metadata block</h2>
+<p>Create a new file <code>metadata.yaml</code> with the following content:</p>
+<div class="sourceCode"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="ot">---</span>
+<span class="fu">title:</span> My First Document with `Cereal`
+<span class="fu">name:</span> FirstDoc
+<span class="fu">version:</span> <span class="st">&#39;1.0&#39;</span>
+<span class="co"># supported types: WD, PR, NOTE, REC, DERR</span>
+<span class="co"># custom types may be provided by creating files</span>
+<span class="co"># in `style/messages`, following the examples.</span>
+<span class="fu">type:</span> NOTE
+<span class="fu">date:</span> <span class="st">&#39;2016-09-13&#39;</span>
+<span class="fu">datecode:</span> <span class="st">&#39;20160913&#39;</span>
+<span class="fu">author:</span>
+    <span class="kw">-</span> <span class="fu">name:</span> Omar Laurino
+      <span class="fu">url:</span> http://www.ivoa.net/cgi-bin/twiki/bin/view/IVOA/OmarLaurino
+<span class="fu">editor:</span>
+    <span class="kw">-</span> <span class="fu">name:</span> Omar Laurino
+<span class="fu">group:</span> Data Models
+<span class="fu">previousVersion:</span>
+    <span class="kw">-</span> <span class="fu">ver:</span> xx
+      <span class="fu">url:</span> http://www.ivoa.net/documents/xx
+
+<span class="fu">abstract:</span> |
+    My very first Markdown document rendered as an IVOA standard document by
+    `cereal`.
+
+<span class="fu">references:</span>
+  <span class="kw">-</span> <span class="fu">id:</span> ivoatex
+    <span class="fu">type:</span> article
+    <span class="fu">author:</span>
+      <span class="kw">-</span> <span class="fu">family:</span> Demleitner
+        <span class="fu">given:</span> Markus
+    <span class="fu">title:</span> <span class="st">&#39;The IVOATEX Document Preparation System&#39;</span>
+    <span class="fu">issued:</span>
+      <span class="fu">year:</span> 2016
+      <span class="fu">month:</span> 04
+      <span class="fu">day:</span> 30
+    <span class="fu">URL:</span> <span class="st">&#39;http://www.ivoa.net/documents/Notes/IVOATeX/index.html&#39;</span>
+<span class="fu">link-citations:</span> true
+<span class="ot">---</span></code></pre></div>
+<p>Now, run again the <code>simple</code> script, adding the metadata file to the command line:</p>
+<pre><code>.\cereal\bin\simple.bat .\metadata.yaml .\content.md
+./cereal/bin/simple.sh metadata.yaml content.md</code></pre>
+<p>Refresh the <code>html</code> page and notice how the metadata is used to render a familiar IVOA front page. Notice that the <code>Status of this document</code> section is automatically filled with the correct description for the kind of document you specified.</p>
+<p>If you changed <code>type: NOTE</code> to <code>type: WD</code> you would get a different message.</p>
+<p>Remember that unless you are using an editor that automatically updates the <code>html</code> rendering, you have to run the <code>simple.sh|bat</code> script to see the document change.</p>
+<p>Did you notice that there is a reference defined in the metadata header? You can use the ID to refer to it in your document. For instance, add anywhere in your <code>content.md</code> file the following text:</p>
+<pre><code>Can you do this with IVOATeX [@ivoatex]? Yes, you can, if you prefer LaTeX over
+Markdown!</code></pre>
+<p>Process the file with the <code>simple</code> script again: the citation is properly and automatically rendered as you would expect in a LaTeX document. The reference itself is also added at the add of the document.</p>
+<p><strong>NOTE</strong>: <code>pandoc</code> supports the usual LaTeX bibliography files as well. It also provide great control over the way citations and references are rendered. However, this is outside of the scope of this document. Refer to the <code>pandoc</code> documentation for more details.</p>
+<p>The <code>simple</code> script only requires <code>pandoc</code> and as such it is very portable.</p>
+<p>However, this script does not allow you to render some advanced features. You can still author a document, but you won't see some special constructs properly rendered.</p>
+<p>For instance, modify <code>content.md</code> to look like this:</p>
+<pre><code>Hello World
+===========
+
+This is my first Markdown document[^1] written in my favorite text editor.
+
+[^1]: powered by [`cereal`](https://github.com/olaurino/cereal).
+
+Can you do this with IVOATeX [@ivoatex]? Yes, you can, if you prefer LaTeX over
+Markdown!
+
+~~~~ {include=sample.xml .xml .numberLines}
+An xml snippet with a list of books
+~~~~
+
+References
+==========</code></pre>
+<p>Then, create a file named <code>sample.xml</code> with the following content:</p>
+<pre><code>&lt;xml&gt;
+  &lt;book&gt;
+    &lt;title&gt;The Hitchhiker&#39;s Guide To The Galaxy&lt;/title&gt;
+    &lt;author&gt;Douglas Adams&lt;/author&gt;
+  &lt;/book&gt;
+&lt;/xml&gt;</code></pre>
+<p>Now, run the <code>simple.bat|sh</code> script again, and reload the page. Unimpressively, only the placeholder text is displayed.</p>
+<h2 id="hello-python"><span class="header-section-number">4.6</span> Hello Python</h2>
+<p>If Python is available on your system, you can install the <code>pandocfilters</code> package<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<p>Then, you can run the <code>full.sh|bat</code> script just as you did with the <code>simple</code> script (you also need to have the <code>pandoc-crossref</code> add-on installed):</p>
+<pre><code>.\cereal\bin\full.bat .\metadata.yaml .\content.md
+./cereal/bin/full.sh metadata.yaml content.md</code></pre>
+<p>Now, you should see the <code>xml</code> snippet rather than the placeholder.</p>
+<h2 id="hello-pdf"><span class="header-section-number">4.7</span> Hello PDF</h2>
+<p>If you have a LaTeX distribution installed, then you can run the <code>pdf.sh|bat</code> script to render the current document:</p>
+<pre><code>.\cereal\bin\pdf.bat .\metadata.yaml .\content.md
+./cereal/bin/pdf.sh metadata.yaml content.md</code></pre>
+<p>The output will be printed to <code>output/full.pdf</code>.</p>
+<p>It is important to stress that the production of a PDF is the terminal step, and that LaTeX is not required if not at the end of the pipeline.</p>
+<p>As such, LaTeX can be used by editors rather than by authors, and, unlike IVOATeX, it is not required to produce <code>html</code> renderings.</p>
+<h1 id="references" class="unnumbered">References</h1>
+<div id="refs" class="references">
+<div id="ref-ivoatex">
+<p>Demleitner, Markus. 2016. “The IVOATEX Document Preparation System.” <a href="http://www.ivoa.net/documents/Notes/IVOATex/index.html" class="uri">http://www.ivoa.net/documents/Notes/IVOATex/index.html</a>.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>We include some instructions on how to install Python packages in sec. <strong>??</strong>, especially for Windows users. Linux and OSX users probably won't need any instructions.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+</body>
+</html>

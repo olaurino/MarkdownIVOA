@@ -20,22 +20,25 @@ are available in the output folder.
 Comparison with IVOATeX
 =======================
 
-This project reuses IVOATeX [@ivoatex] facilities as much as possible. The
-motivation for departing from IvoaTex itself significantly, however, is that
-some IVOA authors do not perceive authoring LaTeX documents as an option.
+This project shares the goals of IVOATeX [@ivoatex] and reuses its templates
+as much as possible. However, it significantly departs from IVOATeX in that
+it does not require LaTeX to be used to author documents. In `cereal` LaTeX is
+an optional dependency required by editors in order to produce a `PDF` version
+of the document.
+
+Also, `cereal` is designed to be cross-platform and easy to set up with as
+few dependencies as possible.
 
 A potential solution could have been to create `pandoc` templates that would
 render Markdown as IVOATeX LaTeX files to be compiled with IVOATeX
 itself.
 
-However, this would have not provided much control over the rendering of the
-contents, at least without adding `pandoc`-specific complexity. Moreover, this
-would have increased the number of dependencies required to produce documents,
-which is already significant in IVOATeX.
+However, this would have not removed the hard dependency on LaTeX and increased
+the number of dependencies required to produce documents, which is already
+significant in IVOATeX.
 
-Finally, It is easy enough to adapt
-IVOATeX to a bunch of templates for `pandoc`, while reducing the complexity of
-the system by removing the hard dependency on LaTeX for regular authors.
+On the other hand, IVOATeX is probably more complete and far more tested that
+`cereal`, at the time of this writing.
 
 Dependencies
 ============
@@ -291,10 +294,10 @@ For instance, modify `content.md` to look like this:
     ~~~~ {include=sample.xml .xml .numberLines}
     An xml snippet with a list of books
     ~~~~
-    
-    References 
+
+    References
     ==========
- 
+
 
 Then, create a file named `sample.xml` with the following content:
 ```
@@ -347,21 +350,6 @@ and that LaTeX is not required if not at the end of the pipeline.
 
 As such, LaTeX can be used by editors rather than by authors, and, unlike
 IVOATeX, it is not required to produce `html` renderings.
-
-Installation {#sec:installation}
-------------
-
-Python needs to be installed and available in the terminal used to
-produce the documents. This should be easily achieved on all platforms.
-
-**TODO**: At this point, only Python 2.7 has been tested, but we must test
-Python 3 is supported.
-
-Optionally, in order to use smart cross references, the `pandoc-crossref` needs
-to be installed. On Windows, binaries are available on the [project's
-repository] (https://github.com/lierdakil/pandoc-crossref/releases). On all
-platforms, it can be built from sources, which requires the installation of the
-[Haskell Platform](https://www.haskell.org/platform/).
 
 References
 ==========

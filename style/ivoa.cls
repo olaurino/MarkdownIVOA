@@ -119,7 +119,7 @@
   \mbox{}
   \vskip -2cm
   \noindent\mbox{%
-  \includegraphics[width=6cm]{images/IVOA.jpg}%
+  \includegraphics[width=6cm]{cereal/images/IVOA.jpg}%
   \raisebox{1.5cm}{\parbox{5cm}{
     \Large\color{ivoacolor}\textsl{\textsf{\textbf{I}nternational}} \\
     \Large\color{ivoacolor}\quad\textsl{\textsf{\textbf{V}irtual}} \\
@@ -202,12 +202,12 @@
 % A file of the kind <Doctype>.txt is searched in
 % `style/messages`
 \newcommand\expandedDoctype[1]
-	{\input{style/messages/#1.txt}}
+	{\input{cereal/style/messages/#1.txt}}
 
 \newcommand\docstatusDeclaration[1]
-  {\input{style/messages/#1_description.txt}
+  {\input{cereal/style/messages/#1_description.txt}
 	\par
-	\input{style/messages/doc_list.txt}}
+	\input{cereal/style/messages/doc_list.txt}}
 
 
 \newcommand\currentDocURL % URL of this document's landing page

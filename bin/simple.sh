@@ -1,7 +1,14 @@
 #!/bin/bash -xe
 
-pandoc -s -N --toc --template ivoa-template.html\
+bindir=$( cd -P "$( dirname "$0" )" && pwd )
+if [ -h "$0" ]; then
+  bindir=$( cd -P "$( dirname "`readlink -n "$0"`" )" && pwd )
+fi
+
+mkdir -p output
+
+pandoc -s -N --toc --template $bindir/../ivoa-template.html\
   --filter pandoc-citeproc\
-  --css ../style/ivoa_doc.css --css ../style/ivoa-plus.css\
+  --css $bindir/../style/ivoa_doc.css --css $bindir/../style/ivoa-plus.css\
   $*\
   -o output/simple.html

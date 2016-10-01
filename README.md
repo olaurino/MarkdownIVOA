@@ -99,11 +99,19 @@ a new folder, initialize an empty `git` repository in it, and then clone the
 `cereal` project as a submodule.
 
 ```
-mydoc
+mkdir mydoc
 cd mydoc
 git init
 git commit --allow-empty -m "init commit"
 git submodule add https://github.com/olaurino/cereal cereal
+```
+
+If for any reason the `cereal` folder is empty after the above command, run the
+following:
+
+```
+git submodule init
+git submodule update
 ```
 
 A submodule is a pointer to a different repository. It is cloned in the user's

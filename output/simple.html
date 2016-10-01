@@ -110,6 +110,7 @@ Omar Laurino</li>
 <li><a href="#metadata-block"><span class="toc-section-number">4.5</span> Metadata block</a></li>
 <li><a href="#hello-python"><span class="toc-section-number">4.6</span> Hello Python</a></li>
 <li><a href="#hello-pdf"><span class="toc-section-number">4.7</span> Hello PDF</a></li>
+<li><a href="#documentation"><span class="toc-section-number">4.8</span> Documentation</a></li>
 </ul></li>
 <li><a href="#references">References</a></li>
 </ul>
@@ -164,11 +165,14 @@ Omar Laurino</li>
 <p>Since <code>cereal</code> is hosted on GitHub both <code>git</code> and <code>svn</code> can be used as clients.</p>
 <h2 id="git"><span class="header-section-number">4.1</span> Git</h2>
 <p>The following instructions, valid for both *nix and Windows systems, will create a new folder, initialize an empty <code>git</code> repository in it, and then clone the <code>cereal</code> project as a submodule.</p>
-<pre><code>mydoc
+<pre><code>mkdir mydoc
 cd mydoc
 git init
 git commit --allow-empty -m &quot;init commit&quot;
 git submodule add https://github.com/olaurino/cereal cereal</code></pre>
+<p>If for any reason the <code>cereal</code> folder is empty after the above command, run the following:</p>
+<pre><code>git submodule init
+git submodule update</code></pre>
 <p>A submodule is a pointer to a different repository. It is cloned in the user's working directory and can be used as any other local directory. However, <code>git</code> internally simply refers to it with the commit ID of the current <code>HEAD</code>.</p>
 <p><code>Git</code> is a distributed system, so you can start your project locally and then publish it to a public or private server where it can be forked and shared.</p>
 <h2 id="subversion"><span class="header-section-number">4.2</span> Subversion</h2>
@@ -292,6 +296,10 @@ References
 <p>The output will be printed to <code>output/full.pdf</code>.</p>
 <p>It is important to stress that the production of a PDF is the terminal step, and that LaTeX is not required if not at the end of the pipeline.</p>
 <p>As such, LaTeX can be used by editors rather than by authors, and, unlike IVOATeX, it is not required to produce <code>html</code> renderings.</p>
+<h2 id="documentation"><span class="header-section-number">4.8</span> Documentation</h2>
+<p>The Markdown flavor supported by <code>pandoc</code> is described in the <a href="http://pandoc.org/MANUAL.html#pandocs-markdown"><code>pandoc</code> manual</a>.</p>
+<p>Citations can take advantages of the <code>citeproc</code> filter's features. Please refer to the <a href="https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md"><code>citeproc</code> documentation</a> for details.</p>
+<p>Internal cross references are rendered by the <code>crossref</code> filter. Please refer to the <a href="https://github.com/lierdakil/pandoc-crossref">filter's documentation</a> for details.</p>
 <h1 id="references" class="unnumbered">References</h1>
 <div id="refs" class="references">
 <div id="ref-ivoatex">

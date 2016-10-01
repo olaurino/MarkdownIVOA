@@ -351,5 +351,18 @@ and that LaTeX is not required if not at the end of the pipeline.
 As such, LaTeX can be used by editors rather than by authors, and, unlike
 IVOATeX, it is not required to produce `html` renderings.
 
+Documentation
+-------------
+
+The Markdown flavor supported by `pandoc` is described in the [`pandoc`
+manual](http://pandoc.org/MANUAL.html#pandocs-markdown).
+
+Citations can take advantages of the `citeproc` filter's features. Please refer
+to the [`citeproc` documentation](https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md)
+for details.
+
+Internal cross references are rendered by the `crossref` filter. Please refer to
+the [filter's documentation](https://github.com/lierdakil/pandoc-crossref) for details.
+
 References
 ==========

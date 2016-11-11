@@ -12,3 +12,5 @@ pandoc -s -N --toc --template $bindir/../ivoa-template.html --mathjax\
   --css ../cereal/style/ivoa_doc.css --css ../cereal/style/ivoa-plus.css\
   $*\
   -o output/full.html
+
+yes | cp -rfT media output/media || echo "warning: can't copy media folder"

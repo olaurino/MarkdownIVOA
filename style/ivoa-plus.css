@@ -103,6 +103,10 @@ span#docdate.DERR::before {
 	content: "IVOA Draft Erratum ";
 }
 
+img {
+	max-width: 100%;
+}
+
 #status {
 		font-style: italic;
 }

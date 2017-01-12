@@ -1,6 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"$if(lang)$ lang="$lang$" xml:lang="$lang$"$endif$>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
@@ -20,9 +23,20 @@ $if(highlighting-css)$
 $highlighting-css$
   </style>
 $endif$
+<!-- Bootstrap -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 $for(css)$
   <link rel="stylesheet" href="$css$" $if(html5)$$else$type="text/css" $endif$/>
 $endfor$
+
 $if(math)$
   $math$
 $endif$
@@ -34,7 +48,7 @@ $endfor$
 $for(include-before)$
 $include-before$
 $endfor$
-<div><table xmlns="http://www.w3.org/1999/xhtml" cellspacing="0"
+<div class="container"><table xmlns="http://www.w3.org/1999/xhtml" cellspacing="0"
   cellpadding="0" width="450"><tr><td><a href="http://www.ivoa.net/"><img
   height="169" alt="IVOA" src="http://www.ivoa.net/icons/IVOA_wb_300.jpg"
   width="300" border="0"/></a></td><td><div style="padding: 3.6pt
@@ -51,6 +65,7 @@ $endfor$
   rgb(0, 90, 156);">lliance</span></i><i/></p></div><i/></td></tr></table><br
   xmlns="http://www.w3.org/1999/xhtml"/></div>
 
+<div class="container">
 $if(title)$
 <div id="$idprefix$header">
 <h1 class="title">$title$</h1>
@@ -95,30 +110,37 @@ $editor.name$$if(editor.url)$</a>$endif$</li>
 $endfor$
 </ul></dd>
 </div>
+</div>
 
 $endif$
 $if(toc)$
+<div class="container">
 <h2>Contents</h2>
 <div id="$idprefix$TOC">
 $toc$
 </div>
+</div>
 $endif$
 
 $if(abstract)$
+<div class="container">
 <h2>Abstract</h2>
 <p class="abstract">
 $abstract$
 </p>
+</div>
 $endif$
 
-<div>
+<div class="container">
 <h2>Status of this document</h2>
 <p id="status" class="$type$">A list of current IVOA Recommendations and other
  technical documents can be found at <a
  href='http://www.ivoa.net/Documents/'>http://www.ivoa.net/Documents/</a>.</p>
 </div>
 
+<div class="container">
 $body$
+</div>
 $for(include-after)$
 $include-after$
 $endfor$

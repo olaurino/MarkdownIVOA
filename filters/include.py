@@ -13,7 +13,7 @@ def code_include(key, value, format, meta):
         [[ident, classes, namevals], code] = value
         for nameval in namevals:
             if nameval[0] == 'include':
-                with open(nameval[1], 'rbU') as content_file:
+                with open(nameval[1], 'rU') as content_file:
                     content = content_file.read()
                 namevals.remove(nameval)
                 return CodeBlock([ident, classes, namevals], content)

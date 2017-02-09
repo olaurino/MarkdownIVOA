@@ -14,7 +14,7 @@ def code_include(key, value, format, meta):
         for nameval in namevals:
             if nameval[0] == 'include':
                 with open(nameval[1], 'rbU') as content_file:
-                    content = content_file.read().decode('utf-8')
+                    content = content_file.read()
                 namevals.remove(nameval)
                 return CodeBlock([ident, classes, namevals], content)
 

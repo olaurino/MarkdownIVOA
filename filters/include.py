@@ -1,22 +1,30 @@
 #!/usr/bin/env python
 
 """
-Pandoc filter to process code blocks with class "include" and
-replace their content with the included file
+Panflute filter to include external files in fenced YAML code blocks
 """
 
-from pandocfilters import toJSONFilter, CodeBlock
+import panflute as pf
 
 
-def code_include(key, value, format, meta):
-    if key == 'CodeBlock':
-        [[ident, classes, namevals], code] = value
-        for nameval in namevals:
-            if nameval[0] == 'include':
-                with open(nameval[1], 'rU') as content_file:
-                    content = content_file.read()
-                namevals.remove(nameval)
-                return CodeBlock([ident, classes, namevals], content)
+def fenced_action(options, data, element, doc):
+    # We'll only run this for CodeBlock elements of class 'include'
+    file = options.get('file')
+    classes = options.get('classes', [])
+    caption = options.get('caption', "")
+    ident = options.get('id', "")
 
-if __name__ == "__main__":
-    toJSONFilter(code_include)
+    with open(file, 'r', encoding="utf-8") as f:
+        content = f.read()
+
+    code = pf.CodeBlock(content, classes=classes, attributes={"caption": caption}, identifier=ident)
+    return code
+
+
+def main(doc=None):
+    return pf.run_filter(pf.yaml_filter, tag='include', function=fenced_action,
+                         doc=doc)
+
+
+if __name__ == '__main__':
+    main()

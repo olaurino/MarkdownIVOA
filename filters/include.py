@@ -3,6 +3,7 @@
 """
 Panflute filter to include external files in fenced YAML code blocks
 """
+import os
 
 import panflute as pf
 
@@ -13,6 +14,9 @@ def fenced_action(options, data, element, doc):
     classes = options.get('classes', [])
     caption = options.get('caption', "")
     ident = options.get('id', "")
+
+    if not os.path.isfile(file):
+        raise FileNotFoundError(file)
 
     with open(file, 'r', encoding="utf-8") as f:
         content = f.read()

@@ -8,7 +8,7 @@ fi
 mkdir -p output
 
 pandoc -s -N --toc --template $bindir/../ivoa-template.html --mathjax\
-  --filter $bindir/../filters/include.py --filter pandoc-crossref --filter pandoc-citeproc\
+  --filter $bindir/../filters/jovial.py --filter $bindir/../filters/include.py --filter pandoc-crossref --filter pandoc-citeproc\
   --css ../cereal/style/ivoa_doc.css --css ../cereal/style/ivoa-plus.css\
   $*\
   -o output/full.html

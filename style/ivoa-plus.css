@@ -107,16 +107,18 @@ img {
 	max-width: 100%;
 }
 
-@media screen
-div.sourceCode {
-    max-height: 70vh;
-    max-width: 90vw;
-    overflow: auto;
+@media screen {
+    div.sourceCode {
+        max-height: 70vh;
+        max-width: 90vw;
+        overflow: auto;
+    }
 }
 
-@media screen
-pre code {
-    white-space: pre;
+@media screen {
+    pre code {
+        white-space: pre;
+    }
 }
 
 #status {

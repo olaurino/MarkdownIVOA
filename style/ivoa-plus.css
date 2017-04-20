@@ -107,6 +107,16 @@ img {
 	max-width: 100%;
 }
 
+div.sourceCode {
+    max-height: 70vh;
+    max-width: 90vw;
+    overflow: auto;
+}
+
+pre code {
+    white-space: pre;
+}
+
 #status {
 		font-style: italic;
 }
